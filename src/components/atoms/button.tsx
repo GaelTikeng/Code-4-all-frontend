@@ -5,14 +5,17 @@ type Props = {
   label: string,
   color: string,
   text: string,
-  borderColor?: string
+  borderColor?: string,
+  onClick?: () => void
 }
 
-export default function Button({label, color, text, borderColor }: Props) {
-  
+export default function Button({ onClick, label, color, text, borderColor }: Props) {
+
   return (
-    <div className={`${color} p-1 border px-2 ${text} ${borderColor} rounded-lg hover:cursor-pointer`}>
-      <div>{label}</div>
-    </div>
+    <button
+      onClick={onClick}
+      className={`${color} w-full p-1 border px-2 ${text} ${borderColor} hover:cursor-pointer`}>
+      <p className="text-center">{label}</p>
+    </button>
   )
 }

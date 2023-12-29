@@ -9,10 +9,10 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
-import './style.css';
+import './styles.css';
 
 // import required modules
-import { Autoplay, Pagination, Navigation, Keyboard } from 'swiper/modules';
+import { Autoplay, Pagination, Keyboard } from 'swiper/modules';
 import Slide from "./slide";
 // import Slide from "../molecules/Slide";
 
@@ -21,22 +21,29 @@ const HeroSection = () => {
   const slideData = [
     {
       id: 0,
-      img: "/image1.jpg",
-      title: "Build ready-for-anything teams",
+      img: "/img6.jpg",
+      title: "Unlock code snippets that accelerate your development",
       mainTitle:
-        "See why leading organizations choose to learn with Udemy Business.",
+        "Save time, improve code quality, and level up your programming skills with our collection of curated code snippets.",
     },
     {
       id: 1,
+      img: "/image4.jpg",
+      title: "Shop now and unleash the power of code snippets!",
+      mainTitle:
+        "Save time, improve code quality, and level up your programming skills with our collection of curated code snippets.",
+    },
+    {
+      id: 2,
       img: "/image3.jpg",
       title: "Learning that gets you",
       mainTitle:
-        "Skills for your present (and your future). Get started with us.",
+        "Explore a wide range of code snippets across various programming languages and frameworks, all carefully crafted and vetted by experienced developers.",
     },
   ];
 
   return (
-    <div className="!bg-white">
+    <div className="pt-4">
       <Swiper
         slidesPerView={1}
         spaceBetween={30}
@@ -52,12 +59,12 @@ const HeroSection = () => {
         pagination={{
           clickable: true,
         }}
-        navigation={true}
-        modules={[Keyboard, Pagination, Navigation, Autoplay]}
+        // navigation={true}
+        modules={[Keyboard, Pagination, Autoplay]}
         className="mySwiper"
       >
         {slideData.map((item, index) => (
-          <SwiperSlide key={index}>
+          <SwiperSlide className="" key={index}>
             <Slide
               key={item.id}
               img={item.img}
