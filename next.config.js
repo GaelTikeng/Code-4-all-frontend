@@ -12,6 +12,9 @@ module.exports = {
       {
         hostname: "www.mymcpl.org",
       },
+      {
+        hostname: "cdn1.iconfinder.com"
+      }
     ],
   },
 };

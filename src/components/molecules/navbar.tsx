@@ -1,5 +1,5 @@
 "use client"
-import React from "react"
+import React, { useState } from "react"
 import { BsSearch } from "react-icons/bs";
 import { GiShoppingCart } from "react-icons/gi";
 import { IoMdContact } from "react-icons/io";
@@ -11,20 +11,50 @@ import { useRouter } from "next/navigation";
 
 export default function Navbar() {
   const router = useRouter()
+  const [showDropDown, setShowDropDown] = useState<Boolean>(false)
+
+  const dropDownList = [
+    {
+      label: "Login",
+      function: () => {
+        setShowDropDown(prev => !prev)
+      }
+    },
+    {
+      label: "Signup",
+      function: () => {
+        setShowDropDown(prev => !prev)
+      }
+    }
+  ]
+
+  const handleLogin = () => {
+    router.push("/login")
+  }
+
+  const handleSignup = () => {
+    router.push('/signup')
+  }
+  function handleGoToCart() {
+    router.push('/cart')
+  }
+
   return (
     <div className=" flex gap-4 justify-between py-3 shadow-lg w-full md:px-[80px] px-[20px] ">
-      <div
-        onClick={() => {
-          router.push("/")
-        }}
-        className="text-2xl hover:cursor-pointer my-auto">
-        <Image
-          src="/code4all.png"
-          alt="logo"
-          height={75}
-          width={150}
-          priority={false}
-        />
+      <div className="flex">
+        <div
+          onClick={() => {
+            router.push("/")
+          }}
+          className="text-2xl hover:cursor-pointer my-auto">
+          <Image
+            src="/code4all.png"
+            alt="logo"
+            height={75}
+            width={150}
+            priority={false}
+          />
+        </div>
       </div>
       <div className="w-full sm:w-[300px] md:w-[60%] relative h-fit hidden md:flex my-auto">
         <BsSearch
@@ -47,16 +77,29 @@ export default function Navbar() {
         />
         <GiShoppingCart
           size="25"
-          className="my-auto"
+          className="my-auto hover:cursor-pointer"
+          onClick={handleGoToCart}
         />
         <div className="md:hidden my-auto ">
           <IoMdContact size="25" />
         </div>
       </div>
       <div className="md:flex hidden my-auto gap-2">
-        <Button label="Login" color="bg-white" text="text-black" borderColor="border-black" />
-        <Button label="Signup" color="bg-[#f94d1c]" text="text-white" />
+        <Button
+          label="Login"
+          color="bg-white"
+          text="text-black"
+          borderColor="border-black"
+          onClick={() => handleLogin()}
+        />
+        <Button
+          label="Signup"
+          color="bg-[#f94d1c]"
+          text="text-white"
+          onClick={() => handleSignup()}
+        />
       </div>
     </div>
   )
 }
+

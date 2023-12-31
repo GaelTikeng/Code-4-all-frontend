@@ -16,7 +16,7 @@ export default function Discount({ }: Props) {
         alt="black woman"
         height={300}
         width={500}
-        className="h-[350px]"
+        className="md:h-[250px] h-[200px] md:w-[500px] w-[400px] "
       />
       <div className="my-10 md:my-auto leading-loose">
         <p className="text-xs pb-4">20 % discount</p>
@@ -24,13 +24,13 @@ export default function Discount({ }: Props) {
         <p className="text-xs pb-4">Looking for a discount code for your suprise ?</p>
         <div className="flex gap-4">
           <input
-            className="bg-white md:w-[300px] px-4"
+            className="bg-white md:w-[300px] w-[70%] px-4"
             placeholder="Email Address"
             type="text"
             onChange={() => handleChange}
           />
           <div className="w-[100px]">
-          <Button label="Suscribe" color="bg-[#f94d1c]" text="text-white" />
+            <Button label="Suscribe" color="bg-[#f94d1c]" text="text-white" />
           </div>
         </div>
       </div>
