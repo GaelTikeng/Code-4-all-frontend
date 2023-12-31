@@ -6,6 +6,7 @@ import { IoMdContact } from "react-icons/io";
 import Button from "../atoms/button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import DropdownModal from "../atoms/dropDownModal";
 
 
 
@@ -17,12 +18,14 @@ export default function Navbar() {
     {
       label: "Login",
       function: () => {
+        router.push('/login')
         setShowDropDown(prev => !prev)
       }
     },
     {
       label: "Signup",
       function: () => {
+        router.push('/signup')
         setShowDropDown(prev => !prev)
       }
     }
@@ -37,6 +40,14 @@ export default function Navbar() {
   }
   function handleGoToCart() {
     router.push('/cart')
+  }
+
+  function handleCloseModal(): void {
+    throw new Error("Function not implemented.");
+  }
+
+  function handleOpenDP() {
+    setShowDropDown((prev) => !prev)
   }
 
   return (
@@ -80,9 +91,31 @@ export default function Navbar() {
           className="my-auto hover:cursor-pointer"
           onClick={handleGoToCart}
         />
-        <div className="md:hidden my-auto ">
-          <IoMdContact size="25" />
+        <div
+          onClick={handleOpenDP}
+          className="md:hidden my-auto "
+        >
+          <IoMdContact
+            size="25"
+          />
         </div>
+        {showDropDown && (
+          <div className="absolute z-40 top-10 right-0">
+            <DropdownModal onClose={handleCloseModal}>
+              <ul className="py-2 w-full flex flex-col gap-2">
+                {dropDownList.map((item, index) => (
+                  <li
+                    className="px-5 py-2 hover:bg-gray-200 hover:cursor-pointer text-sm "
+                    key={index}
+                    onClick={item.function}
+                  >
+                    {item.label}
+                  </li>
+                ))}
+              </ul>
+            </DropdownModal>
+          </div>
+        )}
       </div>
       <div className="md:flex hidden my-auto gap-2">
         <Button

@@ -66,7 +66,7 @@ export default function SignupForm({ }: Props) {
   }
 
   return (
-    <div className="w-[300px] mx-auto px-4 my-10 leading-10">
+    <div className="w-[85%] bg-white z-50 md:w-[300px] mx-auto px-4 my-6 leading-10">
       <div className="py-6">
         <Image
           src="/code4all.png"

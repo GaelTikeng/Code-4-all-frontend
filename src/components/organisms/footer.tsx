@@ -1,26 +1,33 @@
+"use client"
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { FaWhatsapp, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { FaPhoneVolume } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
-
+import { useRouter } from "next/navigation";
 
 type Props = {}
 
 export default function Footer({ }: Props) {
+  const router = useRouter()
+
 
   return (
     <div className="bg-[#0a191c] py-6">
-      <div className="text-[#f2f2f2] md:px-[80px] flex  px-[20px] md:flex gap-4">
+      <div className="text-[#f2f2f2] md:px-[80px] justify-between flex  px-[20px] md:flex gap-4">
         <div className="md:flex md:w-1/2 ">
           <div className="flex flex-col w-full leading-8">
             <Image
+              onClick={() => {
+                router.push("/")
+              }}
               src="/code4all-white.png"
               alt="logo"
               height={60}
               width={120}
               priority={false}
+              className="hover:cursor-pointer"
             />
             <Link href="#" className="hover:underline hover:text-[#f94d1c] pt-3">Privacy Policy</Link>
             <Link href="#" className="hover:underline hover:text-[#f94d1c]">Terms and Conditions</Link>
@@ -41,7 +48,7 @@ export default function Footer({ }: Props) {
               HELP
             </h2>
             <Link href="#" className="hover:underline hover:text-[#f94d1c]">My contact</Link>
-            <Link href="#" className="hover:underline hover:text-[#f94d1c]">Cart</Link>
+            <Link href="/cart" className="hover:underline hover:text-[#f94d1c]">Cart</Link>
             <Link href="#" className="hover:underline hover:text-[#f94d1c]">Order status</Link>
           </div>
           <div className="flex flex-col md:w-1/2 w-full leading-8">
