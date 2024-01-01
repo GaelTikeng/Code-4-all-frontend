@@ -2,13 +2,15 @@
 import React, { useState } from "react";
 import ShopCodeCart from "../molecules/shopCodeCart";
 import { allCode } from "./codeContent";
-import { Code, Test } from "../../../types";
+import { Code, Test, User } from "../../../types";
 import { totalPrice } from "@/utiles/function";
 import Button from "../atoms/button";
 import Link from "next/link";
 import Overlay from "../atoms/overlay";
-import SignupForm from "../molecules/signupComponent";
 import { IoMdClose } from "react-icons/io";
+import SignupFormb from "../molecules/signupComp";
+import LoginFormb from "../molecules/loginComp";
+import { useRouter } from "next/navigation";
 
 
 
@@ -17,13 +19,34 @@ type Props = {
 }
 
 export default function ShoppingCart({ codeCart }: Props) {
+  const router = useRouter()
   const [openPopup, setOpenPopup] = useState<Boolean>(false)
+  const [showForm, setShowForm] = useState<Boolean>(false)
+  const [user, setUser] = useState<User | null>(
+    (): User | null => {
+      if (typeof localStorage !== "undefined") {
+        const fromLocalStorage =
+          JSON.parse(localStorage.getItem("userObject") as string) || {};
+        if (fromLocalStorage) return fromLocalStorage;
+      }
+      return null;
+    }
+  )
 
-  const handleRemove = (id: string) => { }
+  const handleRemove = (id: string) => {
+    codeCart.filter((item) => item.id === id)
+  }
 
   const handleCheckOut = () => {
-    setOpenPopup((prev) => !prev)
+    if (user?.name) {
+      router.push('/checkout')
+    } else {
+      setOpenPopup((prev) => !prev)
+    }
+  }
 
+  const handleShowForm = () => {
+    setShowForm(prev => !prev)
   }
 
   return (
@@ -72,19 +95,20 @@ export default function ShoppingCart({ codeCart }: Props) {
             />
             <div className="fixed z-[80] bg-white  flex gap-5 flex-col top-[15%] w-[90%] md:left-[33%] shadow-md p-4 md:w-[400px] m-auto mobile:max-sm:w-[90vw] mobile:max-sm:left-2 mobile:max-sm:right-2">
               <span
-              className=" mr-0 cursor-pointer hover:bg-gray-300 rounded-full w-fit "
-              onClick={() => handleCheckOut()}><IoMdClose /></span>
-              <SignupForm />
+                className=" mr-0 cursor-pointer hover:bg-gray-300 rounded-full w-fit "
+                onClick={() => handleCheckOut()}><IoMdClose /></span>
+              <div>
+                {!showForm && (
+                  <SignupFormb onClick={() => handleShowForm()} />
+                )}
+              </div>
+              <div>
+                {showForm && (
+                  <LoginFormb onClick={() => handleShowForm()} handleClose={handleCheckOut} />
+                )}
+              </div>
 
             </div>
-
-            {/* <Popups
-              title={"Delete this chat?"}
-              content={""}
-              actionText={"Delete chat"}
-              onCancel={() => setOnDelete((prev) => !prev)}
-              onAction={() => handleDeleteChat()}
-            /> */}
           </>
         )}
 

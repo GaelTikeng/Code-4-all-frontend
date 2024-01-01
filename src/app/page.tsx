@@ -8,9 +8,21 @@ import Codes from "@/components/organisms/codeContent";
 import CommentCarousel from "@/components/organisms/commentCarousel";
 import Footer from "@/components/organisms/footer";
 import Discount from "@/components/organisms/newzletter";
+import React from "react";
+import { User } from "@supabase/supabase-js";
 // import Login from "./signup/page";
 
 export default function Home() {
+  // const [user, setUser] = React.useState<User | null>(
+  //   (): User | null => {
+  //     if (typeof localStorage !== "undefined") {
+  //       const fromLocalStorage =
+  //         JSON.parse(localStorage.getItem("userObject") as string) || {};
+  //       if (fromLocalStorage) return fromLocalStorage;
+  //     }
+  //     return null;
+  //   }
+  // )
 
   return (
     <div>

@@ -1,0 +1,201 @@
+"use client"
+import React, { useState } from "react"
+import { BsSearch } from "react-icons/bs";
+import { GiShoppingCart } from "react-icons/gi";
+import { IoMdContact } from "react-icons/io";
+import Button from "../atoms/button";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import DropdownModal from "../atoms/dropDownModal";
+import { LOCAL_STORAGE } from "@/utiles/service/storage";
+import Avatar from "react-avatar";
+import { User } from "../../../types";
+
+
+export default function Navbar2() {
+  const router = useRouter()
+  const [showDropDown, setShowDropDown] = useState<Boolean>(false)
+  const [disconnect, setDisconnect] = useState<Boolean>(false)
+
+  const [user, setUser] = useState<User | null>(
+    (): User | null => {
+      if (typeof localStorage !== "undefined") {
+        const fromLocalStorage =
+          JSON.parse(localStorage.getItem("userObject") as string) || {};
+        if (fromLocalStorage) return fromLocalStorage;
+      }
+      return null;
+    }
+  )
+
+  const dropDownList = [
+    {
+      label: "Login",
+      function: () => {
+        router.push('/login')
+        setShowDropDown(prev => !prev)
+      }
+    },
+    {
+      label: "Signup",
+      function: () => {
+        router.push('/signup')
+        setShowDropDown(prev => !prev)
+      }
+    }
+  ]
+
+  const list = [
+    {
+      label: "Dashboard",
+      function: () => {
+        router.push('/dashboard')
+      }
+    },
+    {
+      label: "Disconnect",
+      function: () => {
+        setDisconnect(!disconnect)
+        localStorage.removeItem('userObject')
+        router.push('/')
+      }
+    }
+  ]
+
+  const handleLogin = () => {
+    router.push("/login")
+  }
+
+  const handleSignup = () => {
+    router.push('/signup')
+  }
+  function handleGoToCart() {
+    router.push('/cart')
+  }
+
+  function handleCloseModal(): void {
+    throw new Error("Function not implemented.");
+  }
+
+  function handleOpenDP() {
+    setShowDropDown((prev) => !prev)
+  }
+
+  function handleDiscoonnect() {
+    setDisconnect(prev => !prev)
+  }
+
+  return (
+    <div className=" flex gap-4 justify-between py-3 shadow-lg w-full md:px-[80px] px-[20px] ">
+      <div className="flex">
+        <div
+          onClick={() => {
+            router.push("/")
+          }}
+          className="text-2xl hover:cursor-pointer my-auto">
+          <Image
+            src="/code4all.png"
+            alt="logo"
+            height={75}
+            width={150}
+            priority={false}
+          />
+        </div>
+      </div>
+      <div className="w-full sm:w-[300px] md:w-[60%] relative h-fit hidden md:flex my-auto">
+        <BsSearch
+          className="absolute left-0 top-0 ml-3 mt-3 text-gray-400 font-meduim"
+          size={17}
+        />
+        <input
+          className="border-black border px-4 rounded-full w-full
+            placeholder:text-gray-400 font-normal placeholder:px-10 py-1 outline-none my-auto"
+          type="text"
+          placeholder="To search"
+        />
+
+      </div>
+
+      <div className="flex gap-4 my-auto">
+        <BsSearch
+          className="md:hidden my-auto"
+          size="20"
+        />
+        <GiShoppingCart
+          size="25"
+          className="my-auto hover:cursor-pointer"
+          onClick={handleGoToCart}
+        />
+        <div
+          onClick={handleOpenDP}
+          className={user?.name ? " hidden md:hidden my-auto " : "md:hidden my-auto "}
+        >
+          <IoMdContact
+            size="25"
+          />
+        </div>
+        {showDropDown && (
+          <div className="absolute z-40 top-10 right-0">
+            <DropdownModal onClose={handleCloseModal}>
+              <ul className="py-2 w-full flex flex-col gap-2">
+                {dropDownList.map((item, index) => (
+                  <li
+                    className="px-5 py-2 hover:bg-gray-200 hover:cursor-pointer text-sm "
+                    key={index}
+                    onClick={item.function}
+                  >
+                    {item.label}
+                  </li>
+                ))}
+              </ul>
+            </DropdownModal>
+          </div>
+        )}
+        {user?.name ?
+          <div onClick={() => handleDiscoonnect()} >
+            <Avatar
+              className="peer hover:cursor-pointer"
+              name={user.name}
+              color="#000"
+              round={true}
+              size="25"
+            />
+          </div>
+          : <div className="md:flex hidden my-auto gap-2">
+            <Button
+              label="Login"
+              color="bg-white"
+              text="text-black"
+              borderColor="border-black"
+              onClick={() => handleLogin()}
+            />
+            <Button
+              label="Signup"
+              color="bg-[#f94d1c]"
+              text="text-white"
+              onClick={() => handleSignup()}
+            />
+          </div>
+        }
+      </div>
+      {disconnect && (
+        <div className="absolute z-40 top-12 shadow right-0">
+          <DropdownModal onClose={handleCloseModal}>
+            <ul className="py-2 w-full flex flex-col gap-2">
+              {list.map((item, index) => (
+                <li
+                  className="px-5 py-2 hover:bg-gray-200 hover:cursor-pointer text-sm "
+                  key={index}
+                  onClick={item.function}
+                >
+                  {item.label}
+                </li>
+              ))}
+            </ul>
+          </DropdownModal>
+        </div>
+      )}
+    </div>
+  )
+}
+
