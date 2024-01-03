@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 
 module.exports = {
   images: {
@@ -13,8 +13,12 @@ module.exports = {
         hostname: "www.mymcpl.org",
       },
       {
-        hostname: "cdn1.iconfinder.com"
-      }
+        hostname: "cdn1.iconfinder.com",
+      },
+
+      {
+        hostname: "i.pinimg.com",
+      },
     ],
   },
 };
