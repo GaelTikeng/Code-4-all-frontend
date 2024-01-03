@@ -8,14 +8,15 @@ type Props = {
   author?: string,
   rating?: number
   price: number,
-  onClick?: ()=> void
+  onClick?: () => void,
+  handleDetail?: () => void
 }
 
-export default function CodeCard({ onClick, title, author, rating, price }: Props) {
+export default function CodeCard({ handleDetail, onClick, title, author, rating, price }: Props) {
 
   return (
     <div className=" max-w-[170px] ">
-      <div onClick={onClick}>
+      <div onClick={handleDetail}>
         <Image
           src="https://www.mymcpl.org/sites/default/files/2022-07/What%20Is%20a%20Zip%20File.jpg"
           alt="code photo"
@@ -25,7 +26,7 @@ export default function CodeCard({ onClick, title, author, rating, price }: Prop
           loading="lazy"
         />
       </div>
-      <h2 className="text-lg  font-medium">{title}</h2>
+      <h2 className="text-sm  font-medium">{title}</h2>
       <p className="text-xs ">{author}</p>
       <p className="text-sm font-medium">{rating} stars</p>
       <h3 className="text-sm font-extrabold pb-2">{price} FCFA</h3>
@@ -33,6 +34,7 @@ export default function CodeCard({ onClick, title, author, rating, price }: Prop
         label="Add to cart"
         color="bg-[#f94d1c]"
         text="text-white"
+        onClick={onClick}
       />
     </div>
   )

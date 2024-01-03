@@ -1,12 +1,10 @@
-import React, { Dispatch, SetStateAction, createContext, useContext, useState } from "react";
+"use client"
+import React, { Dispatch, SetStateAction, createContext, useContext, useEffect, useState } from "react";
 import { Code, Review, User } from "../../../types";
-
-
+import { getAllSnippets } from "@/utiles/service/queries";
 
 
 interface DataType {
-  currentUser: User;
-  setCurrentUser: Dispatch<SetStateAction<User>>;
   allCode: Code[];
   setAllCode: Dispatch<SetStateAction<Code[]>>;
   allReviews: Review[];
@@ -14,14 +12,6 @@ interface DataType {
 }
 
 const initialState: DataType = {
-  currentUser: {
-    id: "",
-    name: "",
-    email: "",
-    phone: "",
-    image: ""
-  },
-  setCurrentUser: () => {},
   allCode: [],
   setAllCode: () => [],
   allReviews: [],
@@ -30,17 +20,12 @@ const initialState: DataType = {
 
 const AppContext = createContext<DataType>(initialState);
 
-export const AppContextProvider = ({children}: any) => {
-  const [currentUser, setCurrentUser] = useState<User>(
-    initialState.currentUser
-  );
+export const AppContextProvider = ({ children }: any) => {
 
   const [allCode, setAllCode] = useState<Code[]>([])
   const [allReview, setAllReview] = useState<Review[]>([])
 
   const values = {
-    currentUser,
-    setCurrentUser,
     allCode,
     setAllCode,
     allReview,
@@ -48,8 +33,8 @@ export const AppContextProvider = ({children}: any) => {
   }
 
   // do all the queries in a useEffect
+  
 
-
-  return <AppContext.Provider value={values}>{children}</AppContext.Provider>;
+  return <AppContextProvider value={values}>{children}</AppContextProvider>;
 }
 export const useAppContext = () => useContext(AppContext);

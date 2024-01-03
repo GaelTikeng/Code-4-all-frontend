@@ -26,6 +26,17 @@ export default class ApiCall {
       );
   }
 
+  async DELETE(url: string, _headers: HeadersInit = {}) {
+    return fetch(url, {
+      method: "DELETE",
+      headers: { ...Headers, ..._headers },
+    })
+      .then((res) => res.json())
+      .catch((err) =>
+        console.log("an error occurs while fetching on " + url, err)
+      );
+  }
+
   // async POST(url: string, body: any, _headers: HeadersInit = {}) {
   //   return fetch(url, {
   //     method: "POST",

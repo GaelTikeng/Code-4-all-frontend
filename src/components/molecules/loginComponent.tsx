@@ -7,7 +7,7 @@ import Button from "../atoms/button";
 import { useRouter } from "next/navigation";
 import { BASE_URL } from "@/utiles/service/constant";
 import { useAppContext } from "@/app/context/appContext";
-import { loginFunction } from "@/utiles/service/queries";
+import { getAllSnippets, loginFunction } from "@/utiles/service/queries";
 import { User } from "../../../types";
 
 type Props = {}
@@ -16,7 +16,6 @@ export default function LoginForm({ }: Props) {
   const router = useRouter()
   const [success, setSuccess] = useState<String>("")
   const [isLoading, setIsLoading] = useState<Boolean>(false)
-  const { setCurrentUser } = useAppContext()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState<String>('')
   const [message, setMessage] = useState<String>('')
@@ -28,6 +27,13 @@ export default function LoginForm({ }: Props) {
       email: email,
       password: password
     }
+
+    // await getAllSnippets()
+    //   .then((data) => {
+    //     console.log("These are all snippets", data)
+    //   })
+    //   .catch((error) => console.log('this is error', error))
+
     await loginFunction(credential)
       .then((res) => {
         console.log(res)
@@ -35,7 +41,6 @@ export default function LoginForm({ }: Props) {
           setMessage("Invalid email or password")
           setIsLoading(false)
         } else if (res.name) {
-          setCurrentUser(res)
           localStorage.setItem('userObject', JSON.stringify(res))
           setMessage('')
           setSuccess('Welcome back')
@@ -46,28 +51,6 @@ export default function LoginForm({ }: Props) {
       .catch((error) => {
         console.log(error)
       })
-    // await fetch(BASE_URL + "/users/login", {
-    //   method: "POST",
-    //   body: JSON.stringify({
-    //     email: email,
-    //     password: password
-    //   }),
-    //   headers: {
-    //     "content-type": "application/json",
-    //   }
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     if (data.error) {
-    //       setMessage("Invalid email or password")
-    //     } else if (data.name) {
-    //       setCurrentUser(data)
-    //       localStorage.setItem('userObject', JSON.stringify(data))
-    //       setSuccess('Welcome back')
-    //       router.push('/dashboard')
-    //       setIsLoading((prev) => !prev)
-    //     }
-    //   })
   }
 
   return (

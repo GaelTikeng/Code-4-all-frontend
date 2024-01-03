@@ -32,9 +32,21 @@ export default function ShoppingCart({ codeCart }: Props) {
       return null;
     }
   )
+  const [snippets, setSnippets] = useState<Code[] | undefined>(
+    (): Code[] | undefined => {
+      if (typeof localStorage !== "undefined") {
+        const fromLocalStorage = JSON.parse(localStorage.getItem("codeArray") as string) || [];
+        if (fromLocalStorage) return fromLocalStorage;
+      }
+      return undefined;
+    }
+  )
 
   const handleRemove = (id: string) => {
-    codeCart.filter((item) => item.id === id)
+    const newCodesInCart: Code[] | undefined = snippets?.filter((item) => item.id !== id)
+    setSnippets(newCodesInCart)
+    localStorage.setItem('codeArray', JSON.stringify(newCodesInCart))
+    console.log('rest', snippets)
   }
 
   const handleCheckOut = () => {
@@ -50,14 +62,14 @@ export default function ShoppingCart({ codeCart }: Props) {
   }
 
   return (
-    <div className="md:w-2/3 full px-5 mx-auto py-8">
+    <div className="md:w-2/3 w-full px-5 mx-auto py-8">
       <h1 className="text-3xl font-bold ">Shopping Cart</h1>
-      <p className="font-medium pt-4 ">{codeCart.length} Code snippet(s) in cart</p>
+      <p className="font-medium pt-4 ">{snippets?.length} Code snippet(s) in cart</p>
 
       <div className="md:flex gap-10 justify-between">
         <div className="md:w-[30%] md:hidden">
           <p className="text-gray-700 font-bold ">Total:</p>
-          <p className="font-bold py-4 text-xl">{totalPrice(codeCart)} FCFA</p>
+          <p className="font-bold py-4 text-xl">{totalPrice(snippets)} FCFA</p>
           <Button
             label="Checkout"
             color="bg-[#f94d1c]"
@@ -65,28 +77,30 @@ export default function ShoppingCart({ codeCart }: Props) {
             onClick={() => handleCheckOut()}
           />
         </div>
-        <div className="py-4 w-[70%]">
-          {codeCart ? codeCart?.map((item) => (
+        <div className="py-4 w-full">
+          {snippets ? snippets?.map((item) => (
             <ShopCodeCart
               key={item.id}
               title={item.title}
               price={item.price}
               author={item.author}
               rating={item.rating}
-            // onClick={handleRemove(item.id)}
+              onClick={() => handleRemove(item.id)}
             />
           )) : <p className="m-auto">No code added to cart. <Link href="/">Browse code snippets</Link> </p>}
         </div>
-        <div className="hidden md:flex md:flex-col md:w-[30%]">
-          <p className="text-gray-700 font-bold ">Total:</p>
-          <p className="font-bold py-4 text-xl">{totalPrice(codeCart)} FCFA</p>
-          <Button
-            label="Checkout"
-            color="bg-[#f94d1c]"
-            text="text-white"
-            onClick={() => handleCheckOut()}
-          />
-        </div>
+        {snippets ?
+          <div className="hidden md:flex md:flex-col md:w-[30%]">
+            <p className="text-gray-700 font-bold ">Total:</p>
+            <p className="font-bold py-4 text-xl">{totalPrice(snippets)} FCFA</p>
+            <Button
+              label="Checkout"
+              color="bg-[#f94d1c]"
+              text="text-white"
+              onClick={() => handleCheckOut()}
+            />
+          </div>
+          : ""}
         {openPopup && (
           <>
             <Overlay

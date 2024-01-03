@@ -1,22 +1,22 @@
-'use client'
+// 'use client'
 import Image from "next/image";
 import React from "react";
 import Button from "../atoms/button";
 type Props = {}
 
 export default function Discount({ }: Props) {
-  function handleChange(): React.ChangeEventHandler<HTMLInputElement> | undefined {
-    throw new Error("Function not implemented.");
-  }
+  // function handleChange(): React.ChangeEventHandler<HTMLInputElement> | undefined {
+  //   throw new Error("Function not implemented.");
+  // }
 
   return (
-    <div className="bg-[#f5f7fa] md:flex gap-[100px] md:px-[80px] px-[20px]">
+    <div className="bg-[#f5f7fa] md:h-[350px] md:flex gap-[100px] md:px-[80px] px-[20px]">
       <Image
         src="/woman.jpg"
         alt="black woman"
         height={300}
         width={500}
-        className="md:h-[250px] h-[200px] md:w-[500px] w-[400px] "
+        className="md:h-[350px] h-[270px] md:w-[500px] w-[400px] "
       />
       <div className="my-10 md:my-auto leading-loose">
         <p className="text-xs pb-4">20 % discount</p>
@@ -27,7 +27,7 @@ export default function Discount({ }: Props) {
             className="bg-white md:w-[300px] w-[70%] px-4"
             placeholder="Email Address"
             type="text"
-            onChange={() => handleChange}
+            // onChange={() => handleChange}
           />
           <div className="w-[100px]">
             <Button label="Suscribe" color="bg-[#f94d1c]" text="text-white" />

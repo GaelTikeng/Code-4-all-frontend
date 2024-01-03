@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -41,6 +41,8 @@ const HeroSection = () => {
         "Explore a wide range of code snippets across various programming languages and frameworks, all carefully crafted and vetted by experienced developers.",
     },
   ];
+
+ 
 
   return (
     <div className="pt-4">

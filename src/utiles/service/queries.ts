@@ -27,12 +27,12 @@ export const signUp = async (newUser: {
 
 // CREATE PURCHASE (POST REQUEST)
 export const createPurchase = async (purchase: {
-  code_id: string[],
-  quantity: number,
-  total_amount: number,
-  buyer_id: number
+  code_id: string | undefined,
+  quantity: number | undefined,
+  total_amount: any,
+  buyer_id: string | undefined
 }) => {
-  return await apiCall.POST(BASE_URL + "purchases", purchase)
+  return await apiCall.POST(BASE_URL + "/purchases", purchase)
 }
 
 // GET ALL PURCHASES
@@ -42,6 +42,67 @@ export const getAllPurchases = async () => {
 
 // { END POINTS FOR CODE TABLE }
 // CREATE CODE (POST)
-export const createCode = async(code: Code) => {
+export const createCode = async (code: Code) => {
   return await apiCall.POST(BASE_URL + "code", code)
-} 
+}
+
+// GET ALL CODE SNIPPETS
+export const getAllSnippets = async () => {
+  try {
+    const response = await fetch(
+      BASE_URL + `/code`,
+      {
+        next: { revalidate: 300 }, // function will be excuted after 5 mintes
+        method: "GET",
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Failed to get all snippets");
+    }
+    const data = response.json();
+    return data
+
+  } catch (error) {
+    console.error(error);
+  }
+
+}
+
+// GET CODE SNIPPET BY ID
+export const getCodeById = async (id: string) => {
+  console.log('from fxn', id)
+  try {
+    const response = await fetch(
+      BASE_URL + `/code/${id}`,
+      {
+        method: "GET",
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Failed to get all snippets");
+    }
+    const data = response.json();
+    return data
+
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// DELETE CODE SNIPPET
+export const deleteCode = async (id: string, author_id: string) => {
+  return await apiCall.DELETE(BASE_URL + `code/${id}/${author_id}`)
+}
+
+// GET CODE SNIPPET PER USER/AUTHOR
+export const getCodePerUser = async (user_id: string) => {
+  return await apiCall.GET(BASE_URL + `code/user_code/${user_id}`)
+}
+
+// GET CODE PER CATEGORY
+export const findCodeByCategory = async (name: string) => {
+  return await apiCall.GET(BASE_URL + `code/category/${name}`)
+}
+
+// UPDATE CODE SNIPPET
+// export const updateCode = async ()

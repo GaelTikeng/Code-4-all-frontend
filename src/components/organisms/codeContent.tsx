@@ -1,10 +1,13 @@
 "use client"
-import React from "react";
+import React, { useState } from "react";
 import CodeCard from "../molecules/codeCard";
 import Carousel from "react-multi-carousel";
 import { Code, Test } from "../../../types";
+import { getCodeById } from "@/utiles/service/queries";
 
-type Props = {}
+type Props = {
+  snippets: Code[]
+}
 
 export const allCode: Test[] = [
   {
@@ -79,19 +82,41 @@ export const allCode: Test[] = [
   }
 ]
 
-export default function Codes({ }: Props) {
-  
+export default function Codes({ snippets }: Props) {
+
+  const cartSnippets: Code[] = []
+
+  const handleClick = async (id: string) => {
+    await getCodeById(id)
+      .then((data) => {
+        localStorage.setItem('codeSnippet', JSON.stringify(data))
+        cartSnippets.push(data)
+        localStorage.setItem('codeArray', JSON.stringify(cartSnippets))
+        console.log('this is snippet', data)
+      })
+      .catch((err) => {
+        console.log("could not get snippet", err)
+      })
+    console.log(cartSnippets)
+  }
+
+  const handleDetail = (id: string) => {
+    console.log(id)
+  }
+
   return (
     <div className="md:px-[80px] px-[20px] flex gap-6 flex-wrap">
-        {allCode.map((item, index) => (
-          <CodeCard
-            key={index}
-            title={item.title}
-            author={item.author}
-            rating={item.rating}
-            price={item.price}
-          />
-        ))}
+      {snippets.map((item, index) => (
+        <CodeCard
+          key={index}
+          title={item.title}
+          author={item.author}
+          rating={item.rating}
+          price={item.price}
+          onClick={() => handleClick(item.id)}
+          handleDetail={() => handleDetail(item.id)}
+        />
+      ))}
       {/* <div className="flex gap-6 flex-wrap">
         <CodeCard
           title="code source "

@@ -19,7 +19,6 @@ export default function LoginFormb({ handleClose, onClick }: Props) {
   const router = useRouter()
   const [success, setSuccess] = useState<String>("")
   const [isLoading, setIsLoading] = useState<Boolean>(false)
-  const { setCurrentUser } = useAppContext()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState<String>('')
   const [message, setMessage] = useState<String>('')
@@ -38,7 +37,6 @@ export default function LoginFormb({ handleClose, onClick }: Props) {
           setMessage("Invalid email or password")
           setIsLoading(false)
         } else if (res.name) {
-          setCurrentUser(res)
           localStorage.setItem('userObject', JSON.stringify(res))
           setMessage('')
           setSuccess('Welcome back')

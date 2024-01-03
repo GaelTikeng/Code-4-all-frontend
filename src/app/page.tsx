@@ -1,3 +1,4 @@
+"use client"
 import CodeCard from "@/components/molecules/codeCard";
 import CommentCart from "@/components/molecules/commentCart";
 import HeroSection from "@/components/molecules/heroSection";
@@ -8,29 +9,32 @@ import Codes from "@/components/organisms/codeContent";
 import CommentCarousel from "@/components/organisms/commentCarousel";
 import Footer from "@/components/organisms/footer";
 import Discount from "@/components/organisms/newzletter";
-import React from "react";
-import { User } from "@supabase/supabase-js";
+import React, { useEffect, useState } from "react";
+import { getAllSnippets } from "@/utiles/service/queries";
+import { Code } from "../../types";
 // import Login from "./signup/page";
 
 export default function Home() {
-  // const [user, setUser] = React.useState<User | null>(
-  //   (): User | null => {
-  //     if (typeof localStorage !== "undefined") {
-  //       const fromLocalStorage =
-  //         JSON.parse(localStorage.getItem("userObject") as string) || {};
-  //       if (fromLocalStorage) return fromLocalStorage;
-  //     }
-  //     return null;
-  //   }
-  // )
+  const [snippets, setSnippets] = useState<Code[]>([])
+
+  useEffect(() => {
+    getAllSnippets()
+      .then((res) => {
+        console.log("all codes", res)
+        setSnippets(res)
+      })
+      .catch((error) => {
+        console.log('fail to fetch codes snippets', error)
+      })
+  }, [])
 
   return (
     <div>
       <Navbar />
       <HeroSection />
-      <Codes/> 
-      
-       <div className="grid grid-cols-2">
+      <Codes snippets={snippets} />
+
+      <div className="grid grid-cols-2">
         <CommentCart
           image="/image3.jpg"
           createdAt="12 jan 2032"
@@ -43,11 +47,11 @@ export default function Home() {
           name="gaelinho"
           comment="hello guys"
         />
-      </div> 
-       <Discount/>
+      </div>
+      <Discount />
       {/* <CarousselComment /> */}
       <CommentCarousel />
-       <Footer/>
+      <Footer />
 
     </div>
   )

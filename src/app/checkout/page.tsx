@@ -6,6 +6,11 @@ import { IoMdClose, IoMdLock } from "react-icons/io";
 import { totalPrice } from "@/utiles/function";
 import { allCode } from '@/components/organisms/codeContent';
 import Overlay from "@/components/atoms/overlay";
+import { Code, Test, User } from "../../../types";
+import PaidCourse from "@/components/molecules/paidCode";
+import { createPurchase } from "@/utiles/service/queries";
+import Pulsation from "@/components/atoms/pulsation";
+import { BASE_URL } from "@/utiles/service/constant";
 
 
 
@@ -13,10 +18,43 @@ export default function Hello() {
   const router = useRouter();
   const [paypalActive, setPaypalActive] = React.useState(false);
   const [cartActive, setCartActive] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
   const [name, setName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [snippets, setSnippets] = React.useState<Code[] | undefined>(
+    (): Code[] | undefined => {
+      if (typeof localStorage !== "undefined") {
+        const fromLocalStorage = JSON.parse(localStorage.getItem("codeArray") as string) || [];
+        if (fromLocalStorage) return fromLocalStorage;
+      }
+      return undefined;
+    }
+  )
+  const [user, setUser] = React.useState<User | null>(
+    (): User | null => {
+      if (typeof localStorage !== "undefined") {
+        const fromLocalStorage =
+          JSON.parse(localStorage.getItem("userObject") as string) || {};
+        if (fromLocalStorage) return fromLocalStorage;
+      }
+      return null;
+    }
+  )
   const [popupActive, setPopupActive] = React.useState(false);
 
+  const codeIds: string[] | undefined = []
 
+
+  const potentialBoughtourses = snippets?.map(
+    (course: Code) => (
+      <PaidCourse
+        title={course.title}
+        price={course.price}
+        author={course.user.name}
+        key={course.id}
+      />
+    )
+  );
 
   const handleCart = () => {
     setCartActive((prev) => !prev);
@@ -28,7 +66,9 @@ export default function Hello() {
   }
 
   const handleCheckout = () => {
+
     setPopupActive((prev) => !prev);
+
     router.push("/dashboard");
   };
 
@@ -37,9 +77,54 @@ export default function Hello() {
     setCartActive(false);
   };
 
-  const handlePayment = () => {
+  const handlePayment = async () => {
+    setLoading(true)
+    snippets?.map((i) => (
+      codeIds.push(i.id)
+    ))
 
-    setPopupActive((prev) => !prev)
+    // try {
+    //   const res = await fetch(BASE_URL + "/purchases", {
+    //     method: 'POST',
+    //     body: JSON.stringify({
+    //       // code_id: codeIds,
+    //       code_id: snippets[0]?.id,
+    //       quantity: snippets?.length,
+    //       total_amount: totalPrice(snippets),
+    //       buyer_id: user?.id
+    //     }),
+    //     headers: {
+    //       'content-type': 'application/json'
+    //     }
+    //   })
+    //   console.log(res)
+    //   if (res.ok) {
+    //     console.log("Yeai!")
+    //     setLoading(false)
+    //   } else {
+    //     console.log("Oops! Something is wrong.")
+    //   }
+    //   const data = res.json()
+    //   return data
+    // } catch (error) {
+    //   console.log(error)
+    // }
+
+    await createPurchase({
+      // code_id: codeIds,
+      code_id: snippets[1]?.id,
+      quantity: snippets?.length,
+      total_amount: totalPrice(snippets),
+      buyer_id: user?.id
+    }).then((res) => {
+      console.log(res)
+      localStorage.setItem('purchases', JSON.stringify(res))
+      setLoading(prev => !prev)
+      setPopupActive((prev) => !prev)
+    })
+      .catch((error) => {
+        console.log('error while purchasing', error)
+      })
 
   }
 
@@ -66,8 +151,8 @@ export default function Hello() {
           Cancel
         </p>
       </div>
-      <div className="md:flex md:px-4 px-5">
-        <div className="md:w-[55%] md:flex">
+      <div className="md:flex md:px-4 ">
+        <div className="md:w-[55%] md:px-[80px] px-[20px] md:flex">
           <p className="flex-1"></p>
           <div className="md:pr-10 md:w-[40rem]">
             <div>
@@ -173,26 +258,27 @@ export default function Hello() {
                 <div className={cartActive ? "w-full px-5 py-5" : "hidden"}>
                   <div className="flex justify-between py-2">
                     <label className="font-bold">Name on cart</label>
-                    <span className="text-sm text-gray2">Required</span>
                   </div>
 
                   <input
-                    className="border border-gray2 px-4 py-2 w-[200px]"
+                    className="border border-gray2 px-4 py-2 w-full"
                     placeholder="name on cart"
                     type="text"
                     onChange={(e) => setName(e.target.value)}
                   />
 
                   <div className="flex justify-between py-2">
-                    <label className="font-bold">Cart number</label>
+                    <label className="font-bold">Email address</label>
                     <span className="text-sm text-gray2">Required</span>
                   </div>
                   <input
+                    required
                     type="text"
                     className="border px-4 py-3 w-full"
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                   <div className="flex gap-2 pb-5">
-                    <div className="w-1/2">
+                    {/* <div className="w-1/2">
                       <div className="flex justify-between py-2">
                         <label className="font-bold">Expire date</label>
                         <span className="text-sm text-gray2">Required</span>
@@ -203,8 +289,8 @@ export default function Hello() {
                         type="text"
                       // onChange={(e) => setExpireDate(e.target.value)}
                       />
-                    </div>
-                    <div className="w-1/2">
+                    </div> */}
+                    {/* <div className="w-1/2">
                       <div className="flex justify-between py-2">
                         <label className="font-bold">CVC/CVV</label>
                         <span className="text-sm text-gray2">Required</span>
@@ -215,7 +301,7 @@ export default function Hello() {
                         placeholder="CVC"
                       // onChange={(e) => setCvc(e.target.value)}
                       />
-                    </div>
+                    </div> */}
                   </div>
                   <div className="flex gap-2">
                     <input type="checkbox" className="w-4 border" />
@@ -224,35 +310,32 @@ export default function Hello() {
                 </div>
               </div>
               <div className="">
-                <h2 className="font-semibold py-4 text-xl md:text-2xl leading-normal">
+                <h2 className="font-semibold pt-4 text-xl md:text-2xl leading-normal">
                   Order details
                 </h2>
-                <p className="text-violt">
-                  Potential puchased course will be displayed here
-                </p>
-                {/* <div className=" flex flex-col w-fill py-14 mx-auto">
+                <div className=" flex flex-col w-fill py-4 mx-auto">
                   {potentialBoughtourses}
-                </div> */}
+                </div>
               </div>
             </section>
           </div>
         </div>
         <div className="md:bg-[#f8fafb] md:opacity-90 md:min-h-[100vh] text-black md:w-[45%] md:px-10 md:pt-20">
-          <div className="w-full">
-            <h2 className="font-semibold py-4 text-xl md:text-2xl leading-normal">
+          <div className="w-full md:w-[320px]">
+            <h2 className="font-semibold pb-4 text-xl md:text-2xl leading-normal">
               Summary
             </h2>
             <hr />
             <div className="flex justify-between font-bold py-3">
               <p>Total: </p>
-              <span>{totalPrice(allCode)} FCFA</span>
+              <span>{totalPrice(snippets)} FCFA</span>
             </div>
 
             <button
               onClick={() => handlePayment()}
               className="py-4 bg-[#f94d1c] hover:shadow-xl font-semibold text-white w-full"
             >
-              {paypalActive ? "Proceed" : "Complete checkout"}
+              {loading ? <Pulsation /> : "Complete checkout"}
             </button>
             {popupActive && (
               <>
@@ -261,10 +344,10 @@ export default function Hello() {
                   onClick={() => setPopupActive((prev) => !prev)}
                 />
                 <div className="fixed h-[50vh] z-[80] bg-white  flex gap-5 flex-col top-[15%] w-[100%] md:left-[33%] shadow-md p-4 md:w-[550px] m-auto mobile:max-sm:w-[90vw] mobile:max-sm:left-2 mobile:max-sm:right-2">
-                <span
-                className=" mr-0 cursor-pointer hover:bg-gray-300 rounded-full w-fit "
-                onClick={() => setPopupActive((prev) => !prev)}><IoMdClose /></span>
-              
+                  <span
+                    className=" mr-0 cursor-pointer hover:bg-gray-300 rounded-full w-fit "
+                    onClick={() => setPopupActive((prev) => !prev)}><IoMdClose /></span>
+
                   <h1 className="py-4 md:py-6 font-semibold text-2xl md:text-4xl leading-normal">
                     🎉 Thanks for the purchase🎉
                   </h1>
