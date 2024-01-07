@@ -7,13 +7,27 @@ import Button from "../atoms/button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import DropdownModal from "../atoms/dropDownModal";
+import { LOCAL_STORAGE } from "@/utiles/service/storage";
+import Avatar from "react-avatar";
+import { User } from "../../../types";
 import { CiSearch } from "react-icons/ci";
 
 
-
-export default function Navbar() {
+export default function Navbar2() {
   const router = useRouter()
   const [showDropDown, setShowDropDown] = useState<Boolean>(false)
+  const [disconnect, setDisconnect] = useState<Boolean>(false)
+
+  const [user, setUser] = useState<User | null>(
+    (): User | null => {
+      if (typeof localStorage !== "undefined") {
+        const fromLocalStorage =
+          JSON.parse(localStorage.getItem("userObject") as string) || {};
+        if (fromLocalStorage) return fromLocalStorage;
+      }
+      return null;
+    }
+  )
 
   const dropDownList = [
     {
@@ -28,6 +42,24 @@ export default function Navbar() {
       function: () => {
         router.push('/signup')
         setShowDropDown(prev => !prev)
+      }
+    }
+  ]
+
+  const list = [
+    {
+      label: "Dashboard",
+      function: () => {
+        router.push('/dashboard')
+        setDisconnect(!disconnect)
+      }
+    },
+    {
+      label: "Disconnect",
+      function: () => {
+        setDisconnect(!disconnect)
+        localStorage.removeItem('userObject')
+        router.push('/')
       }
     }
   ]
@@ -49,6 +81,10 @@ export default function Navbar() {
 
   function handleOpenDP() {
     setShowDropDown((prev) => !prev)
+  }
+
+  function handleDiscoonnect() {
+    setDisconnect(prev => !prev)
   }
 
   return (
@@ -76,7 +112,6 @@ export default function Navbar() {
           className="w-full  outline-none bg-transparent"
         />
       </div>
-
       <div className="flex gap-4 my-auto">
         {/* <BsSearch
           className="md:hidden my-auto"
@@ -89,7 +124,7 @@ export default function Navbar() {
         />
         <div
           onClick={handleOpenDP}
-          className="md:hidden my-auto "
+          className={user?.name ? " hidden md:hidden my-auto " : "md:hidden my-auto "}
         >
           <IoMdContact
             size="25"
@@ -112,22 +147,50 @@ export default function Navbar() {
             </DropdownModal>
           </div>
         )}
+        {user?.name ?
+          <div onClick={() => handleDiscoonnect()} >
+            <Avatar
+              className="peer hover:cursor-pointer"
+              name={user.name}
+              color="#000"
+              round={true}
+              size="25"
+            />
+          </div>
+          : <div className="md:flex hidden my-auto gap-2">
+            <Button
+              label="Login"
+              color="bg-white"
+              text="text-black"
+              borderColor="border-black"
+              onClick={() => handleLogin()}
+            />
+            <Button
+              label="Signup"
+              color="bg-[#f94d1c]"
+              text="text-white"
+              onClick={() => handleSignup()}
+            />
+          </div>
+        }
       </div>
-      <div className="md:flex hidden my-auto gap-2">
-        <Button
-          label="Login"
-          color="bg-white"
-          text="text-black"
-          borderColor="border-black"
-          onClick={() => handleLogin()}
-        />
-        <Button
-          label="Signup"
-          color="bg-[#f94d1c]"
-          text="text-white"
-          onClick={() => handleSignup()}
-        />
-      </div>
+      {disconnect && (
+        <div className="absolute z-40 top-12 shadow right-0">
+          <DropdownModal onClose={handleCloseModal}>
+            <ul className="py-2 w-full flex flex-col gap-2">
+              {list.map((item, index) => (
+                <li
+                  className="px-5 py-2 hover:bg-gray-200 hover:cursor-pointer text-sm "
+                  key={index}
+                  onClick={item.function}
+                >
+                  {item.label}
+                </li>
+              ))}
+            </ul>
+          </DropdownModal>
+        </div>
+      )}
     </div>
   )
 }
