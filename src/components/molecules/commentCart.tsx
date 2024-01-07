@@ -3,18 +3,17 @@ import React from "react";
 
 type Props = {
   onClick?: () => void,
-  image: string,
   name?: string,
   createdAt?: string,
   comment: string
 }
 
-export default function CommentCart({ onClick, createdAt, comment, name, image }: Props) {
+export default function CommentCart({ onClick, createdAt, comment, name }: Props) {
   return (
-    <div className="bg-white py-5 max-w-[200px] leading-loose m-4 shadow">
+    <div className="bg-white py-5 max-w-[300px] leading-loose m-4 shadow">
       <div className="flex justify-center py-4">
         <Image
-          src={image}
+          src="https://cdn-icons-png.flaticon.com/512/6596/6596121.png"
           alt="user photo"
           height={80}
           width={80}

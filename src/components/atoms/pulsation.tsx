@@ -2,7 +2,8 @@ import React from "react";
 
 const Pulsation = () => {
   return (
-    <div className="pulsating-circle w-full">
+    // <div className="loader">Loading...</div>
+    <div className="loader w-full">
       <span className="mr-4"> Loading...</span>
     </div>
   );

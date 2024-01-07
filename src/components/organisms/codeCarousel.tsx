@@ -20,7 +20,7 @@ export default function CodeCarousel(props: { title: string }) {
       pageContent = allCode.map((item, index) => (
         <CodeCard
           title={item.title}
-          // author={item.user.name}
+          author={item.user.name}
           rating={item.rating}
           price={item.price}
           onClick={() => handleClick(item.id)}

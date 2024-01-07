@@ -51,6 +51,7 @@ export default function Navbar2() {
       label: "Dashboard",
       function: () => {
         router.push('/dashboard')
+        setDisconnect(!disconnect)
       }
     },
     {
@@ -112,10 +113,10 @@ export default function Navbar2() {
         />
       </div>
       <div className="flex gap-4 my-auto">
-        <BsSearch
+        {/* <BsSearch
           className="md:hidden my-auto"
           size="20"
-        />
+        /> */}
         <GiShoppingCart
           size="25"
           className="my-auto hover:cursor-pointer"

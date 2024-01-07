@@ -7,14 +7,12 @@ import Button from "../atoms/button";
 import { BASE_URL } from "@/utiles/service/constant";
 import { User } from "../../../types";
 import { useRouter } from "next/navigation";
-import { useAppContext } from "@/app/context/appContext";
 import { signUp } from "@/utiles/service/queries";
 
 type Props = {}
 
 export default function SignupForm({ }: Props) {
   const router = useRouter()
-  const { setCurrentUser } = useAppContext();
   const [name, setName] = useState("")
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState("")
@@ -31,7 +29,6 @@ export default function SignupForm({ }: Props) {
         email: email,
         password: password
       }).then((data) => {
-        setCurrentUser(data);
         localStorage.setItem('userObject', JSON.stringify(data))
         console.log(data);
         setSuccess(`Welcome ${data.name} 🙂`);

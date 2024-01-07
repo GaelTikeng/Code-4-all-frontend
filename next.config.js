@@ -19,6 +19,9 @@ module.exports = {
       {
         hostname: "i.pinimg.com",
       },
+      {
+        hostname: "cdn-icons-png.flaticon.com",
+      },
     ],
   },
 };

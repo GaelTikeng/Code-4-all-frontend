@@ -7,7 +7,6 @@ import Pulsation from "@/components/atoms/pulsation";
 import { User } from "../../../types";
 import { LOCAL_STORAGE } from "@/utiles/service/storage";
 import { BASE_URL } from "@/utiles/service/constant";
-import { useAppContext } from "../context/appContext";
 // import { LOCAL_STORAGE } from "@/utils/service/storage";
 // import { signUp } from "@/utils/service/queries";
 // import { SITE_URL } from "@/utils/service/constant";
@@ -20,7 +19,6 @@ const Signupb = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   // context data
-  const { setCurrentUser } = useAppContext();
 
   const handleInputChange = async () => {
     setIsLoading(true);
@@ -42,7 +40,6 @@ const Signupb = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        setCurrentUser(data);
         LOCAL_STORAGE.save("userObject", data);
         console.log(data);
         setSuccess(`Welcome ${data.name} 🙂`);

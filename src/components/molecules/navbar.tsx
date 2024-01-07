@@ -69,32 +69,19 @@ export default function Navbar() {
         </div>
       </div>
       <div className="input flex bg-[#f1f1f1] w-[70%] items-center py-1 px-2 gap-2 rounded-full">
-            <CiSearch size={20} />
-            <input
-              type="text"
-              placeholder="search..."
-              className="w-full  outline-none bg-transparent"
-            />
-          </div>
-      {/* <div className="w-full sm:w-[300px] md:w-[60%] relative h-fit hidden md:flex my-auto">
-        <BsSearch
-          className="absolute left-0 top-0 ml-3 mt-3 text-gray-400 font-meduim"
-          size={17}
-        />
+        <CiSearch size={20} />
         <input
-          className="border-black border px-4 rounded-full w-full
-            placeholder:text-gray-400 font-normal placeholder:px-10 py-1 outline-none my-auto"
           type="text"
-          placeholder="To search"
+          placeholder="search..."
+          className="w-full  outline-none bg-transparent"
         />
-
-      </div> */}
+      </div>
 
       <div className="flex gap-4 my-auto">
-        <BsSearch
+        {/* <BsSearch
           className="md:hidden my-auto"
           size="20"
-        />
+        /> */}
         <GiShoppingCart
           size="25"
           className="my-auto hover:cursor-pointer"

@@ -6,21 +6,26 @@ type Review = {
   user_id: string,
   code_id: string,
   review: string,
-  rating: string
+  rating: string,
+  createdAt: string,
+  user: {
+    name:string
+  }
 }
 
 type Code = {
   id: string,
-  user_id: string,
+  user_id: string | undefined,
   purchase_id: string,
   title: string,
   description: string,
   price: number,
-  code_file: string,
+  code_file?: string,
   programming_language: string,
   category: string,
   rating: number,
   author: string,
+  createdAt: string,
   user: {
     name: string,
     email: string
@@ -41,7 +46,8 @@ type Purchase = {
   code_id: string,
   buyer_id: string,
   total_amount: number,
-  quantity: number
+  quantity: number,
+  createdAt: string
 }
 
 type Test = {

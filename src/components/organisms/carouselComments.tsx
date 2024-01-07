@@ -55,7 +55,6 @@ export default function CarousselComment({ }: Props) {
       {comments.map((item, index) => (
           <SwiperSlide key={index}>
             <CommentCart
-              image={item.image}
               createdAt={item.createAt}
               name={item.name}
               comment={item.comment}

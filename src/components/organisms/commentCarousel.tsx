@@ -1,33 +1,37 @@
 import React from "react";
 import CommentCart from "../molecules/commentCart";
+import { Review } from "../../../types";
+import Pulsation from "../atoms/pulsation";
 
-type Props = {}
+type Props = {
+  reviews: Review[]
+}
 
-export default function CommentCarousel({ }: Props) {
+export default function CommentCarousel({ reviews}: Props) {
 
-  const comments = [
-    {
-      id: 0,
-      image: "/image2.jpg",
-      name: "ricardo",
-      createAt: "12 Jan 2013",
-      comment: "Wonderfull code"
-    },
-    {
-      id: 1,
-      image: "/image3.jpg",
-      name: "Sam Marvis",
-      createAt: "12 fev 2013",
-      comment: "amazing code"
-    },
-    {
-      id: 0,
-      image: "/image4.jpg",
-      name: "ricardo",
-      createAt: "12 Jan 2013",
-      comment: "Wonderfull code"
-    }
-  ]
+  // const comments = [
+  //   {
+  //     id: 0,
+  //     image: "/image2.jpg",
+  //     name: "ricardo",
+  //     createAt: "12 Jan 2013",
+  //     comment: "Wonderfull code"
+  //   },
+  //   {
+  //     id: 1,
+  //     image: "/image3.jpg",
+  //     name: "Sam Marvis",
+  //     createAt: "12 fev 2013",
+  //     comment: "amazing code"
+  //   },
+  //   {
+  //     id: 0,
+  //     image: "/image4.jpg",
+  //     name: "ricardo",
+  //     createAt: "12 Jan 2013",
+  //     comment: "Wonderfull code"
+  //   }
+  // ]
   return (
     <div
       style={{
@@ -41,15 +45,14 @@ export default function CommentCarousel({ }: Props) {
       <div className="  h-full w-full">
         <h1 className="text-2xl mb-6 font-semibold text-center">What our developers say? </h1>
         <div className=" grid grid-cols-2 mx-auto md:grid md:grid-cols-3 md:w-[50%] z-50">
-          {comments.map((item) => (
+          {reviews ? reviews.map((item) => (
             <CommentCart
               key={item.id}
-              image={item.image}
-              createdAt={item.createAt}
-              comment={item.comment}
-              name={item.name}
+              createdAt={item.createdAt.slice(0,10)}
+              comment={item.review}
+              name={item.user.name}
             />
-          ))}
+          )) : <Pulsation/>}
         </div>
       </div>
 

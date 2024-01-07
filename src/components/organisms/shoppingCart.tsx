@@ -46,7 +46,6 @@ export default function ShoppingCart({ codeCart }: Props) {
     const newCodesInCart: Code[] | undefined = snippets?.filter((item) => item.id !== id)
     setSnippets(newCodesInCart)
     localStorage.setItem('codeArray', JSON.stringify(newCodesInCart))
-    console.log('rest', snippets)
   }
 
   const handleCheckOut = () => {
@@ -83,11 +82,11 @@ export default function ShoppingCart({ codeCart }: Props) {
               key={item.id}
               title={item.title}
               price={item.price}
-              author={item.author}
+              author={item.user.name}
               rating={item.rating}
               onClick={() => handleRemove(item.id)}
             />
-          )) : <p className="m-auto">No code added to cart. <Link href="/">Browse code snippets</Link> </p>}
+          )) : <p className="m-auto">No code added to cart. <Link className="text-blue-500" href="/">Browse code snippets</Link> </p>}
         </div>
         {snippets ?
           <div className="hidden md:flex md:flex-col md:w-[30%]">

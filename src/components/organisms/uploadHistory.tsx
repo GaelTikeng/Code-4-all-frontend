@@ -1,15 +1,15 @@
 import { getPurchasesPerBuyer } from "@/utiles/service/queries";
 import React, { useEffect } from "react";
-import { Purchase, User } from "../../../types";
+import { Code, Purchase, User } from "../../../types";
 import Loader from "../atoms/loader";
 
 
 type Props = {
   className?: string,
-  transaction: Purchase[]
+  uploaded: Code[]
 }
 
-const Transactions = ({ className, transaction }: Props) => {
+const UploadedCode = ({ className, uploaded }: Props) => {
   const [user, setUser] = React.useState<User | null>(
     (): User | null => {
       if (typeof localStorage !== "undefined") {
@@ -21,7 +21,7 @@ const Transactions = ({ className, transaction }: Props) => {
     }
   )
 
-  
+
 
   return (
     <div className={className}>
@@ -30,21 +30,27 @@ const Transactions = ({ className, transaction }: Props) => {
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" className="px-6 font-semibold py-3">
-                Transaction id
+                Title
               </th>
               <th scope="col" className="px-6 py-3">
-                Quantity
+                Language
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Category
               </th>
               <th scope="col" className="px-6 py-3">
                 Date
               </th>
               <th scope="col" className="px-6 py-3">
-                Amount
+                rating
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Price
               </th>
             </tr>
           </thead>
           <tbody>
-            {transaction?.length ? transaction.map((item, index) => (
+            {uploaded?.length ? uploaded.map((item, index) => (
               <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <th
                   scope="row"
@@ -52,9 +58,12 @@ const Transactions = ({ className, transaction }: Props) => {
                 >
                   {item.id.slice(0, 7)}
                 </th>
-                <td className="px-6 py-4">{item.quantity}</td>
+                <td className="px-6 py-4">{item.title}</td>
+                <td className="px-6 py-4">{item.programming_language} FCFA</td>
+                <td className="px-6 py-4">{item.category}</td>
                 <td className="px-6 py-4">{item.createdAt.slice(0, 10)}</td>
-                <td className="px-6 py-4">{item.total_amount} FCFA</td>
+                <td className="px-6 py-4">{item.rating} FCFA</td>
+                <td className="px-6 py-4">{item.price} FCFA</td>
               </tr>
             ))
               :
@@ -69,4 +78,4 @@ const Transactions = ({ className, transaction }: Props) => {
   );
 };
 
-export default Transactions;
+export default UploadedCode;

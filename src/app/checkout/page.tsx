@@ -12,9 +12,7 @@ import { createPurchase } from "@/utiles/service/queries";
 import Pulsation from "@/components/atoms/pulsation";
 import { BASE_URL } from "@/utiles/service/constant";
 
-
-
-export default function Hello() {
+export default function CheckoutPage() {
   const router = useRouter();
   const [paypalActive, setPaypalActive] = React.useState(false);
   const [cartActive, setCartActive] = React.useState(false);
@@ -43,7 +41,6 @@ export default function Hello() {
   const [popupActive, setPopupActive] = React.useState(false);
 
   const codeIds: string[] | undefined = []
-
 
   const potentialBoughtourses = snippets?.map(
     (course: Code) => (
@@ -112,7 +109,7 @@ export default function Hello() {
 
     await createPurchase({
       // code_id: codeIds,
-      code_id: snippets[1]?.id,
+      code_id: snippets[0]?.id,
       quantity: snippets?.length,
       total_amount: totalPrice(snippets),
       buyer_id: user?.id
@@ -278,30 +275,6 @@ export default function Hello() {
                     onChange={(e) => setEmail(e.target.value)}
                   />
                   <div className="flex gap-2 pb-5">
-                    {/* <div className="w-1/2">
-                      <div className="flex justify-between py-2">
-                        <label className="font-bold">Expire date</label>
-                        <span className="text-sm text-gray2">Required</span>
-                      </div>
-                      <input
-                        className="border px-4 py-3 w-full"
-                        placeholder="MM/YY"
-                        type="text"
-                      // onChange={(e) => setExpireDate(e.target.value)}
-                      />
-                    </div> */}
-                    {/* <div className="w-1/2">
-                      <div className="flex justify-between py-2">
-                        <label className="font-bold">CVC/CVV</label>
-                        <span className="text-sm text-gray2">Required</span>
-                      </div>
-                      <input
-                        className="border px-4 py-3 w-full"
-                        type="text"
-                        placeholder="CVC"
-                      // onChange={(e) => setCvc(e.target.value)}
-                      />
-                    </div> */}
                   </div>
                   <div className="flex gap-2">
                     <input type="checkbox" className="w-4 border" />
@@ -335,7 +308,7 @@ export default function Hello() {
               onClick={() => handlePayment()}
               className="py-4 bg-[#f94d1c] hover:shadow-xl font-semibold text-white w-full"
             >
-              {loading ? <Pulsation /> : "Complete checkout"}
+              {loading ? "Loading..." : "Complete checkout"}
             </button>
             {popupActive && (
               <>
@@ -349,7 +322,7 @@ export default function Hello() {
                     onClick={() => setPopupActive((prev) => !prev)}><IoMdClose /></span>
 
                   <h1 className="py-4 md:py-6 font-semibold text-2xl md:text-4xl leading-normal">
-                    🎉 Thanks for the purchase🎉
+                    🎉 Thanks for purchasing🎉
                   </h1>
                   <p className="text-center">Checkout your email address to download code snippet</p>
                   <button
