@@ -3,7 +3,7 @@ import { ReactElement } from "react";
 
 type Review = {
   id: string,
-  user_id: string,
+  user_id: string | undefined,
   code_id: string,
   review: string,
   rating: string,

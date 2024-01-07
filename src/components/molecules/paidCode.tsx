@@ -4,13 +4,15 @@ import Image from "next/image";
 type Props = {
   title?: string;
   author?: string;
-  price: number
+  price: number | undefined,
+  rating?: number | undefined
 };
 
 const PaidCourse = ({
   title,
   author,
-  price
+  price,
+  rating
 }: Props): React.JSX.Element => {
   return (
     <div className=" gap-4 my-2 flex w-full justify-start">
@@ -26,6 +28,7 @@ const PaidCourse = ({
         <div className=" flex flex-col   flex-1 items-start gap-2 ">
           <p className="text-sm font-bold font-sans ">{title}</p>
           <p className="text-xs font-extralight font-sans">By {author}</p>
+          <p className="text-xs font-extralight font-sans">{rating} stars</p>
         </div>
         <p className='text-sm font-bold  text-[#f94d1c]'>{price} FCFA</p>
       </div>

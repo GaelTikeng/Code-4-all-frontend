@@ -21,6 +21,7 @@ const UploadedCode = ({ className, uploaded }: Props) => {
     }
   )
 
+  console.log('from component', uploaded)
 
 
   return (
@@ -29,7 +30,7 @@ const UploadedCode = ({ className, uploaded }: Props) => {
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-              <th scope="col" className="px-6 font-semibold py-3">
+              <th scope="col" className="px-6 py-3">
                 Title
               </th>
               <th scope="col" className="px-6 py-3">
@@ -56,13 +57,13 @@ const UploadedCode = ({ className, uploaded }: Props) => {
                   scope="row"
                   className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  {item.id.slice(0, 7)}
+                  {item.title}
                 </th>
-                <td className="px-6 py-4">{item.title}</td>
-                <td className="px-6 py-4">{item.programming_language} FCFA</td>
+                {/* <td className="px-6 py-4">{item.title}</td> */}
+                <td className="px-6 py-4">{item.programming_language}</td>
                 <td className="px-6 py-4">{item.category}</td>
                 <td className="px-6 py-4">{item.createdAt.slice(0, 10)}</td>
-                <td className="px-6 py-4">{item.rating} FCFA</td>
+                <td className="px-6 py-4">{item.rating}</td>
                 <td className="px-6 py-4">{item.price} FCFA</td>
               </tr>
             ))

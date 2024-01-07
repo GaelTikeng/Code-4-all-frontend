@@ -16,7 +16,6 @@ type Props = {
 
 export default function SignupFormb({onClick }: Props) {
   const router = useRouter()
-  const { setCurrentUser } = useAppContext();
   const [name, setName] = useState("")
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState("")
@@ -32,7 +31,6 @@ export default function SignupFormb({onClick }: Props) {
         email: email,
         password: password
       }).then((data) => {
-        setCurrentUser(data);
         localStorage.setItem('userObject', JSON.stringify(data))
         console.log(data);
         router.push("/cart");

@@ -27,7 +27,7 @@ export const signUp = async (newUser: {
 
 // CREATE PURCHASE (POST REQUEST)
 export const createPurchase = async (purchase: {
-  code_id: string | undefined,
+  code_id: string[] | undefined,
   quantity: number | undefined,
   total_amount: any,
   buyer_id: string | undefined
@@ -58,7 +58,8 @@ export const getPurchasesPerBuyer = async (id: string | undefined) => {
 
   } catch (error) {
     console.error(error);
-  }}
+  }
+}
 
 // { END POINTS FOR CODE TABLE }
 // CREATE CODE (POST)
@@ -124,7 +125,7 @@ export const deleteCode = async (id: string, author_id: string) => {
 }
 
 // GET CODE SNIPPET PER USER/AUTHOR
-export const getCodePerUser = async (user_id: string) => {
+export const getCodePerUser = async (user_id: string | undefined) => {
   return await apiCall.GET(BASE_URL + `/code/user_code/${user_id}`)
 }
 
@@ -142,7 +143,12 @@ export const findAllReviews = async () => {
 }
 
 // POST A REVIEW
-export const createReview = async (payload: Review) => {
+export const createReview = async (payload: {
+  user_id: string | undefined,
+  code_id: string,
+  review: string,
+  rating: string
+}) => {
   return await apiCall.POST(BASE_URL + "/review", payload)
 }
 

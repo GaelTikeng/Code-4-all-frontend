@@ -13,6 +13,8 @@ import React, { useEffect, useState } from "react";
 import { findAllReviews, getAllSnippets } from "@/utiles/service/queries";
 import { Code, Review, User } from "../../types";
 import Navbar2 from "@/components/molecules/navbar2";
+import Pulsation from "@/components/atoms/pulsation";
+import Loader from "@/components/atoms/loader";
 // import Login from "./signup/page";
 
 export default function Home() {
@@ -60,7 +62,7 @@ export default function Home() {
     <div>
       {user ? <Navbar2 /> : <Navbar />}
       <HeroSection />
-      {(isLoading && snippets?.length) ? <Codes snippets={snippets} /> : <p></p>}
+      {(isLoading && snippets?.length) ? <Codes snippets={snippets} /> : <p className="h-[300px] text-center">Loading code snippets...</p>}
 
       <div className="grid grid-cols-2">
         <CommentCart

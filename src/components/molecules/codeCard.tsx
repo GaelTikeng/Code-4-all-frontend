@@ -4,10 +4,10 @@ import React from "react";
 import Button from "../atoms/button";
 
 type Props = {
-  title: string,
-  author?: string,
-  rating: number
-  price: number,
+  title: string | undefined,
+  author?: string | undefined,
+  rating: number | undefined
+  price: number | undefined,
   onClick?: () => void,
   handleDetail?: () => void
 }

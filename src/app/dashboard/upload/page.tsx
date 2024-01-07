@@ -46,7 +46,7 @@ const page = () => {
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setIsLoading(prev => !prev)
-    console.log("category", category)
+    console.log("description", formData.description)
     console.log('form data', formData)
     const data = new FormData(event.currentTarget)
     console.log(data)
@@ -106,7 +106,7 @@ const page = () => {
         </div>
 
         <div className="flex flex-col pb-4">
-          <label htmlFor="frm-first">Programming language<span className="text-red-500">*</span></label>
+          <label htmlFor="language">Programming language<span className="text-red-500">*</span></label>
           <input
             className="border-1 p-1 px-3"
             type="text"
@@ -172,9 +172,9 @@ const page = () => {
             // style={{ width: `30%` }}
           ></div>
         </div> */}
-        <div className="flex pb-5">
+        <div className="flex gap-5 items-baseline pb-5">
           <progress value={progress} max={100} />
-          <p>{progress}</p>
+          <p>{progress} %</p>
         </div>
 
         <div className="flex justify-center">

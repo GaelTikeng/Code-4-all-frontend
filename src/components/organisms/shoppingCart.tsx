@@ -1,7 +1,6 @@
 "use client"
 import React, { useState } from "react";
 import ShopCodeCart from "../molecules/shopCodeCart";
-import { allCode } from "./codeContent";
 import { Code, Test, User } from "../../../types";
 import { totalPrice } from "@/utiles/function";
 import Button from "../atoms/button";
@@ -15,7 +14,7 @@ import { useRouter } from "next/navigation";
 
 
 type Props = {
-  codeCart: Test[]
+  codeCart: Code[] | undefined
 }
 
 export default function ShoppingCart({ codeCart }: Props) {
@@ -63,6 +62,7 @@ export default function ShoppingCart({ codeCart }: Props) {
   return (
     <div className="md:w-2/3 w-full px-5 mx-auto py-8">
       <h1 className="text-3xl font-bold ">Shopping Cart</h1>
+      <Link className="text-[#f94d1c] hover:cursor-pointer hover:underline " href="/">Go back</Link>
       <p className="font-medium pt-4 ">{snippets?.length} Code snippet(s) in cart</p>
 
       <div className="md:flex gap-10 justify-between">

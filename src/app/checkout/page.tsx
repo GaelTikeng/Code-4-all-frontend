@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { IoMdClose, IoMdLock } from "react-icons/io";
 import { totalPrice } from "@/utiles/function";
-import { allCode } from '@/components/organisms/codeContent';
+// import { allCode } from '@/components/organisms/codeContent';
 import Overlay from "@/components/atoms/overlay";
 import { Code, Test, User } from "../../../types";
 import PaidCourse from "@/components/molecules/paidCode";
@@ -108,8 +108,8 @@ export default function CheckoutPage() {
     // }
 
     await createPurchase({
-      // code_id: codeIds,
-      code_id: snippets[0]?.id,
+      code_id: codeIds,
+      // code_id: snippets[0]?.id,
       quantity: snippets?.length,
       total_amount: totalPrice(snippets),
       buyer_id: user?.id

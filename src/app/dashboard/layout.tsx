@@ -88,7 +88,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
           />
         </div>
 
-        <div className="hidden md:flex flex-col justify-between py-2 h-[80vh]">
+        <div className="hidden md:flex flex-col justify-between py-2 h-[100vh]">
           <div className="flex flex-col gap-2">
             {links.map((link, index) => (
               <Link
@@ -111,7 +111,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
         </div>
       </div>
       <div className="flex w-full md:w-[80vw] h-screen p-5">
-        <div className="md:pr-16 w-full">
+        <div className=" w-full">
           <div className="topNav top-0 items-baseline flex justify-between w-full md:w-[100%]">
             <AiOutlineMenu
               size="25"
@@ -172,7 +172,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
           ? "z-20 top-0 md:hidden ml-[-4] mt-20 absolute w-full transition-transform 1s ease-in-out"
           : "hidden"
           }`} />
-          <div className="py-4 md:w-[100%]">{children}</div>
+          <div className="py-4 md:w-[100%] h-[calc(100vh-56px)] overflow-y-auto">{children}</div>
         </div>
       </div>
     </div>
