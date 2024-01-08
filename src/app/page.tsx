@@ -12,7 +12,7 @@ import { Code, Review, User } from "../../types";
 import Navbar2 from "@/components/molecules/navbar2";
 
 export default function Home() {
-  const [snippets, setSnippets] = useState<Code[]>([])
+  const [snippets, setSnippets] = useState<Code[] | null>(null)
   const [review, setReview] = useState<Review[]>([])
   const [loader, setLoader] = useState<Boolean>(false)
   const [isLoading, setIsLoading] = useState<Boolean>(false)
@@ -56,7 +56,7 @@ export default function Home() {
     <div>
       {user ? <Navbar2 /> : <Navbar />}
       <HeroSection />
-      {(isLoading && snippets?.length) ? <Codes snippets={snippets} /> : <p className="h-[300px] text-center">Loading code snippets...</p>}
+      {snippets? <Codes snippets={snippets} /> : <p className="h-[300px] text-center">Loading code snippets...</p>}
 
       {/* <div className="grid grid-cols-2">
         <CommentCart
