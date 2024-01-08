@@ -7,7 +7,7 @@ import Overlay from "../atoms/overlay";
 import { IoMdClose } from "react-icons/io";
 import CartPopup from "./cartPopup";
 import { useRouter } from "next/navigation";
-import CodeCard from "../molecules/codeCard";
+import CodeCard from "../molecules/codeSnippetCard";
 
 type Props = {
   snippets: Code[]

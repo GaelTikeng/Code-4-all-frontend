@@ -1,6 +1,5 @@
 "use client"
 import React from "react"
-import CodeCard from "../molecules/codeCard"
 import Button from "../atoms/button"
 import { useRouter } from "next/navigation";
 import PaidCourse from "../molecules/paidCode";

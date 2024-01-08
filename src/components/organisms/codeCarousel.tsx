@@ -2,7 +2,7 @@ import React, { ReactElement, useContext } from "react";
 import Pulsation from "../atoms/pulsation";
 import Carousel from "react-multi-carousel";
 import { useAppContext } from "@/app/context/appContext";
-import CodeCard from "../molecules/codeCard";
+import CodeCard from "../molecules/codeSnippetCard";
 
 export default function CodeCarousel(props: { title: string }) {
   const { allCode, setAllCode } = useAppContext()

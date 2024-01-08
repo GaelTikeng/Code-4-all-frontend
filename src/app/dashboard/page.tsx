@@ -1,5 +1,5 @@
 "use client"
-import CodeCard from "@/components/molecules/codeCard";
+import CodeCard from "@/components/molecules/codeSnippetCard";
 import React from "react";
 import Image from "next/image";
 
