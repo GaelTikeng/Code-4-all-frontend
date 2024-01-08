@@ -9,13 +9,14 @@ import Pulsation from "../atoms/pulsation";
 import Overlay from "../atoms/overlay";
 import { IoMdClose } from "react-icons/io";
 import CartPopup from "./cartPopup";
-import { LOCAL_STORAGE } from "@/utiles/service/storage";
+import { useRouter } from "next/navigation";
 
 type Props = {
   snippets: Code[]
 }
 
 export default function Codes({ snippets }: Props) {
+  const router = useRouter()
   const [popupActive, setPopupActive] = useState<Boolean>(false)
   const [codeObject, setCodeObject] = useState<Code | null>()
 
@@ -46,6 +47,7 @@ export default function Codes({ snippets }: Props) {
   }
 
   const handleDetail = (id: string) => {
+    router.push(`/details/${id}`)
     console.log(id)
   }
 

@@ -21,8 +21,6 @@ const Transactions = ({ className, transaction }: Props) => {
     }
   )
 
-  
-
   return (
     <div className={className}>
       <div className={`relative md:overflow-x-auto w-full`}>

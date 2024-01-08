@@ -119,6 +119,27 @@ export const getCodeById = async (id: string | undefined) => {
   }
 }
 
+// DUPLICATE
+export const findCodeById = async (id: string | string[]) => {
+  console.log('from fxn', id)
+  try {
+    const response = await fetch(
+      BASE_URL + `/code/${id}`,
+      {
+        method: "GET",
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Failed to get all snippets");
+    }
+    const data = response.json();
+    return data
+
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 // DELETE CODE SNIPPET
 export const deleteCode = async (id: string, author_id: string) => {
   return await apiCall.DELETE(BASE_URL + `/code/${id}/${author_id}`)
@@ -150,5 +171,25 @@ export const createReview = async (payload: {
   rating: string
 }) => {
   return await apiCall.POST(BASE_URL + "/review", payload)
+}
+
+// GET REVIEW BY CODE_ID
+export const getReviewByCodeId = async (id: string | string[]) => {
+  try {
+    const response = await fetch(
+      BASE_URL + `/review/${id}`,
+      {
+        method: "GET",
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Failed to get all snippets");
+    }
+    const data = response.json();
+    return data
+
+  } catch (error) {
+    console.error(error);
+  }
 }
 
