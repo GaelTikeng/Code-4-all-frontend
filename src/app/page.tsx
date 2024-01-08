@@ -1,10 +1,7 @@
 "use client"
-import CodeCard from "@/components/molecules/codeCard";
 import CommentCart from "@/components/molecules/commentCart";
 import HeroSection from "@/components/molecules/heroSection";
-import LoginForm from "@/components/molecules/signupComponent";
 import Navbar from "@/components/molecules/navbar";
-import CarousselComment from "@/components/organisms/carouselComments";
 import Codes from "@/components/organisms/codeContent";
 import CommentCarousel from "@/components/organisms/commentCarousel";
 import Footer from "@/components/organisms/footer";
@@ -13,9 +10,6 @@ import React, { useEffect, useState } from "react";
 import { findAllReviews, getAllSnippets } from "@/utiles/service/queries";
 import { Code, Review, User } from "../../types";
 import Navbar2 from "@/components/molecules/navbar2";
-import Pulsation from "@/components/atoms/pulsation";
-import Loader from "@/components/atoms/loader";
-// import Login from "./signup/page";
 
 export default function Home() {
   const [snippets, setSnippets] = useState<Code[]>([])

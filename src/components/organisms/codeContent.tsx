@@ -1,15 +1,13 @@
 "use client"
 import React, { useState } from "react";
-import CodeCard from "../molecules/codeCard";
-import Carousel from "react-multi-carousel";
 import { Code, Test } from "../../../types";
 import { getCodeById } from "@/utiles/service/queries";
 import { toast } from "react-toastify";
-import Pulsation from "../atoms/pulsation";
 import Overlay from "../atoms/overlay";
 import { IoMdClose } from "react-icons/io";
 import CartPopup from "./cartPopup";
 import { useRouter } from "next/navigation";
+import CodeCard from "../molecules/codeCard";
 
 type Props = {
   snippets: Code[]
