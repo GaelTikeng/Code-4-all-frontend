@@ -52,6 +52,7 @@ const codeData = [
 
 export default function Dashboard() {
   const [id, setId] = React.useState<string>('')
+  const [status, setStatus] = React.useState<string>('')
   const [popupActive, setPopupActive] = React.useState<Boolean>(false)
   const [loading, setLoading] = React.useState<Boolean>(false)
   const [isLoading, setIsLoading] = React.useState<Boolean>(false)
@@ -67,6 +68,10 @@ export default function Dashboard() {
       return null;
     }
   )
+
+    const getStatusFromChild = (msg: string) => {
+      setStatus(msg)
+    }
 
   React.useEffect(() => {
     setLoading(true)
@@ -122,6 +127,7 @@ export default function Dashboard() {
                 <span>{code.review}</span>
               </div>
             </div>
+            {status === "true" ? <p className="bg-green-400">Reviewed</p> : ""}
             <Button
               label="Add a review"
               color="bg-[#f94d1c]"
@@ -144,7 +150,7 @@ export default function Dashboard() {
             >
               <IoMdClose />
             </span>
-            <ReviewForm ID={id}/>
+            <ReviewForm giveStatus={getStatusFromChild} ID={id}/>
 
           </div>
         </>
@@ -152,7 +158,7 @@ export default function Dashboard() {
       <div className="flex flex-col gap-4">
         <h3 className="font-semibold text-lg">Transaction History</h3>
         <div className="w-full">
-          {(loading && transactionData.length)
+          {(loading && transactionData?.length)
             ?
             <Transactions transaction={transactionData} />
             :
@@ -161,7 +167,7 @@ export default function Dashboard() {
       </div>
       <div className=" w-full">
         <h3 className="font-semibold pb-4 text-lg">Upload History</h3>
-        {(isLoading && uploads.length)
+        {(isLoading && uploads?.length)
           ?
           <UploadedCode uploaded={uploads} />
           :

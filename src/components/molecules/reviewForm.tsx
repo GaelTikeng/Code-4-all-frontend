@@ -5,10 +5,12 @@ import { toast } from "react-toastify";
 
 
 type Props = {
-  ID: string
+  ID: string,
+  giveStatus: (msg: string) => void
 }
 
-export default function ReviewForm({ ID }: Props) {
+export default function ReviewForm({ ID, giveStatus }: Props) {
+  
   const [isLoading, setIsLoading] = React.useState<Boolean>(false)
   const [rating, setRating] = React.useState<string>('')
   const [review, setReview] = React.useState<string>('')
@@ -36,6 +38,7 @@ export default function ReviewForm({ ID }: Props) {
     await createReview(payload)
       .then((res) => {
         console.log(res)
+        giveStatus('true')
         setIsLoading(prev => !prev)
         toast.success("Review successfully posted", {
           position: toast.POSITION.TOP_RIGHT,
@@ -47,6 +50,7 @@ export default function ReviewForm({ ID }: Props) {
       .catch((error) => {
         console.log(error)
       })
+
   }
 
   return (
