@@ -58,7 +58,7 @@ export default function Home() {
       <HeroSection />
       {(isLoading && snippets?.length) ? <Codes snippets={snippets} /> : <p className="h-[300px] text-center">Loading code snippets...</p>}
 
-      <div className="grid grid-cols-2">
+      {/* <div className="grid grid-cols-2">
         <CommentCart
           createdAt="12 jan 2032"
           name="gaelinho"
@@ -69,7 +69,7 @@ export default function Home() {
           name="gaelinho"
           comment="hello guys"
         />
-      </div>
+      </div> */}
       <Discount />
       {/* <CarousselComment /> */}
       {(isLoading && review.length) ? <CommentCarousel reviews={review} />

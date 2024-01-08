@@ -71,7 +71,7 @@ export default function Footer({ }: Props) {
           </div>
         </div>
       </div>
-      <hr className="my-4 w-[88%] mx-auto" />
+      <hr className="my-4 w-[90%] mx-auto" />
       <div className="text-white md:px-[80px] px-[20px] flex justify-between ">
         <div>
           <h2 className="font-medium text-base">Category</h2>
