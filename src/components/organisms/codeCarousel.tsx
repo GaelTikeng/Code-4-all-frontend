@@ -9,25 +9,26 @@ export default function CodeCarousel(props: { title: string }) {
 
   const handleClick = (id: string) => {
     console.log(id)
-  } 
+  }
 
   let pageContent: ReactElement | ReactElement[] = (
     <div>
       <Pulsation />
     </div>
   );
-    if (allCode.length) {
-      pageContent = allCode.map((item, index) => (
-        <CodeCard
-          title={item.title}
-          author={item.user.name}
-          rating={item.rating}
-          price={item.price}
-          onClick={() => handleClick(item.id)}
-        />
-      ))
+  if (allCode.length) {
+    pageContent = allCode.map((item) => (
+      <CodeCard
+        key={item.id}
+        title={item.title}
+        author={item.user.name}
+        rating={item.rating}
+        price={item.price}
+        onClick={() => handleClick(item.id)}
+      />
+    ))
 
-    }
+  }
 
 
   return (
@@ -67,5 +68,5 @@ export default function CodeCarousel(props: { title: string }) {
 
     </div>
   )
-} 
+}
 

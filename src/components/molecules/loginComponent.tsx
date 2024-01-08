@@ -66,8 +66,7 @@ export default function LoginForm({ }: Props) {
         />
       </div>
       <h1 className="text-[#f94d1c] text-xl font-semibold  pb-3">Log in your account</h1>
-
-      <p className=" pb-4">Don't have an account?<Link href="/signup" className="text-blue-600">Signup now</Link></p>
+      <p className=" pb-4">Dont have an account?<Link href="/signup" className="text-blue-600">Signup now</Link></p>
       <GoogleButton />
       <div style={{ columnGap: "18px" }} className="flex mt-[18px] justify-between items-center font-sm ">
         <span className="block w-full h-[2px] bg-gray-300"></span>

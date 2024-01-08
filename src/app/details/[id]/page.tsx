@@ -47,7 +47,7 @@ function DetailPage() {
 
   useEffect(() => {
     fetchDatas(param.id)
-  }, [])
+  }, [param.id])
 
   const data = [{
     id: '1',
