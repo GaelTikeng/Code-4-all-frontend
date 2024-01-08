@@ -72,7 +72,7 @@ export default function Home() {
       </div> */}
       <Discount />
       {/* <CarousselComment /> */}
-      {(isLoading && review.length) ? <CommentCarousel reviews={review} />
+      {(!isLoading && review) ? <CommentCarousel reviews={review} />
         :
         <p
           style={{
