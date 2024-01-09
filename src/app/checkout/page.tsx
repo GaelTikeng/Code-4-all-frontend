@@ -6,12 +6,9 @@ import { IoMdClose, IoMdLock } from "react-icons/io";
 import { totalPrice } from "@/utiles/function";
 // import { allCode } from '@/components/organisms/codeContent';
 import Overlay from "@/components/atoms/overlay";
-import { Code, Test, User } from "../../../types";
+import { Code, User } from "../../../types";
 import PaidCourse from "@/components/molecules/paidCode";
 import { createPurchase } from "@/utiles/service/queries";
-import Pulsation from "@/components/atoms/pulsation";
-import { BASE_URL } from "@/utiles/service/constant";
-import { sendCodeFile } from "@/lib/api";
 import { sendEmail } from "@/utiles/send-email";
 
 export default function CheckoutPage() {
@@ -21,16 +18,16 @@ export default function CheckoutPage() {
   const [loading, setLoading] = React.useState(false);
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
-  // const [snippets, setSnippets] = React.useState<Code[] | undefined>(
-  //   (): Code[] | undefined => {
-  //     if (typeof localStorage !== "undefined") {
-  //       const fromLocalStorage = JSON.parse(localStorage.getItem("codeArray") as string) || [];
-  //       if (fromLocalStorage) return fromLocalStorage;
-  //     }
-  //     return undefined;
-  //   }
-  // )
-  const snippets = JSON.parse(localStorage.getItem("codeArray") || "[]")
+  const [snippets, setSnippets] = React.useState<Code[] | undefined>(
+    (): Code[] | undefined => {
+      if (typeof localStorage !== "undefined") {
+        const fromLocalStorage = JSON.parse(localStorage.getItem("codeArray") as string) || [];
+        if (fromLocalStorage) return fromLocalStorage;
+      }
+      return undefined;
+    }
+  )
+  // const snippets = JSON.parse(localStorage.getItem("codeArray") || "[]")
   const [user, setUser] = React.useState<User | null>(
     (): User | null => {
       if (typeof localStorage !== "undefined") {
