@@ -64,7 +64,7 @@ export default function SignupForm({ }: Props) {
 
   return (
     <div className="w-[85%] bg-white z-50 md:w-[300px] mx-auto px-4 my-6 leading-10">
-      <div className="py-6">
+      <div className="py-6 flex justify-center">
         <Image
           src="/code4all.png"
           alt="logo"
@@ -74,9 +74,9 @@ export default function SignupForm({ }: Props) {
 
         />
       </div>
-      <h1 className="text-[#f94d1c] text-xl font-semibold  pb-3">Create your account</h1>
+      <h1 className="text-[#f94d1c] text-center text-xl font-semibold  pb-3">Create your account</h1>
 
-      <p className=" pb-4">Have an account?<Link href="/login" className="text-blue-600">Log in now</Link></p>
+      <p className="text-center pb-4">Have an account?<Link href="/login" className="text-blue-600">Log in now</Link></p>
       <GoogleButton />
       <div style={{ columnGap: "18px" }} className="flex mt-[18px] justify-between items-center font-sm ">
         <span className="block w-full h-[2px] bg-gray-300"></span>
