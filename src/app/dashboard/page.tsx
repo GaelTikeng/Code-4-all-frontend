@@ -1,14 +1,13 @@
 "use client"
-import CodeCard from "@/components/molecules/codeCard";
+import CodeCard from "@/components/molecules/codeSnippetCard";
 import React from "react";
 import Image from "next/image";
 
 // React icons imports
-import { IoIosArrowRoundBack, IoMdClose } from "react-icons/io";
-import { IoIosArrowRoundForward } from "react-icons/io";
+import { IoMdClose } from "react-icons/io";
 import Transactions from "@/components/organisms/Transactions";
 import { Code, Purchase, User } from "../../../types";
-import { getCodeById, getCodePerUser, getPurchasesPerBuyer } from "@/utiles/service/queries";
+import { getCodePerUser, getPurchasesPerBuyer } from "@/utiles/service/queries";
 import UploadedCode from "@/components/organisms/uploadHistory";
 import Link from "next/link";
 import Button from "@/components/atoms/button";
@@ -93,7 +92,7 @@ export default function Dashboard() {
         console.log('these are uploaded cources', res)
       })
 
-  }, [])
+  }, [user?.id])
 
   const handleReview = (id: string) => {
     setPopupActive(prev => !prev)

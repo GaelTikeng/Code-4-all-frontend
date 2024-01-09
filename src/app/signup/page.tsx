@@ -6,12 +6,12 @@ import SignupForm from "@/components/molecules/signupComponent";
 
 type Props = {}
 
-export default function Signup ({}: Props) {
+export default function Signup({ }: Props) {
   return (
     <div>
-      <Navbar/>
-      <SignupForm/>
-      <Footer/>
+      <Navbar />
+      <SignupForm />
+      <Footer />
     </div>
   )
 }

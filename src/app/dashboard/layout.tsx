@@ -8,7 +8,7 @@ import { CiLogout } from "react-icons/ci";
 import { CiSearch } from "react-icons/ci";
 import Avatar from "react-avatar";
 import { User } from "../../../types";
-import React from "react";
+import React, { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { FaFileUpload } from "react-icons/fa";
 import DropdownModal from "@/components/atoms/dropDownModal";
@@ -29,14 +29,13 @@ const links = [
   },
 ];
 
-const layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
   const paramName = pathname.split("/").slice(-1)[0];
-  console.log(paramName)
   const router = useRouter()
-  const [active, setActive] = React.useState<Boolean>(false)
-  const [disconnect, setDisconnect] = React.useState<Boolean>(false)
-  const [user, setUser] = React.useState<User | null>(
+  const [active, setActive] = useState<Boolean>(false)
+  const [disconnect, setDisconnect] = useState<Boolean>(false)
+  const [user, setUser] = useState<User | null>(
     (): User | null => {
       if (typeof localStorage !== "undefined") {
         const fromLocalStorage =
@@ -169,9 +168,9 @@ const layout = ({ children }: { children: React.ReactNode }) => {
             )}
           </div>
           <MenuItem className={`${active
-          ? "z-20 top-0 md:hidden ml-[-4] mt-20 absolute w-full transition-transform 1s ease-in-out"
-          : "hidden"
-          }`} />
+            ? "z-20 top-0 md:hidden ml-[-4] mt-20 absolute w-full transition-transform 1s ease-in-out"
+            : "hidden"
+            }`} />
           <div className="py-4 md:w-[100%] h-[calc(100vh-56px)] overflow-y-auto">{children}</div>
         </div>
       </div>
@@ -179,4 +178,4 @@ const layout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default layout;
+export default Layout;

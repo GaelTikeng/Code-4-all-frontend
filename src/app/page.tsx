@@ -1,10 +1,7 @@
 "use client"
-import CodeCard from "@/components/molecules/codeCard";
 import CommentCart from "@/components/molecules/commentCart";
 import HeroSection from "@/components/molecules/heroSection";
-import LoginForm from "@/components/molecules/signupComponent";
 import Navbar from "@/components/molecules/navbar";
-import CarousselComment from "@/components/organisms/carouselComments";
 import Codes from "@/components/organisms/codeContent";
 import CommentCarousel from "@/components/organisms/commentCarousel";
 import Footer from "@/components/organisms/footer";
@@ -13,13 +10,10 @@ import React, { useEffect, useState } from "react";
 import { findAllReviews, getAllSnippets } from "@/utiles/service/queries";
 import { Code, Review, User } from "../../types";
 import Navbar2 from "@/components/molecules/navbar2";
-import Pulsation from "@/components/atoms/pulsation";
-import Loader from "@/components/atoms/loader";
-// import Login from "./signup/page";
 
 export default function Home() {
-  const [snippets, setSnippets] = useState<Code[]>([])
-  const [review, setReview] = useState<Review[]>([])
+  const [snippets, setSnippets] = useState<Code[] | null>(null)
+  const [review, setReview] = useState<Review[] | null>(null)
   const [loader, setLoader] = useState<Boolean>(false)
   const [isLoading, setIsLoading] = useState<Boolean>(false)
   const [user, setUser] = useState<User | null>(
@@ -62,9 +56,9 @@ export default function Home() {
     <div>
       {user ? <Navbar2 /> : <Navbar />}
       <HeroSection />
-      {(isLoading && snippets?.length) ? <Codes snippets={snippets} /> : <p className="h-[300px] text-center">Loading code snippets...</p>}
+      {snippets? <Codes snippets={snippets} /> : <p className="h-[300px] text-center">Loading code snippets...</p>}
 
-      <div className="grid grid-cols-2">
+      {/* <div className="grid grid-cols-2">
         <CommentCart
           createdAt="12 jan 2032"
           name="gaelinho"
@@ -75,10 +69,10 @@ export default function Home() {
           name="gaelinho"
           comment="hello guys"
         />
-      </div>
+      </div> */}
       <Discount />
       {/* <CarousselComment /> */}
-      {(isLoading && review.length) ? <CommentCarousel reviews={review} />
+      {review ? <CommentCarousel reviews={review} />
         :
         <p
           style={{

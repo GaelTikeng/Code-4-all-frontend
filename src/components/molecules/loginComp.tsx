@@ -1,14 +1,10 @@
 "use client"
 import Image from "next/image";
-import Link from "next/link";
 import React, { useState } from "react";
 import GoogleButton from "../atoms/googleBtn";
 import Button from "../atoms/button";
 import { useRouter } from "next/navigation";
-import { BASE_URL } from "@/utiles/service/constant";
-import { useAppContext } from "@/app/context/appContext";
 import { loginFunction } from "@/utiles/service/queries";
-import { User } from "../../../types";
 
 type Props = {
   onClick: () => void,
@@ -25,7 +21,6 @@ export default function LoginFormb({ handleClose, onClick }: Props) {
 
   const handleClick = async () => {
     setIsLoading(true)
-
     const credential: any = {
       email: email,
       password: password
@@ -48,24 +43,20 @@ export default function LoginFormb({ handleClose, onClick }: Props) {
       .catch((error) => {
         console.log(error)
       })
-
   }
-
   return (
     <div className="w-[85%] md:w-[300px] mx-auto px-4 my-6 leading-10">
-      <div className="py-6">
+      <div className="py-6 flex justify-center">
         <Image
           src="/code4all.png"
           alt="logo"
           height={75}
           width={150}
           priority={false}
-
         />
       </div>
-      <h1 className="text-[#f94d1c] text-xl font-semibold  pb-3">Log in your account</h1>
-
-      <p className=" pb-4">Don't have an account?<span onClick={onClick} className="text-blue-600 hover:cursor-pointer">Signup now</span></p>
+      <h1 className="text-[#f94d1c] text-xl text-center font-semibold  pb-3">Log in your account</h1>
+      <p className="text-center pb-4">Dont have an account?<span onClick={onClick} className="text-blue-600 hover:cursor-pointer">Signup now</span></p>
       <GoogleButton />
       <div style={{ columnGap: "18px" }} className="flex mt-[18px] justify-between items-center font-sm ">
         <span className="block w-full h-[2px] bg-gray-300"></span>
@@ -87,9 +78,8 @@ export default function LoginFormb({ handleClose, onClick }: Props) {
           className="border rounded border-gray-300 px-3 w-full"
           onChange={(e) => setPassword(e.target.value)}
         />
-
         <Button
-          label={isLoading ? "Loading..." : "Login"}
+          label={isLoading ? "Loading...":"Login"}
           color="bg-[#f94d1c]"
           text="text-white"
           borderColor="border-gray-300"

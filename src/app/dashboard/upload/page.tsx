@@ -7,15 +7,15 @@ import { toast } from "react-toastify";
 
 
 
-const page = () => {
-  const [file, setFile] = React.useState<File>()
-  const [url, setUrl] = React.useState<string>("")
-  const [isLoading, setIsLoading] = React.useState<Boolean>(false)
+const Page = () => {
+  const [file, setFile] = useState<File>()
+  const [url, setUrl] = useState<string>("")
+  const [isLoading, setIsLoading] = useState<Boolean>(false)
   const [progress, setProgress] = useState<number | undefined>()
-  const [category, setCategory] = React.useState<string>("")
-  const [price, setPrice] = React.useState<number>(0)
+  const [category, setCategory] = useState<string>("")
+  const [price, setPrice] = useState<number>(0)
   const { edgestore } = useEdgeStore()
-  const [user, setUser] = React.useState<User | null>(
+  const [user, setUser] = useState<User | null>(
     (): User | null => {
       if (typeof localStorage !== "undefined") {
         const fromLocalStorage =
@@ -191,4 +191,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

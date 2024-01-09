@@ -6,11 +6,10 @@ import { IoMdClose, IoMdLock } from "react-icons/io";
 import { totalPrice } from "@/utiles/function";
 // import { allCode } from '@/components/organisms/codeContent';
 import Overlay from "@/components/atoms/overlay";
-import { Code, Test, User } from "../../../types";
+import { Code, User } from "../../../types";
 import PaidCourse from "@/components/molecules/paidCode";
 import { createPurchase } from "@/utiles/service/queries";
-import Pulsation from "@/components/atoms/pulsation";
-import { BASE_URL } from "@/utiles/service/constant";
+import { sendEmail } from "@/utiles/send-email";
 
 export default function CheckoutPage() {
   const router = useRouter();
@@ -28,6 +27,7 @@ export default function CheckoutPage() {
       return undefined;
     }
   )
+  // const snippets = JSON.parse(localStorage.getItem("codeArray") || "[]")
   const [user, setUser] = React.useState<User | null>(
     (): User | null => {
       if (typeof localStorage !== "undefined") {
@@ -41,6 +41,7 @@ export default function CheckoutPage() {
   const [popupActive, setPopupActive] = React.useState(false);
 
   const codeIds: string[] | undefined = []
+  const files: string[] = []
 
   const potentialBoughtourses = snippets?.map(
     (course: Code) => (
@@ -63,10 +64,9 @@ export default function CheckoutPage() {
   }
 
   const handleCheckout = () => {
-
     setPopupActive((prev) => !prev);
-
     router.push("/dashboard");
+    localStorage.removeItem("codeArray")
   };
 
   const handlePaypal = () => {
@@ -75,38 +75,30 @@ export default function CheckoutPage() {
   };
 
   const handlePayment = async () => {
-    setLoading(true)
-    snippets?.map((i) => (
+    // setLoading(true)
+    snippets?.map((i: { id: string; }) => (
       codeIds.push(i.id)
     ))
 
-    // try {
-    //   const res = await fetch(BASE_URL + "/purchases", {
-    //     method: 'POST',
-    //     body: JSON.stringify({
-    //       // code_id: codeIds,
-    //       code_id: snippets[0]?.id,
-    //       quantity: snippets?.length,
-    //       total_amount: totalPrice(snippets),
-    //       buyer_id: user?.id
-    //     }),
-    //     headers: {
-    //       'content-type': 'application/json'
-    //     }
-    //   })
-    //   console.log(res)
-    //   if (res.ok) {
-    //     console.log("Yeai!")
-    //     setLoading(false)
-    //   } else {
-    //     console.log("Oops! Something is wrong.")
-    //   }
-    //   const data = res.json()
-    //   return data
-    // } catch (error) {
-    //   console.log(error)
-    // }
+    snippets?.map((i: any) => (
+      files.push(i.code_file)
+    ))
 
+    console.log(email, name)
+
+    if (email && name) {
+      await sendEmail({
+        name: name,
+        email: email,
+        file: files
+      })
+        .then((res) => {
+          console.log('response from fxn', res)
+        })
+        .catch((err) => {
+          console.log('this is error', err)
+        });
+    };
     await createPurchase({
       code_id: codeIds,
       // code_id: snippets[0]?.id,

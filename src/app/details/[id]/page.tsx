@@ -47,7 +47,7 @@ function DetailPage() {
 
   useEffect(() => {
     fetchDatas(param.id)
-  }, [])
+  }, [param.id])
 
   const data = [{
     id: '1',
@@ -137,18 +137,20 @@ function DetailPage() {
         </div>
         <h2 className="font-semibold text-xl text-center py-5">Reviews of professionals</h2>
         <div className="md:grid md:grid-cols-2 p-4 gap-4 ">
-          {(data.length && isLoading) ? data.map((data) => (
+          {(reviews.length && isLoading) ? reviews.map((data) => (
             <ReviewCart
               key={data.id}
-              name={data.name}
+              name={data.user.name}
               createdAt={data.createdAt}
               review={data?.review}
             />
-          )) : <p className="italic font-mono">This code snippet has not yet been reviewed</p>}
+          )) : <p className="italic font-mono text-center w-full">This code snippet has not yet been reviewed</p>}
         </div>
       </div>
 
-      <Footer />
+      <div className="fixed w-full bottom-0">
+        <Footer />
+      </div>
     </div>
   )
 }

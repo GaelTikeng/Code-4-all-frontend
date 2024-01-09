@@ -58,7 +58,7 @@ export default function Navbar2() {
       label: "Disconnect",
       function: () => {
         setDisconnect(!disconnect)
-        localStorage.removeItem('userObject')
+        localStorage.clear()
         router.push('/')
       }
     }
