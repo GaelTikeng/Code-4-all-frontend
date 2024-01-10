@@ -9,6 +9,7 @@ import { findCodeById, getReviewByCodeId } from "@/utiles/service/queries";
 import Image from "next/image";
 import Loader from "@/components/atoms/loader";
 import ReviewCart from "@/components/organisms/reviewCart";
+import Link from "next/link";
 
 
 
@@ -20,7 +21,7 @@ function DetailPage() {
   const [loading, setLoading] = useState<Boolean>(false)
 
 
-  const fetchDatas = async (id: string | string[]) => {
+  const fetchData = async (id: string | string[]) => {
     setIsLoading(true)
     setLoading(true)
 
@@ -46,76 +47,15 @@ function DetailPage() {
   }
 
   useEffect(() => {
-    fetchDatas(param.id)
+    fetchData(param.id)
   }, [param.id])
-
-  const data = [{
-    id: '1',
-    name: "Gael T",
-    rating: 4,
-    createdAt: "2024/01/2336",
-    review: "MY RATING asdv sadv,jb sakjvn,sdvk.jasbdvkj as,dv.sbdvkjbs,v ksbdvkjsdbv,. sadkvbas,.d nvasdbvn, asda vkjsaddkgv ksduvksadvbkads,",
-  }, {
-    id: '2',
-    name: "Gael T",
-    rating: 2,
-    createdAt: "2024/01/2336",
-    review: "MY RATING  asdv sadv,jb sakjvn,sdvk.jasbdvkj as,dv.sbdvkjbs,v ksbdvkjsdbv,. sadkvbas,.d nvasdbvn, asda vkjsaddkgv ksduvksadvbkads,",
-  }, {
-    id: '1',
-    name: "Gael T",
-    review: "MY RATIN  asdv sadv,jb sakjvn,sdvk.jasbdvkj as,dv.sbdvkjbs,v ksbdvkjsdbv,. sadkvbas,.d nvasdbvn, asda vkjsaddkgv ksduvksadvbkads,G",
-    rating: 1,
-    createdAt: "2024/01/2336",
-  }, {
-    id: '1',
-    name: "Gael T",
-    review: "MY RATIN GATIN  asdv sadv,jb sakjvn,sdvk.jasbdvkj as,dv.sbdvkjbs,v ksbdvkjsdbv,. sadkvbas,.d nvasdbvn, asda vkjsaddkgv ksduvksadvbkads,G",
-    createdAt: "2024/01/2336",
-    rating: 1,
-  }, {
-    id: '1',
-    name: "Gael T",
-    review: "MY RATING",
-    createdAt: "2024/01/2336",
-    rating: 1,
-  }, {
-    id: '1',
-    name: "Gael T",
-    review: "MY RATIN ATIN  asdv sadv,jb sakjvn,sdvk.jasbdvkj as,dv.sbdvkjbs,v ksbdvkjsdbv,. sadkvbas,.d nvasdbvn, asda vkjsaddkgv ksduvksadvbkads,GG",
-    createdAt: "2024/01/2336",
-    rating: 1,
-  }, {
-    id: '1',
-    name: "Gael T",
-    review: "MY RATIN  ATIN  asdv sadv,jb sakjvn,sdvk.jasbdvkj as,dv.sbdvkjbs,v ksbdvkjsdbv,. sadkvbas,.d nvasdbvn, asda vkjsaddkgv ksduvksadvbkads,GG ",
-    createdAt: "2024/01/2336",
-    rating: 1,
-  }, {
-    id: '1',
-    name: "Gael T",
-    review: "MY RATING fnfchgnlfmbldfg bxdfgbd fglkbnfg bdgbn d gbdsfbnlsdfkb/dsf blds fb.mdf bnslfdb sdfblsfnb zlsf",
-    createdAt: "2024/01/2336",
-    rating: 1,
-  }, {
-    id: '1',
-    name: "Gael T",
-    review: "MY RATING",
-    createdAt: "2024/01/2336",
-    rating: 1,
-  }, {
-    id: '1',
-    name: "Gael T",
-    review: "MY RATIN  ATIN  asdv sadv,jb sakjvn,sdvk.jasbdvkj as,dv.sbdvkjbs,v ksbdvkjsdbv,. sadkvbas,.d nvasdbvn, asda vkjsaddkgv ksduvksadvbkads,GG",
-    createdAt: "2024/01/2336",
-    rating: 1,
-  }]
 
   return (
     <div className="">
       <Navbar2 />
       <div className="w-[90%] md:max-w-[60%] gap-5 py-6 mx-auto">
-        <div className=" md:flex gap-5 ">
+        <Link className="text-[#f94d1c] hover:underline" href="/">Go back</Link>
+        <div className="pt-5 md:flex gap-5 ">
           <Image
             src="https://www.mymcpl.org/sites/default/files/2022-07/What%20Is%20a%20Zip%20File.jpg"
             alt="zip file image"
@@ -124,13 +64,14 @@ function DetailPage() {
             height={250}
             loading="lazy"
           />
-          <div className="">
-            <h1 className="font-bold text-xl pb-5 ">{codeDetail?.title}</h1>
-            <p className="text-xs text-gray-400 b-5">By {codeDetail?.user.name}</p>
+          <div className="my-auto">
+            <h1 className="font-bold text-xl pb-2 ">{codeDetail?.title}</h1>
+            <p className="text-xs text-gray-400 ">By {codeDetail?.user.name}</p>
             <p>{codeDetail?.rating} stars</p>
-            <p className="pb-5"> Programming language: <span className="pb-5 font-semibold text-lg">{codeDetail?.programming_language}</span></p>
-            <h3 className="text-sm font-extrabold pb-2">{codeDetail?.price} FCFA</h3>
-            <p className="pb-5">{codeDetail?.description}</p>
+            <p className="pb-2"> Category: <span className="pb-2 font-semibold text-lg">{codeDetail?.category}</span></p>
+            <p className="pb-2"> Programming language: <span className="pb-2 font-semibold text-lg">{codeDetail?.programming_language}</span></p>
+            <h3 className="text-lg text-[#f94d1c] font-extrabold pb-2">{codeDetail?.price} FCFA</h3>
+            <p className="pb-2">Description: {codeDetail?.description}</p>
           </div>
 
 

@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import DropdownModal from "../atoms/dropDownModal";
 import { LOCAL_STORAGE } from "@/utiles/service/storage";
 import Avatar from "react-avatar";
-import { User } from "../../../types";
+import { Code, User } from "../../../types";
 import { CiSearch } from "react-icons/ci";
 
 
@@ -26,6 +26,15 @@ export default function Navbar2() {
         if (fromLocalStorage) return fromLocalStorage;
       }
       return null;
+    }
+  )
+  const [snippets, setSnippets] = React.useState<Code[] | undefined>(
+    (): Code[] | undefined => {
+      if (typeof localStorage !== "undefined") {
+        const fromLocalStorage = JSON.parse(localStorage.getItem("codeArray") as string) || [];
+        if (fromLocalStorage) return fromLocalStorage;
+      }
+      return undefined;
     }
   )
 
@@ -117,11 +126,16 @@ export default function Navbar2() {
           className="md:hidden my-auto"
           size="20"
         /> */}
-        <GiShoppingCart
-          size="25"
-          className="my-auto hover:cursor-pointer"
-          onClick={handleGoToCart}
-        />
+        <div className="my-auto">
+          {snippets?.length ?
+            <div className="bg-red-500 text-center z-20 mt-[-10px] right-[65px] md:right-[124px] absolute  mb-2 h-5 text-[10px] w-5 p-1 rounded-full text-white">{snippets?.length}</div>
+            : ""}
+          <GiShoppingCart
+            size="25"
+            className="my-auto relative hover:cursor-pointer"
+            onClick={handleGoToCart}
+          />
+        </div>
         <div
           onClick={handleOpenDP}
           className={user?.name ? " hidden md:hidden my-auto " : "md:hidden my-auto "}
@@ -154,7 +168,7 @@ export default function Navbar2() {
               name={user.name}
               color="#000"
               round={true}
-              size="25"
+              size="35"
             />
           </div>
           : <div className="md:flex hidden my-auto gap-2">

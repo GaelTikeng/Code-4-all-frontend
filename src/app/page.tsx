@@ -6,10 +6,13 @@ import Codes from "@/components/organisms/codeContent";
 import CommentCarousel from "@/components/organisms/commentCarousel";
 import Footer from "@/components/organisms/footer";
 import Discount from "@/components/organisms/newzletter";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { findAllReviews, getAllSnippets } from "@/utiles/service/queries";
 import { Code, Review, User } from "../../types";
 import Navbar2 from "@/components/molecules/navbar2";
+import CarousselComment from "@/components/organisms/carouselComments";
+import SkeletonCart from "@/components/molecules/codeSnippetSkeleton";
+import SkeletonComment from "@/components/molecules/seletonComments";
 
 export default function Home() {
   const [snippets, setSnippets] = useState<Code[] | null>(null)
@@ -56,33 +59,14 @@ export default function Home() {
     <div>
       {user ? <Navbar2 /> : <Navbar />}
       <HeroSection />
-      {snippets? <Codes snippets={snippets} /> : <p className="h-[300px] text-center">Loading code snippets...</p>}
+      {snippets ? <Codes snippets={snippets} /> : <SkeletonCart/>}
 
-      {/* <div className="grid grid-cols-2">
-        <CommentCart
-          createdAt="12 jan 2032"
-          name="gaelinho"
-          comment="hello guys"
-        />
-        <CommentCart
-          createdAt="12 jan 2032"
-          name="gaelinho"
-          comment="hello guys"
-        />
-      </div> */}
       <Discount />
       {/* <CarousselComment /> */}
       {review ? <CommentCarousel reviews={review} />
         :
-        <p
-          style={{
-            padding: "",
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
-            // backgroundImage: "url(https://previews.123rf.com/images/monsitj/monsitj1702/monsitj170200006/72934082-code-de-programmation-technologie-abstrait-du-d%C3%A9veloppeur-de-logiciels-et-de-script-informatique.jpg)"
-            backgroundImage: "linear-gradient(100deg, #f1f1f1bd, #e1e1e1c5), url(https://previews.123rf.com/images/monsitj/monsitj1702/monsitj170200006/72934082-code-de-programmation-technologie-abstrait-du-d%C3%A9veloppeur-de-logiciels-et-de-script-informatique.jpg)"
-          }}
-          className="my-auto text-center h-[400px]">Loading Reviews... </p>}
+        <SkeletonComment/>
+      }
       <Footer />
 
     </div>

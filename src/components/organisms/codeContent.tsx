@@ -1,7 +1,6 @@
 "use client"
 import React, { useState } from "react";
-import { Code, Test } from "../../../types";
-import { getCodeById } from "@/utiles/service/queries";
+import { Code } from "../../../types";
 import { toast } from "react-toastify";
 import Overlay from "../atoms/overlay";
 import { IoMdClose } from "react-icons/io";
@@ -10,7 +9,7 @@ import { useRouter } from "next/navigation";
 import CodeCard from "../molecules/codeSnippetCard";
 
 type Props = {
-  snippets: Code[]
+  snippets: Code[] | null
 }
 
 export default function Codes({ snippets }: Props) {
@@ -18,30 +17,16 @@ export default function Codes({ snippets }: Props) {
   const [popupActive, setPopupActive] = useState<Boolean>(false)
   const [codeObject, setCodeObject] = useState<Code | null>()
 
-
   const cartSnippets: Code[] = []
 
-  const handleClick = async (id: string) => {
-    await getCodeById(id)
-      .then((data) => {
-        cartSnippets.push(data)
-        localStorage.setItem('codeSnippet', JSON.stringify(data))
-        // setPopupActive(prev => !prev)
-        
-        toast.success("Added to cart", {
-          position: "top-right",
-          hideProgressBar: true,
-          autoClose: 1000,
-        });
-        localStorage.setItem('codeArray', JSON.stringify(cartSnippets))
-        console.log('this is snippet', data)
-        // setCodeObject(data)
-      })
-      .catch((err) => {
-        console.log("could not get snippet", err)
-      })
-    
-    console.log(cartSnippets)
+  const handleClick = (item: Code) => {
+    cartSnippets.push(item)
+    localStorage.setItem('codeArray', JSON.stringify(cartSnippets))
+    toast.success("Added to cart", {
+      position: "top-right",
+      hideProgressBar: true,
+      autoClose: 1000,
+    });
   }
 
   const handleDetail = (id: string) => {
@@ -58,7 +43,7 @@ export default function Codes({ snippets }: Props) {
           author={item.user.name}
           rating={item.rating}
           price={item.price}
-          onClick={() => handleClick(item.id)}
+          onClick={() => handleClick(item)}
           handleDetail={() => handleDetail(item.id)}
         />
       ))}
@@ -81,7 +66,6 @@ export default function Codes({ snippets }: Props) {
               rating={codeObject?.rating}
               price={codeObject?.price}
             />
-
           </div>
         </>
       )}

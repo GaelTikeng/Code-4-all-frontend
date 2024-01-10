@@ -1,6 +1,6 @@
 "use client";
 // import Pulsation from "@/app/[signup]/component/PulseLoader";
-import { supabase } from "@/utiles/supabase/client";
+import supabase from "@/utiles/supabase/client";
 import Image from "next/image";
 import React, { useState } from "react";
 
@@ -30,7 +30,9 @@ const GoogleButton = () => {
         redirectTo: urlToUse(),
       },
     });
-    setIsLoading(true);
+    if (data) {
+      console.log('here is user obj', data)
+    }
   };
 
   return (

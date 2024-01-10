@@ -63,7 +63,7 @@ export default function SignupForm({ }: Props) {
   }
 
   return (
-    <div className="w-[85%] bg-white z-50 md:w-[300px] mx-auto px-4 my-6 leading-10">
+    <div className="w-[85%] bg-white z-50 md:w-[400px] mx-auto px-4 my-6 leading-10">
       <div className="py-6 flex justify-center">
         <Image
           src="/code4all.png"
@@ -80,7 +80,7 @@ export default function SignupForm({ }: Props) {
       <GoogleButton />
       <div style={{ columnGap: "18px" }} className="flex mt-[18px] justify-between items-center font-sm ">
         <span className="block w-full h-[2px] bg-gray-300"></span>
-        <span>OR</span>
+        <span className="italic font-mono">OR</span>
         <span className="block w-full h-[2px] bg-gray-300"></span>
       </div>
       <div className="flex flex-col gap-4">

@@ -9,36 +9,12 @@ type Props = {
 
 export default function CommentCarousel({ reviews}: Props) {
 
-  // const comments = [
-  //   {
-  //     id: 0,
-  //     image: "/image2.jpg",
-  //     name: "ricardo",
-  //     createAt: "12 Jan 2013",
-  //     comment: "Wonderfull code"
-  //   },
-  //   {
-  //     id: 1,
-  //     image: "/image3.jpg",
-  //     name: "Sam Marvis",
-  //     createAt: "12 fev 2013",
-  //     comment: "amazing code"
-  //   },
-  //   {
-  //     id: 0,
-  //     image: "/image4.jpg",
-  //     name: "ricardo",
-  //     createAt: "12 Jan 2013",
-  //     comment: "Wonderfull code"
-  //   }
-  // ]
   return (
     <div
       style={{
         padding: "",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
-        // backgroundImage: "url(https://previews.123rf.com/images/monsitj/monsitj1702/monsitj170200006/72934082-code-de-programmation-technologie-abstrait-du-d%C3%A9veloppeur-de-logiciels-et-de-script-informatique.jpg)"
         backgroundImage: "linear-gradient(100deg, #f1f1f1bd, #e1e1e1c5), url(https://previews.123rf.com/images/monsitj/monsitj1702/monsitj170200006/72934082-code-de-programmation-technologie-abstrait-du-d%C3%A9veloppeur-de-logiciels-et-de-script-informatique.jpg)"
       }}
       className="h-fit py-8 md:py-12">

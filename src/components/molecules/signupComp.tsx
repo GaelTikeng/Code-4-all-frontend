@@ -11,10 +11,11 @@ import { useAppContext } from "@/app/context/appContext";
 import { signUp } from "@/utiles/service/queries";
 
 type Props = {
-  onClick: () => void
+  onClick: () => void,
+  handleClose: () => void
 }
 
-export default function SignupFormb({onClick }: Props) {
+export default function SignupFormb({onClick, handleClose }: Props) {
   const router = useRouter()
   const [name, setName] = useState("")
   const [email, setEmail] = useState('')
@@ -34,6 +35,7 @@ export default function SignupFormb({onClick }: Props) {
         localStorage.setItem('userObject', JSON.stringify(data))
         console.log(data);
         router.push("/cart");
+        handleClose()
         setIsLoading(false);
       }).catch((error) => {
         console.log(error)
@@ -61,7 +63,7 @@ export default function SignupFormb({onClick }: Props) {
       <GoogleButton />
       <div style={{ columnGap: "18px" }} className="flex mt-[18px] justify-between items-center font-sm ">
         <span className="block w-full h-[2px] bg-gray-300"></span>
-        <span>OR</span>
+        <span className="italic font-mono">OR</span>
         <span className="block w-full h-[2px] bg-gray-300"></span>
       </div>
       <div className="flex flex-col gap-4">
