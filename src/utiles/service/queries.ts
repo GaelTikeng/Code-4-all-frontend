@@ -39,27 +39,30 @@ export const createPurchase = async (purchase: {
 export const getAllPurchases = async () => {
   return await apiCall.GET(BASE_URL + "puchases")
 }
-
+ 
 // GET PURCHASES PER BUYER
 export const getPurchasesPerBuyer = async (id: string | undefined) => {
-  try {
-    const response = await fetch(
-      BASE_URL + `/purchases/${id}`,
-      {
-        // next: { revalidate: 900 }, // function will be excuted after 5 mintes
-        method: "GET",
-      }
-    );
-    if (!response.ok) {
-      throw new Error("Failed to get all snippets");
-    }
-    const data = response.json();
-    return data
-
-  } catch (error) {
-    console.error(error);
-  }
+  return await apiCall.GET(BASE_URL + `/purchases/${id}`)
 }
+// export const getPurchasesPerBuyer = async (id: string | undefined) => {
+//   try {
+//     const response = await fetch(
+//       BASE_URL + `/purchases/${id}`,
+//       {
+//         // next: { revalidate: 900 }, // function will be excuted after 5 mintes
+//         method: "GET",
+//       }
+//     );
+//     if (!response.ok) {
+//       throw new Error("Failed to get all snippets");
+//     }
+//     return response.json()
+//     // return data
+
+//   } catch (error) {
+//     console.error(error);
+//   }
+// }
 
 // { END POINTS FOR CODE TABLE }
 // CREATE CODE (POST)

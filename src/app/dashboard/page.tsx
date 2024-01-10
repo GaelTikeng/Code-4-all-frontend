@@ -67,6 +67,15 @@ export default function Dashboard() {
       return null;
     }
   )
+  const [snippets, setSnippets] = React.useState<Code[] | undefined>(
+    (): Code[] | undefined => {
+      if (typeof localStorage !== "undefined") {
+        const fromLocalStorage = JSON.parse(localStorage.getItem("codeArray") as string) || [];
+        if (fromLocalStorage) return fromLocalStorage;
+      }
+      return undefined;
+    }
+  )
 
     const getStatusFromChild = (msg: string) => {
       setStatus(msg)
@@ -75,6 +84,8 @@ export default function Dashboard() {
   React.useEffect(() => {
     setLoading(true)
     setIsLoading(true)
+
+    // get purchases per buyer
     getPurchasesPerBuyer(user?.id)
       .then((data) => {
         setTransactionData(data)
@@ -85,6 +96,7 @@ export default function Dashboard() {
         console.log('Un able to fetch purchases', error)
       })
 
+    // get code per user
     getCodePerUser(user?.id)
       .then((res) => {
         setUploads(res)
@@ -106,7 +118,7 @@ export default function Dashboard() {
         <h3 className="font-semibold text-lg">👋Hi, {user?.name}</h3>{" "}
       </div>
       <div className="md:flex gap-4 w-full">
-        {codeData.map((code, index) => (
+        {snippets?.map((code, index) => (
           <div key={index} className="bg-[#f1f1f1] border shadow w-[200px]">
             <div
             >
@@ -120,10 +132,10 @@ export default function Dashboard() {
               />
             </div>
             <div className="flex flex-col px-2">
-              <h2>{code.title}</h2>
+              <h2 className="pt-2 font-semibold">{code.title}</h2>
               <div className="flex items-center justify-between">
-                <span>{code.price}</span>
-                <span>{code.review}</span>
+                <span className="py-2">{code.price} FCFA</span>
+                <span>{code.rating} stars</span>
               </div>
             </div>
             {status === "true" ? <p className="bg-green-400">Reviewed</p> : ""}

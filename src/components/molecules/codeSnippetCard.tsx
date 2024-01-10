@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { title } from "process";
 import React from "react";
 import Button from "../atoms/button";
 

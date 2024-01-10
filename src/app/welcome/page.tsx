@@ -99,7 +99,7 @@ const Signupb = () => {
           className={`border ${isLoading ? "cursor-not-allowed disabled:cursor-wait" : ""
             } p-4 px-5 text-base font-extrabold bg-themecolor text-[#f94d1c] hover:shadow rounded`}
         >
-          {isLoading ? <Pulsation /> : "Agree and Continue"}
+          {isLoading ? "Loading..." : "Agree and Continue"}
         </button>
       ) : (
         <p className="text-2xl mt-6 font-extrabold text-[#f94d1c]">

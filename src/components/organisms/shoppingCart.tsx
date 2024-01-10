@@ -112,7 +112,7 @@ export default function ShoppingCart({ codeCart }: Props) {
                 onClick={() => handleCheckOut()}><IoMdClose /></span>
               <div>
                 {!showForm && (
-                  <SignupFormb onClick={() => handleShowForm()} />
+                  <SignupFormb handleClose={handleCheckOut} onClick={() => handleShowForm()} />
                 )}
               </div>
               <div>

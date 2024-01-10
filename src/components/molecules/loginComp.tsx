@@ -60,7 +60,7 @@ export default function LoginFormb({ handleClose, onClick }: Props) {
       <GoogleButton />
       <div style={{ columnGap: "18px" }} className="flex mt-[18px] justify-between items-center font-sm ">
         <span className="block w-full h-[2px] bg-gray-300"></span>
-        <span>OR</span>
+        <span className="italic font-mono">OR</span>
         <span className="block w-full h-[2px] bg-gray-300"></span>
       </div>
       <div className="flex flex-col gap-4">

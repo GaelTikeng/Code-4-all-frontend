@@ -66,7 +66,7 @@ export default function CheckoutPage() {
   const handleCheckout = () => {
     setPopupActive((prev) => !prev);
     router.push("/dashboard");
-    localStorage.removeItem("codeArray")
+    // localStorage.removeItem("codeArray")
   };
 
   const handlePaypal = () => {
@@ -75,7 +75,7 @@ export default function CheckoutPage() {
   };
 
   const handlePayment = async () => {
-    // setLoading(true)
+    setLoading(true)
     snippets?.map((i: { id: string; }) => (
       codeIds.push(i.id)
     ))
@@ -134,7 +134,7 @@ export default function CheckoutPage() {
           />
         </div>
         <p
-          className="my-auto hover:cursor-pointer font-semibold text-[#f94d1c]"
+          className="my-auto hover:cursor-pointer hover:underline font-semibold text-[#f94d1c]"
           onClick={() => handleClick()}
         >
           Cancel
