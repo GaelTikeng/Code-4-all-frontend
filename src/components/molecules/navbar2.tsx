@@ -122,10 +122,6 @@ export default function Navbar2() {
         />
       </div>
       <div className="flex gap-4 my-auto">
-        {/* <BsSearch
-          className="md:hidden my-auto"
-          size="20"
-        /> */}
         <div className="my-auto">
           {snippets?.length ?
             <div className="bg-red-500 text-center z-20 mt-[-10px] right-[65px] md:right-[124px] absolute  mb-2 h-5 text-[10px] w-5 p-1 rounded-full text-white">{snippets?.length}</div>

@@ -20,29 +20,35 @@ export default function LoginFormb({ handleClose, onClick }: Props) {
   const [message, setMessage] = useState<String>('')
 
   const handleClick = async () => {
-    setIsLoading(true)
+
     const credential: any = {
       email: email,
       password: password
     }
-    await loginFunction(credential)
-      .then((res) => {
-        console.log(res)
-        if (res.error) {
-          setMessage("Invalid email or password")
-          setIsLoading(false)
-        } else if (res.name) {
-          localStorage.setItem('userObject', JSON.stringify(res))
-          setMessage('')
-          setSuccess('Welcome back')
-          setIsLoading((prev) => !prev)
-          handleClose()
-          router.push('/cart')
-        }
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    if (email && password) {
+      setIsLoading(true)
+      setMessage('')
+      await loginFunction(credential)
+        .then((res) => {
+          console.log(res)
+          if (res.error) {
+            setMessage("Invalid email or password")
+            setIsLoading(false)
+          } else if (res.name) {
+            localStorage.setItem('userObject', JSON.stringify(res))
+            setMessage('')
+            setSuccess('Welcome back')
+            setIsLoading((prev) => !prev)
+            handleClose()
+            router.push('/cart')
+          }
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    } else {
+      setMessage("Fill all fields")
+    }
   }
   return (
     <div className="w-[85%] md:w-[300px] mx-auto px-4 my-6 leading-10">
@@ -64,8 +70,8 @@ export default function LoginFormb({ handleClose, onClick }: Props) {
         <span className="block w-full h-[2px] bg-gray-300"></span>
       </div>
       <div className="flex flex-col gap-4">
-        {message ? <p className="bg-red-300 w-full py-3 text-xs">{message}</p> : ""}
-        {success ? <p className="bg-green-300 py-3text-xs w-full">{success}</p> : ""}
+        {message ? <p className="bg-red-300 w-full text-center py-3 text-xs">{message}</p> : ""}
+        {success ? <p className="bg-green-300 text-center py-3text-xs w-full">{success}</p> : ""}
         <input
           type="text"
           placeholder="Email"
@@ -79,12 +85,11 @@ export default function LoginFormb({ handleClose, onClick }: Props) {
           onChange={(e) => setPassword(e.target.value)}
         />
         <Button
-          label={isLoading ? "Loading...":"Login"}
+          label={isLoading ? "Loading..." : "Login"}
           color="bg-[#f94d1c]"
           text="text-white"
           borderColor="border-gray-300"
-          onClick={() => handleClick()}
-        />
+          onClick={() => handleClick()} />
       </div>
     </div>
   )

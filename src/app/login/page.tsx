@@ -6,14 +6,12 @@ import LoginForm from "@/components/molecules/loginComponent";
 
 type Props = {}
 
-export default function Signup ({}: Props) {
+export default function Signup({ }: Props) {
   return (
     <div>
-      <Navbar/>
-      <LoginForm/>
-      <div className="fixed w-full bottom-0">
-        <Footer />
-      </div>
+      <Navbar />
+      <LoginForm />
+      <Footer />
     </div>
   )
 }

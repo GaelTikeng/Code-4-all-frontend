@@ -21,9 +21,9 @@ export default function SignupForm({ }: Props) {
   const [error, setError] = useState<String>("")
 
   const handleClick = async () => {
-    setIsLoading(true)
-    console.log(name, email, password)
     if (name && email && password) {
+      setError("")
+      setIsLoading(true)
       signUp({
         name: name,
         email: email,
@@ -102,8 +102,8 @@ export default function SignupForm({ }: Props) {
           className="border rounded border-gray-300 px-3 w-full"
           onChange={(e) => setPassword(e.target.value)}
         />
-        {success ? <p className="text-green-500">{success}</p> : ""}
-        {error ? <p className="text-red-500">{error}</p> : ""}
+        {success ? <p className="text-green-500 text-center">{success}</p> : ""}
+        {error ? <p className="text-red-500 text-center">{error}</p> : ""}
         <Button
           label={isLoading ? "Loading..." : "Signup"}
           color="bg-[#f94d1c]"

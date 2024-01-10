@@ -24,9 +24,10 @@ export default function SignupFormb({onClick, handleClose }: Props) {
   const [error, setError] = useState<String>("")
 
   const handleClick = async () => {
-    setIsLoading(true)
-    console.log(name, email, password)
+    
     if (name && email && password) {
+      setIsLoading(true)
+      setError("")
       signUp({
         name: name,
         email: email,

@@ -20,6 +20,7 @@ const GoogleButton = () => {
   const [isLoading, setIsLoading] = useState<Boolean>(false);
 
   const handleGoogleSignin = async () => {
+    setIsLoading(true)
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
@@ -30,6 +31,7 @@ const GoogleButton = () => {
         redirectTo: urlToUse(),
       },
     });
+    // setIsLoading(prev => !prev)
     if (data) {
       console.log('here is user obj', data)
     }
