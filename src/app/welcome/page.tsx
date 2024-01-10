@@ -1,16 +1,8 @@
 "use client";
-// import Image from "next/image";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { supabase } from "@/utiles/supabase/client";
-import Pulsation from "@/components/atoms/pulsation";
-import { User } from "../../../types";
 import { LOCAL_STORAGE } from "@/utiles/service/storage";
 import { BASE_URL } from "@/utiles/service/constant";
-// import { LOCAL_STORAGE } from "@/utils/service/storage";
-// import { signUp } from "@/utils/service/queries";
-// import { SITE_URL } from "@/utils/service/constant";
-// import { useAppContext } from "../Context/AppContext";
 
 const Signupb = () => {
   const [error, setError] = useState("");
@@ -40,11 +32,11 @@ const Signupb = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        LOCAL_STORAGE.save("userObject", data);
+        localStorage.setItem("userObject", JSON.stringify(data));
         console.log(data);
         setSuccess(`Welcome ${data.name} 🙂`);
         router.push("/dashboard");
-        setIsLoading(false);
+        setIsLoading(prev => !prev);
       }
       );
 
