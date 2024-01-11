@@ -89,9 +89,9 @@ function DetailPage() {
         </div>
       </div>
 
-      <div className="fixed w-full bottom-0">
+      {/* <div className="fixed w-full bottom-0"> */}
         <Footer />
-      </div>
+      {/* </div> */}
     </div>
   )
 }

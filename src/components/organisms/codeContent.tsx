@@ -48,7 +48,7 @@ export default function Codes({ snippets }: Props) {
   }
 
   return (
-    <div className="py-8">
+    <div className="pb-8">
       <div className="md:px-[80px] px-[20px] py-8 flex gap-6 flex-wrap">
         {entries?.map((item, index) => (
           <CodeCard
