@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
-import { LOCAL_STORAGE } from "@/utiles/service/storage";
+import { useRouter, useSearchParams } from "next/navigation";
 import { BASE_URL } from "@/utiles/service/constant";
 
 const Signupb = () => {
@@ -9,7 +8,9 @@ const Signupb = () => {
   const [success, setSuccess] = useState("");
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const params = useSearchParams()
 
+  console.log(params)
   // context data
 
   const handleInputChange = async () => {

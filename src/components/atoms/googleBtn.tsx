@@ -35,6 +35,9 @@ const GoogleButton = () => {
     if (data) {
       console.log('here is user obj', data)
     }
+    if (error) {
+      console.log('this is error from supabase', error)
+    }
   };
 
   return (

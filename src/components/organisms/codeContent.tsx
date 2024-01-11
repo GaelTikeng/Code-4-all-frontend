@@ -23,19 +23,14 @@ export default function Codes({ snippets }: Props) {
   const cartSnippets: Code[] = []
 
   const page = searchParams['page'] ?? '1'
-  console.log('page', page)
   
   const per_page = searchParams['per_page'] ?? '15'
-  console.log('page_per', per_page)
 
   const start = (Number(page) - 1) * Number(per_page)
   
   const end = start + Number(per_page)
-  console.log('start', start, 'en:', end)
 
   const entries = snippets?.slice(start, end)
-
-  console.log('entries', entries)
 
   const handleClick = (item: Code) => {
     cartSnippets.push(item)
@@ -66,7 +61,6 @@ export default function Codes({ snippets }: Props) {
             handleDetail={() => handleDetail(item.id)}
           />
         ))}
-
 
         {popupActive && (
           <>
