@@ -93,7 +93,7 @@ export default function Home() {
           <h2 className={`font-semibold ${allClicked ? 'text-black' :'text-gray-500'} hover:text-black hover:cursor-pointer text-[16px]`}>All</h2>
         </div>
         {category.map((cat, i) => (
-          <div onClick={() => getCodeByCategory(cat.category)}>
+          <div key={i} onClick={() => getCodeByCategory(cat.category)}>
             <h2 className={`font-semibold ${clicked ? 'text-black' :'text-gray-500'} hover:text-black hover:cursor-pointer text-[16px]`}>{cat.category}</h2>
             {/* <p className="h-2 bg-grren-300">.</p> */}
           </div>
