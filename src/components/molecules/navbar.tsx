@@ -83,6 +83,7 @@ export default function Navbar() {
           type="text"
           placeholder="search..."
           className="w-full  outline-none bg-transparent"
+          
         />
       </div>
 

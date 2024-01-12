@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Code } from "../../../types";
 import { toast } from "react-toastify";
 import Overlay from "../atoms/overlay";
@@ -9,28 +9,32 @@ import { useRouter, useParams } from "next/navigation";
 import CodeCard from "../molecules/codeSnippetCard";
 import { SearchParamsContext } from "next/dist/shared/lib/hooks-client-context.shared-runtime";
 import PaginationControler from "../molecules/pagination";
+import { useAppContext } from "@/app/context/appContext";
 
 type Props = {
   snippets: Code[]
 }
 
 export default function Codes({ snippets }: Props) {
+  const { allCode, searchRes, setAllCode } = useAppContext()
   const router = useRouter()
   const searchParams = useParams()
   const [popupActive, setPopupActive] = useState<Boolean>(false)
-  const [codeObject, setCodeObject] = useState<Code | null>()
+  const [codeObject, setCodeObject] = useState<Code | null>();
+
+  const [displayData, setDisplayData] = useState<Code[]>(allCode || searchRes || [])
 
   const cartSnippets: Code[] = []
 
   const page = searchParams['page'] ?? '1'
-  
+
   const per_page = searchParams['per_page'] ?? '15'
 
   const start = (Number(page) - 1) * Number(per_page)
-  
+
   const end = start + Number(per_page)
 
-  const entries = snippets?.slice(start, end)
+  const entries = displayData?.slice(start, end)
 
   const handleClick = (item: Code) => {
     cartSnippets.push(item)
@@ -46,6 +50,11 @@ export default function Codes({ snippets }: Props) {
     router.push(`/details/${id}`)
     console.log(id)
   }
+
+  useEffect(() => {
+    if (searchRes.length > 0) setDisplayData(searchRes);
+    else setDisplayData(allCode);
+  }, [allCode, searchRes])
 
   return (
     <div className="pb-8">
@@ -85,7 +94,7 @@ export default function Codes({ snippets }: Props) {
           </>
         )}
       </div>
-      <PaginationControler hasNextPage={start >= 0} hasPrevPage={end < 100} snippets={snippets} />
+      <PaginationControler hasNextPage={start >= 0} hasPrevPage={end < 100} snippets={displayData} />
     </div>
   )
 }

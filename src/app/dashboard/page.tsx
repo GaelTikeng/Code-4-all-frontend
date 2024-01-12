@@ -138,7 +138,7 @@ export default function Dashboard() {
                 <span>{code.rating} stars</span>
               </div>
             </div>
-            {status === "true" ? <p className="bg-green-400">Reviewed</p> : ""}
+            {status === "true" ? <p className="bg-yellow-200 text-[10px] w-fit">Reviewed</p> : ""}
             <Button
               label="Add a review"
               color="bg-[#f94d1c]"
@@ -169,7 +169,7 @@ export default function Dashboard() {
       <div className="flex flex-col gap-4">
         <h3 className="font-semibold text-lg">Transaction History</h3>
         <div className="w-full">
-          {(loading && transactionData?.length)
+          {(transactionData?.length)
             ?
             <Transactions transaction={transactionData} />
             :
@@ -178,7 +178,7 @@ export default function Dashboard() {
       </div>
       <div className=" w-full">
         <h3 className="font-semibold pb-4 text-lg">Upload History</h3>
-        {(isLoading && uploads?.length)
+        {(uploads?.length)
           ?
           <UploadedCode uploaded={uploads} />
           :

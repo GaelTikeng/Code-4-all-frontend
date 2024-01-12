@@ -19,7 +19,7 @@ export default function CommentCarousel({ reviews}: Props) {
       }}
       className="h-fit py-8 md:py-12">
       <div className="  h-full w-full">
-        <h1 className="text-2xl mb-6 font-semibold text-center">What our developers say? </h1>
+        <h1 className="text-2xl mb-6 font-semibold text-center">What developers say? </h1>
         <div className=" grid grid-cols-2 mx-auto md:grid md:grid-cols-3 md:w-[50%] z-50">
           {reviews ? reviews.map((item) => (
             <CommentCart

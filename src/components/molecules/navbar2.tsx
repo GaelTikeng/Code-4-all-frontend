@@ -1,22 +1,27 @@
 "use client"
-import React, { useState } from "react"
-import { BsSearch } from "react-icons/bs";
+import React, { useState, forwardRef, ChangeEvent } from "react"
 import { GiShoppingCart } from "react-icons/gi";
 import { IoMdContact } from "react-icons/io";
 import Button from "../atoms/button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import DropdownModal from "../atoms/dropDownModal";
-import { LOCAL_STORAGE } from "@/utiles/service/storage";
 import Avatar from "react-avatar";
 import { Code, User } from "../../../types";
 import { CiSearch } from "react-icons/ci";
+import { useAppContext } from "@/app/context/appContext";
 
 
-export default function Navbar2() {
+interface Props {
+  setSearch?: () => void
+}
+
+export default function Navbar2({ setSearch }: Props) {
+  const {allCode, setSearchRes} = useAppContext()
   const router = useRouter()
   const [showDropDown, setShowDropDown] = useState<Boolean>(false)
   const [disconnect, setDisconnect] = useState<Boolean>(false)
+  // const [search, setSearch] = useState<string>('')
 
   const [user, setUser] = useState<User | null>(
     (): User | null => {
@@ -96,6 +101,11 @@ export default function Navbar2() {
     setDisconnect(prev => !prev)
   }
 
+  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    const filter = allCode.filter((item) => item.title.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase()))
+    setSearchRes(filter);
+  }
+
   return (
     <div className=" flex gap-4 justify-between py-3 shadow-lg w-full md:px-[80px] px-[20px] ">
       <div className="flex">
@@ -119,6 +129,7 @@ export default function Navbar2() {
           type="text"
           placeholder="search..."
           className="w-full  outline-none bg-transparent"
+          onChange={handleSearch}
         />
       </div>
       <div className="flex gap-4 my-auto">
