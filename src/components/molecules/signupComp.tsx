@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Button from "../atoms/button";
 import { useRouter } from "next/navigation";
 import { signUp } from "@/utiles/service/queries";
-import GoogleBtn from "../atoms/googleBtn";
+import GoogleBtn from "../atoms/googleButton";
 
 type Props = {
   onClick: () => void,

@@ -32,7 +32,6 @@ const GoogleBtn = () => {
         .then((data) => {
           localStorage.setItem("userObject", JSON.stringify(data));
           console.log(data);
-          // setSuccess(`Welcome ${data.name} 🙂`);
           router.push("/");
           setIsLoading(prev => !prev);
         }

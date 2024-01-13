@@ -2,10 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
-import GoogleButton from "../atoms/googleBtn";
 import Button from "../atoms/button";
-import { BASE_URL } from "@/utiles/service/constant";
-import { User } from "../../../types";
 import { useRouter } from "next/navigation";
 import { signUp } from "@/utiles/service/queries";
 import GoogleBtn from "../atoms/googleButton";
@@ -41,26 +38,6 @@ export default function SignupForm({ }: Props) {
     } else {
       setError("Fill all fields")
     }
-    // await fetch(BASE_URL + "/users", {
-    //   method: "POST",
-    //   body: JSON.stringify({
-    //     name: name,
-    //     email: email,
-    //     password: password
-    //   }),
-    //   headers: {
-    //     "content-type": "application/json",
-    //   },
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    // setCurrentUser(data);
-    // localStorage.setItem('userObject', JSON.stringify(data))
-    // console.log(data);
-    // setSuccess(`Welcome ${data.name} 🙂`);
-    // router.push("/dashboard");
-    // setIsLoading(false);
-    //   });
   }
 
   return (

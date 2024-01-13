@@ -12,7 +12,7 @@ import { Code, Review, User } from "../../types";
 import Navbar2 from "@/components/molecules/navbar2";
 import CarousselComment from "@/components/organisms/carouselComments";
 import SkeletonCart from "@/components/molecules/codeSnippetSkeleton";
-import SkeletonComment from "@/components/molecules/seletonComments";
+import SkeletonComment from "@/components/molecules/skeletonComments";
 import { useAppContext } from "./context/appContext";
 
 export default function Home() {
