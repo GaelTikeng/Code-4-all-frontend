@@ -13,8 +13,6 @@ const GoogleBtn = () => {
   const handleGoogleSignin = async () => {
     setIsLoading(prev => !prev)
     const result = await signInWithPopup(auth, googleAuth)
-    localStorage.setItem('result', JSON.stringify(result))
-    console.log("This is result", result)
     if (result) {
       setIsLoading(prev => !prev)
       await fetch(BASE_URL + "/users", {

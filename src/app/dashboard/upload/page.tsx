@@ -50,20 +50,15 @@ const Page = () => {
     console.log('form data', formData)
     const data = new FormData(event.currentTarget)
     console.log(data)
-    console.log('this is file', file)
 
     if (file) {
       const res = await edgestore.publicFiles.upload({
         file,
         onProgressChange: (progress) => {
           setProgress(progress)
-          console.log('progress bar', progress)
-          // Make api call here
-
         }
       })
       setUrl(res.url)
-      console.log('this is res', res)
       await createCode({
         user_id: user?.id,
         title: formData.title,
