@@ -8,6 +8,7 @@ import { BASE_URL } from "@/utiles/service/constant";
 import { User } from "../../../types";
 import { useRouter } from "next/navigation";
 import { signUp } from "@/utiles/service/queries";
+import GoogleBtn from "../atoms/googleButton";
 
 type Props = {}
 
@@ -77,7 +78,8 @@ export default function SignupForm({ }: Props) {
       <h1 className="text-[#f94d1c] text-center text-xl font-semibold  pb-3">Create your account</h1>
 
       <p className="text-center pb-4">Have an account?<Link href="/login" className="text-blue-600">Log in now</Link></p>
-      <GoogleButton />
+      {/* <GoogleButton /> */}
+      <GoogleBtn/>
       <div style={{ columnGap: "18px" }} className="flex mt-[18px] justify-between items-center font-sm ">
         <span className="block w-full h-[2px] bg-gray-300"></span>
         <span className="italic font-mono">OR</span>

@@ -46,7 +46,7 @@ export const AppContextProvider = ({ children }: any) => {
     findAllReviews()
       .then((res) => {
         console.log("all reviews", res)
-        setReview(res)
+        setAllReviews(res)
       })
       .catch((error) => {
         console.log('error due to review', error)

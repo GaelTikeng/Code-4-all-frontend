@@ -8,10 +8,6 @@ const Signupb = () => {
   const [success, setSuccess] = useState("");
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const params = useSearchParams()
-
-  console.log(params)
-  // context data
 
   const handleInputChange = async () => {
     setIsLoading(true);

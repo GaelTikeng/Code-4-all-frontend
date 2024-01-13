@@ -16,9 +16,8 @@ import SkeletonComment from "@/components/molecules/seletonComments";
 import { useAppContext } from "./context/appContext";
 
 export default function Home() {
-  const { allCode, setAllCode, allClicked, clicked, setAllClicked, setClicked } = useAppContext()
+  const { allCode, allReviews, setAllCode, allClicked, clicked, setAllClicked, setClicked } = useAppContext()
   const [snippets, setSnippets] = useState<Code[] | null>(null)
-  const [review, setReview] = useState<Review[] | null>(null)
   const [isLoading, setIsLoading] = useState<Boolean>(false)
   const [user, setUser] = useState<User | null>(
     (): User | null => {
@@ -82,7 +81,7 @@ export default function Home() {
 
       <Discount />
       {/* <CarousselComment /> */}
-      {review ? <CommentCarousel reviews={review} />
+      {allReviews ? <CommentCarousel reviews={allReviews} />
         :
         <SkeletonComment />
       }
