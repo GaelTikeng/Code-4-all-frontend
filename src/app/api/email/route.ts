@@ -18,8 +18,8 @@ export async function POST(request: NextRequest) {
   const mailOptions: Mail.Options = {
     from: process.env.MY_EMAIL,
     to: email,
-    subject: `Message from code4all for Mr/Miss ${name}`,
-    text: `Here are the links to your code snippets ${file}`,
+    subject: `Purchased code snippets from code-4all by ${name}`,
+    text: `Here are the links to your code snippets \n ${file}`,
   };
 
   const sendMailPromise = () =>

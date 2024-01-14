@@ -2,13 +2,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
-import GoogleButton from "../atoms/googleBtn";
 import Button from "../atoms/button";
 import { useRouter } from "next/navigation";
-import { BASE_URL } from "@/utiles/service/constant";
-import { useAppContext } from "@/app/context/appContext";
-import { getAllSnippets, loginFunction } from "@/utiles/service/queries";
-import { User } from "../../../types";
+import { loginFunction } from "@/utiles/service/queries";
+import GoogleBtn from "../atoms/googleButton";
 
 type Props = {}
 
@@ -21,36 +18,36 @@ export default function LoginForm({ }: Props) {
   const [message, setMessage] = useState<String>('')
 
   const handleClick = async () => {
-    setIsLoading(true)
+
 
     const credential: any = {
       email: email,
       password: password
     }
 
-    // await getAllSnippets()
-    //   .then((data) => {
-    //     console.log("These are all snippets", data)
-    //   })
-    //   .catch((error) => console.log('this is error', error))
-
-    await loginFunction(credential)
-      .then((res) => {
-        console.log(res)
-        if (res.error) {
-          setMessage("Invalid email or password")
-          setIsLoading(false)
-        } else if (res.name) {
-          localStorage.setItem('userObject', JSON.stringify(res))
-          setMessage('')
-          setSuccess('Welcome back')
-          setIsLoading((prev) => !prev)
-          router.push('/dashboard')
-        }
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    if (email && password) {
+      setIsLoading(true)
+      setMessage('')
+      await loginFunction(credential)
+        .then((res) => {
+          console.log(res)
+          if (res.error) {
+            setMessage("Invalid email or password")
+            setIsLoading(false)
+          } else if (res.name) {
+            localStorage.setItem('userObject', JSON.stringify(res))
+            setMessage('')
+            setSuccess('Welcome back')
+            setIsLoading((prev) => !prev)
+            router.push('/dashboard')
+          }
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    } else {
+      setMessage("Fill all fields")
+    }
   }
 
   return (
@@ -66,15 +63,15 @@ export default function LoginForm({ }: Props) {
       </div>
       <h1 className="text-[#f94d1c] text-center text-xl font-semibold  pb-3">Log in your account</h1>
       <p className=" pb-4 text-center">Dont have an account?<Link href="/signup" className="text-blue-600">Signup now</Link></p>
-      <GoogleButton />
+      <GoogleBtn/>
       <div style={{ columnGap: "18px" }} className="flex mt-[18px] justify-between items-center font-sm ">
         <span className="block w-full h-[2px] bg-gray-300"></span>
         <span className="italic">OR</span>
         <span className="block w-full h-[2px] bg-gray-300"></span>
       </div>
       <div className="flex flex-col gap-4">
-        {message ? <p className="bg-red-300 w-full py-3 text-xs">{message}</p> : ""}
-        {success ? <p className="bg-green-300 py-3text-xs w-full">{success}</p> : ""}
+        {message ? <p className="bg-red-300 text-center w-full py-3 text-xs">{message}</p> : ""}
+        {success ? <p className="bg-green-300 text-center py-3text-xs w-full">{success}</p> : ""}
         <input
           type="text"
           placeholder="Email"

@@ -7,7 +7,7 @@ import { MdOutlineThumbDownOffAlt, MdOutlineThumbUp } from "react-icons/md";
 
 interface Props {
   name: string,
-  rating?: number,
+  rating?: string,
   createdAt: string,
   review: string | undefined
 }
@@ -29,8 +29,8 @@ export default function ReviewCart({ name, review, createdAt, rating }: Props) {
         />
         <div className="">
           <h2 className="font-semibold text-lg ">{name}</h2>
-          <div className="flex gap-4">
-            <p>{rating} </p>
+          <div className="flex gap-4 align-baseline">
+            <p className="text-[12px] ">{rating} <span className="text-gray-400">stars</span></p>
             <p className="font-semibold text-xs text-gray-400 ">{createdAt.slice(0, 10)}</p>
           </div>
         </div>

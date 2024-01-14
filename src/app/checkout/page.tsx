@@ -10,6 +10,7 @@ import { Code, User } from "../../../types";
 import PaidCourse from "@/components/molecules/paidCode";
 import { createPurchase } from "@/utiles/service/queries";
 import { sendEmail } from "@/utiles/send-email";
+import RequestLoader from "@/components/atoms/requestLoader";
 
 export default function CheckoutPage() {
   const router = useRouter();
@@ -75,7 +76,6 @@ export default function CheckoutPage() {
   };
 
   const handlePayment = async () => {
-    setLoading(true)
     snippets?.map((i: { id: string; }) => (
       codeIds.push(i.id)
     ))
@@ -84,37 +84,41 @@ export default function CheckoutPage() {
       files.push(i.code_file)
     ))
 
-    console.log(email, name)
-
     if (email && name) {
-      await sendEmail({
-        name: name,
-        email: email,
-        file: files
-      })
-        .then((res) => {
-          console.log('response from fxn', res)
+      setLoading(true)
+      await createPurchase({
+        code_id: codeIds,
+        // code_id: snippets[0]?.id,
+        quantity: snippets?.length,
+        total_amount: totalPrice(snippets),
+        buyer_id: user?.id
+      }).then((res) => {
+        console.log(res)
+        localStorage.setItem('purchases', JSON.stringify(res))
+        setLoading(prev => !prev)
+        setPopupActive((prev) => !prev)
+        
+        // send mail
+        sendEmail({
+          name: name,
+          email: email,
+          file: files
         })
-        .catch((err) => {
-          console.log('this is error', err)
-        });
-    };
-    await createPurchase({
-      code_id: codeIds,
-      // code_id: snippets[0]?.id,
-      quantity: snippets?.length,
-      total_amount: totalPrice(snippets),
-      buyer_id: user?.id
-    }).then((res) => {
-      console.log(res)
-      localStorage.setItem('purchases', JSON.stringify(res))
-      setLoading(prev => !prev)
-      setPopupActive((prev) => !prev)
-    })
-      .catch((error) => {
-        console.log('error while purchasing', error)
+          .then((res) => {
+            console.log('response from fxn', res)
+          })
+          .catch((err) => {
+            console.log('this is error', err)
+          });
       })
-
+        .catch((error) => {
+          console.log('error while purchasing', error)
+        })
+  
+      
+    } else {
+      setCartActive(prev => !prev)
+    }
   }
 
   return (
@@ -296,12 +300,14 @@ export default function CheckoutPage() {
               <span>{totalPrice(snippets)} FCFA</span>
             </div>
 
-            <button
-              onClick={() => handlePayment()}
-              className="py-4 bg-[#f94d1c] hover:shadow-xl font-semibold text-white w-full"
-            >
-              {loading ? "Loading..." : "Complete checkout"}
-            </button>
+            {loading ?
+              <RequestLoader /> :
+              <button
+                onClick={() => handlePayment()}
+                className="py-4 bg-[#f94d1c] hover:shadow-xl font-semibold text-white w-full"
+              >
+                Complete checkout
+              </button>}
             {popupActive && (
               <>
                 <Overlay

@@ -84,14 +84,15 @@ function DetailPage() {
               name={data.user.name}
               createdAt={data.createdAt}
               review={data?.review}
+              rating={data.rating}
             />
           )) : <p className="italic font-mono text-center w-full">This code snippet has not yet been reviewed</p>}
         </div>
       </div>
 
-      <div className="fixed w-full bottom-0">
+      {/* <div className="fixed w-full bottom-0"> */}
         <Footer />
-      </div>
+      {/* </div> */}
     </div>
   )
 }

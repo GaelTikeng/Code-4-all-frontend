@@ -1,14 +1,10 @@
 "use client"
 import Image from "next/image";
-import Link from "next/link";
 import React, { useState } from "react";
-import GoogleButton from "../atoms/googleBtn";
 import Button from "../atoms/button";
-import { BASE_URL } from "@/utiles/service/constant";
-import { User } from "../../../types";
 import { useRouter } from "next/navigation";
-import { useAppContext } from "@/app/context/appContext";
 import { signUp } from "@/utiles/service/queries";
+import GoogleBtn from "../atoms/googleButton";
 
 type Props = {
   onClick: () => void,
@@ -24,9 +20,10 @@ export default function SignupFormb({onClick, handleClose }: Props) {
   const [error, setError] = useState<String>("")
 
   const handleClick = async () => {
-    setIsLoading(true)
-    console.log(name, email, password)
+    
     if (name && email && password) {
+      setIsLoading(true)
+      setError("")
       signUp({
         name: name,
         email: email,
@@ -60,7 +57,8 @@ export default function SignupFormb({onClick, handleClose }: Props) {
       <h1 className="text-[#f94d1c] text-xl text-center font-semibold  pb-3">Create your account</h1>
 
       <p className=" pb-4 text-center">Have an account?<span onClick={onClick} className="text-blue-600 hover:cursor-pointer">Log in now</span></p>
-      <GoogleButton />
+      
+      <GoogleBtn/>
       <div style={{ columnGap: "18px" }} className="flex mt-[18px] justify-between items-center font-sm ">
         <span className="block w-full h-[2px] bg-gray-300"></span>
         <span className="italic font-mono">OR</span>

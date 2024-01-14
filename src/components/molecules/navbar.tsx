@@ -8,12 +8,21 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import DropdownModal from "../atoms/dropDownModal";
 import { CiSearch } from "react-icons/ci";
-
+import { Code } from "../../../types";
 
 
 export default function Navbar() {
   const router = useRouter()
   const [showDropDown, setShowDropDown] = useState<Boolean>(false)
+  const [snippets, setSnippets] = React.useState<Code[] | undefined>(
+    (): Code[] | undefined => {
+      if (typeof localStorage !== "undefined") {
+        const fromLocalStorage = JSON.parse(localStorage.getItem("codeArray") as string) || [];
+        if (fromLocalStorage) return fromLocalStorage;
+      }
+      return undefined;
+    }
+  )
 
   const dropDownList = [
     {
@@ -74,19 +83,21 @@ export default function Navbar() {
           type="text"
           placeholder="search..."
           className="w-full  outline-none bg-transparent"
+          
         />
       </div>
 
       <div className="flex gap-4 my-auto">
-        {/* <BsSearch
-          className="md:hidden my-auto"
-          size="20"
-        /> */}
-        <GiShoppingCart
-          size="25"
-          className="my-auto hover:cursor-pointer"
-          onClick={handleGoToCart}
-        />
+        <div className="my-auto">
+          {snippets?.length ?
+            <div className="bg-red-500 text-center z-20 mt-[-10px] right-[100px] md:right-[124px] absolute  mb-2 h-5 text-[10px] w-5 p-1 rounded-full text-white">{snippets?.length}</div>
+            : ""}
+          <GiShoppingCart
+            size="25"
+            className="my-auto relative hover:cursor-pointer"
+            onClick={handleGoToCart}
+          />
+        </div>
         <div
           onClick={handleOpenDP}
           className="md:hidden my-auto "

@@ -122,7 +122,7 @@ export const getCodeById = async (id: string | undefined) => {
   }
 }
 
-// DUPLICATE
+// DUPLICATE Did this duplicate bcz of types was disturbing
 export const findCodeById = async (id: string | string[]) => {
   console.log('from fxn', id)
   try {

@@ -4,6 +4,7 @@ import './globals.css'
 import { ToastContainer } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.min.css";
 import { EdgeStoreProvider } from '@/lib/edgestore'
+import { AppContextProvider } from './context/appContext';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,10 +20,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-white">
-        {/* <AppContextProvider>{children}</AppContextProvider> */}
+      <body className="bg-white" suppressHydrationWarning={true}>
+
         <ToastContainer />
-        <EdgeStoreProvider>{children}</EdgeStoreProvider>
+        <EdgeStoreProvider>
+          <AppContextProvider>{children}</AppContextProvider>
+        </EdgeStoreProvider>
       </body>
     </html>
   )
