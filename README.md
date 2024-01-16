@@ -18,13 +18,15 @@ npm install
 ```
 2. <b>Run the server</b>: Use the following command to run the server;
 ```bash
-npm run dev for frontend
-npm run start:dev for backend
+npm run dev 
 ```
 3. <b>Access the website</b>: Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Third parti platforms
+1. [`Firebase`](https://firebase.google.com/)  for google authentication
+2. [`Edgestore`](https://edgestore.dev/) for file upload
 ## Key functionalities 
 * <b>Product browsing and search</b>: Users can browse through product categories, search for specific items, and view detailed product information and can eventually add to shopping cart.
-* <b>Shopping cart and checkout</b>: Users can add code snippets to their cart, manage quantities, and proceed to checkout using various payment methods (paypal and credit cart). After purchase the user will receive the links of all the purchased code snippets in his mail box.
+* <b>Shopping cart and checkout</b>: Users can add code snippets to their cart, manage quantities, and proceed to checkout using various payment methods (paypal and credit cart). After purchase the user will receive links of all the purchased code snippets in his mail box.
 * <b>User accounts</b>: Users can register and create accounts to manage their orders, see their purchased code snippets, see payment histories and eventually have the posibility to upload their own course and put it for sale.
 * <b>Content management system (CMS)</b>: Administrators can add, edit, and manage code snippet information, category, description, price, etc.
 ## Demo
