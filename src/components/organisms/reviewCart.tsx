@@ -19,7 +19,7 @@ export default function ReviewCart({ name, review, createdAt, rating }: Props) {
   return (
     <div className="w-full md:max-w-[900px]">
       <hr></hr>
-      <div className="flex gap-5 py-10 ">
+      <div className="flex gap-5 py-4 ">
         <Avatar
           className="peer hover:cursor-pointer"
           name={name}
