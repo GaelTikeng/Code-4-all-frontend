@@ -1,9 +1,6 @@
-import { findCodeById, getCodeById, getReviewByCodeId } from "@/utiles/service/queries";
-import React, { useEffect, useState } from "react";
-import { Code, Review } from "../../../types";
+import React from "react";
 import Avatar from "react-avatar";
 import { MdOutlineThumbDownOffAlt, MdOutlineThumbUp } from "react-icons/md";
-
 
 interface Props {
   name: string,
@@ -13,8 +10,6 @@ interface Props {
 }
 
 export default function ReviewCart({ name, review, createdAt, rating }: Props) {
-
-
 
   return (
     <div className="w-full md:max-w-[900px]">
