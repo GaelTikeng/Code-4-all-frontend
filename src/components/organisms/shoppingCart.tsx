@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import ShopCodeCart from "../molecules/shopCodeCart";
 import { Code, Test, User } from "../../../types";
-import { totalPrice } from "@/utiles/function";
+import { totalPrice } from "@/utiles/calculateTotalPriceFunction";
 import Button from "../atoms/button";
 import Link from "next/link";
 import Overlay from "../atoms/overlay";

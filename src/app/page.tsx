@@ -30,8 +30,6 @@ export default function Home() {
     }
   )
 
-
-
   const category = [{ category: "Frontend" }, { category: "Backend" }]
 
   const getCodeByCategory = async (cat: string) => {
@@ -78,13 +76,10 @@ export default function Home() {
       </div>
       <hr className="w-[90%] mx-auto"></hr>
       {allCode?.length ? <Codes snippets={allCode} /> : <SkeletonCart />}
-
       <Discount />
       {/* <CarousselComment /> */}
-      {allReviews ? <CommentCarousel reviews={allReviews} />
-        :
-        <SkeletonComment />
-      }
+      {/* <SkeletonComment /> */}
+      {allReviews?.length ? <CommentCarousel reviews={allReviews} /> : <SkeletonComment />}
       <Footer />
 
     </div>

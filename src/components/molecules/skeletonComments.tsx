@@ -13,7 +13,7 @@ export default function SkeletonComment() {
       <div className="h-full  w-full">
       <h1 className="text-2xl mb-6 font-semibold text-center">What our developers say? </h1>
       <div className="md:grid grid grid-cols-2 md:grid-cols-3 md:px-[80px] px-[20px]">
-        {[...Array(4)].map((item, index) => (
+        {[...Array(3)].map((item, index) => (
           <div key={index} className="max-w-[300px] py-8 bg-white leading-loose m-4 ">
             <div className="flex  justify-center py-4">
               <div className="rounded-full m-auto skeleton object-fill border border-[#f94d1c] w-[80px] h-[80px] "></div>
