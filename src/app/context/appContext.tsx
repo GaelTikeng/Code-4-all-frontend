@@ -35,7 +35,7 @@ export const AppContextProvider = ({ children }: any) => {
     setAllClicked(true)
     getAllSnippets()
       .then((res) => {
-        console.log("all codes", res)
+        console.log("all codes from context", res)
         setAllCode(res)
         setIsLoading(prev => !prev)
       })
@@ -45,7 +45,7 @@ export const AppContextProvider = ({ children }: any) => {
 
     findAllReviews()
       .then((res) => {
-        console.log("all reviews", res)
+        console.log("all reviews from context", res)
         setAllReviews(res)
       })
       .catch((error) => {

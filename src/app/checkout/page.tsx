@@ -3,7 +3,7 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { IoMdClose, IoMdLock } from "react-icons/io";
-import { totalPrice } from "@/utiles/function";
+import { totalPrice } from "@/utiles/calculateTotalPriceFunction";
 // import { allCode } from '@/components/organisms/codeContent';
 import Overlay from "@/components/atoms/overlay";
 import { Code, User } from "../../../types";
