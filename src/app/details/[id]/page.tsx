@@ -82,7 +82,7 @@ function DetailPage() {
 
         <h2 className="font-semibold text-xl text-center py-5">Reviews of professionals</h2>
         <div className="md:grid md:grid-cols-2 p-4 gap-4 ">
-          {(reviews.length && isLoading) ? reviews.map((data) => (
+          {reviews.length ? reviews.map((data) => (
             <ReviewCart
               key={data.id}
               name={data.user.name}
