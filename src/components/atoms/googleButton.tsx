@@ -14,6 +14,7 @@ const GoogleBtn = () => {
     setIsLoading(prev => !prev)
     const result = await signInWithPopup(auth, googleAuth)
     if (result) {
+      console.log(result)
       setIsLoading(prev => !prev)
       await fetch(BASE_URL + "/users", {
         method: "POST",
