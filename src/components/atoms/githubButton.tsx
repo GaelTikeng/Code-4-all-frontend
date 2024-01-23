@@ -41,14 +41,14 @@ const GithubBtn = () => {
   }
 
   return (
-    <div className="py-2">
+    <div className="py-1">
       <button
         onClick={() => handleGithubSignin()}
         data-u
         className={
           isLoading
-            ? "hover:cursor-not-allowed flex border border-gray-300 w-full py-1 items-center text-xs rounded gap-3 px-[60px] m-auto"
-            : "flex border border-gray-300 hover:shadow items-center py-1 rounded  gap-3 w-full justify-center m-auto"
+            ? "hover:cursor-not-allowed flex border border-gray-300 w-full items-center text-xs rounded gap-3 px-[60px] m-auto"
+            : "flex border border-gray-300 hover:shadow items-center rounded  gap-3 w-full justify-center m-auto"
         }
       >
         <Image
