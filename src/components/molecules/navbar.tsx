@@ -10,7 +10,6 @@ import DropdownModal from "../atoms/dropDownModal";
 import { CiSearch } from "react-icons/ci";
 import { Code } from "../../../types";
 
-
 export default function Navbar() {
   const router = useRouter()
   const [showDropDown, setShowDropDown] = useState<Boolean>(false)
@@ -83,7 +82,7 @@ export default function Navbar() {
           type="text"
           placeholder="search..."
           className="w-full  outline-none bg-transparent"
-          
+
         />
       </div>
 

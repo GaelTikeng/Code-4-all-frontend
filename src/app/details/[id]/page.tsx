@@ -11,12 +11,13 @@ import Loader from "@/components/atoms/loader";
 import ReviewCart from "@/components/organisms/reviewCart";
 import Link from "next/link";
 import PageDetailSkeleton from "@/components/molecules/pageDetailSkeleton";
-
+import { useAppContext } from "@/app/context/appContext";
 
 
 function DetailPage() {
+  const { allCode } = useAppContext()
   const param = useParams()
-  const [codeDetail, setCodeDetail] = useState<Code>()
+  // const [codeDetail, setCodeDetail] = useState<Code>()
   const [reviews, setReviews] = useState<Review[]>([])
   const [isLoading, setIsLoading] = useState<Boolean>(false)
   const [loading, setLoading] = useState<Boolean>(false)
@@ -36,16 +37,18 @@ function DetailPage() {
         console.log(error)
       ])
 
-    await findCodeById(id)
-      .then((res) => {
-        console.log('this is code detail', res)
-        setCodeDetail(res)
-        setLoading(prev => !prev)
-      })
-      .catch((error) => {
-        console.log("error while fetching code object", error)
-      })
+    // await findCodeById(id)
+    //   .then((res) => {
+    //     console.log('this is code detail', res)
+    //     setCodeDetail(res)
+    //     setLoading(prev => !prev)
+    //   })
+    //   .catch((error) => {
+    //     console.log("error while fetching code object", error)
+    //   })
   }
+
+  const codeDetails = allCode.find((item) => item.id === param.id)
 
   useEffect(() => {
     fetchData(param.id)
@@ -56,7 +59,7 @@ function DetailPage() {
       <Navbar2 />
       <div className="w-[90%] md:max-w-[60%] gap-5 py-6 mx-auto">
         <Link className="text-[#f94d1c] hover:underline" href="/">Go back</Link>
-        {codeDetail ?
+        {codeDetails ?
           <div className="pt-5 md:flex gap-5 ">
             <Image
               src="https://www.mymcpl.org/sites/default/files/2022-07/What%20Is%20a%20Zip%20File.jpg"
@@ -67,13 +70,13 @@ function DetailPage() {
               loading="lazy"
             />
             <div className="my-auto">
-              <h1 className="font-bold text-xl pb-2 ">{codeDetail?.title}</h1>
-              <p className="text-xs text-gray-400 ">By {codeDetail?.user.name}</p>
-              <p>{codeDetail?.rating} stars</p>
-              <p className="pb-2"> Category: <span className="pb-2 font-semibold text-lg">{codeDetail?.category}</span></p>
-              <p className="pb-2"> Programming language: <span className="pb-2 font-semibold text-lg">{codeDetail?.programming_language}</span></p>
-              <h3 className="text-lg text-[#f94d1c] font-extrabold pb-2">{codeDetail?.price} FCFA</h3>
-              <p className="pb-2">Description: {codeDetail?.description}</p>
+              <h1 className="font-bold text-xl pb-2 ">{codeDetails?.title}</h1>
+              <p className="text-xs text-gray-400 ">By {codeDetails?.user.name}</p>
+              <p>{codeDetails?.rating} stars</p>
+              <p className="pb-2"> Category: <span className="pb-2 font-semibold text-lg">{codeDetails?.category}</span></p>
+              <p className="pb-2"> Programming language: <span className="pb-2 font-semibold text-lg">{codeDetails?.programming_language}</span></p>
+              <h3 className="text-lg text-[#f94d1c] font-extrabold pb-2">{codeDetails?.price} FCFA</h3>
+              <p className="pb-2">Description: {codeDetails?.description}</p>
             </div>
           </div>
           :

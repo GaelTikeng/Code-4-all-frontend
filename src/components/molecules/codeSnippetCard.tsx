@@ -27,10 +27,10 @@ export default function CodeCard({ handleDetail, onClick, title, author, rating,
         />
       </div>
       <h2 className="text-sm  font-medium">{title}</h2>
-      <p className="text-xs text-gray-400">{author}</p>
+      <p className="text-xs text-gray-400">Author: {author}</p>
       {/* <Rating style={{maxWidth: 300}} className="font-sm" onChange={() => handleChange(rating)} value={state.rate} /> */}
       <div className="flex justify-between">
-        <p className="text-sm font-medium">{rating} stars</p>
+        {rating ? <p className="text-sm font-medium">{rating} ⭐</p> : ''}
         <h3 className="text-sm font-extrabold pb-2">{price} FCFA</h3>
       </div>
       <Button
