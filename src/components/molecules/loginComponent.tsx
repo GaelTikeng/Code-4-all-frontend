@@ -6,6 +6,7 @@ import Button from "../atoms/button";
 import { useRouter } from "next/navigation";
 import { loginFunction } from "@/utiles/service/queries";
 import GoogleBtn from "../atoms/googleButton";
+import GithubBtn from "../atoms/githubButton";
 
 type Props = {}
 
@@ -64,6 +65,7 @@ export default function LoginForm({ }: Props) {
       <h1 className="text-[#f94d1c] text-center text-xl font-semibold  pb-3">Log in your account</h1>
       <p className=" pb-4 text-center">Dont have an account?<Link href="/signup" className="text-blue-600">Signup now</Link></p>
       <GoogleBtn/>
+      <GithubBtn/>
       <div style={{ columnGap: "18px" }} className="flex mt-[18px] justify-between items-center font-sm ">
         <span className="block w-full h-[2px] bg-gray-300"></span>
         <span className="italic">OR</span>

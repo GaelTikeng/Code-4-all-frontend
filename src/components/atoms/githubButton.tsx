@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { auth } from "@/utiles/firebase/firebase";
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { signInWithPopup, GithubAuthProvider } from "firebase/auth";
 import { BASE_URL } from "@/utiles/service/constant";
 import { useRouter } from "next/navigation";
 
-const GoogleBtn = () => {
+const GithubBtn = () => {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
 
-  const googleAuth = new GoogleAuthProvider()
-  const handleGoogleSignin = async () => {
+  const githubAuth = new GithubAuthProvider()
+  const handleGithubSignin = async () => {
     setIsLoading(prev => !prev)
-    const result = await signInWithPopup(auth, googleAuth)
+    const result = await signInWithPopup(auth, githubAuth)
+    console.log(result)
     if (result) {
-      console.log(result)
+      console.log(result.user)
       setIsLoading(prev => !prev)
       await fetch(BASE_URL + "/users", {
         method: "POST",
@@ -40,27 +41,27 @@ const GoogleBtn = () => {
   }
 
   return (
-    <div className="">
+    <div className="py-1">
       <button
-        onClick={() => handleGoogleSignin()}
+        onClick={() => handleGithubSignin()}
         data-u
         className={
           isLoading
-            ? "hover:cursor-not-allowed flex border border-gray-300 w-full items-center rounded gap-3 px-[60px] m-auto"
+            ? "hover:cursor-not-allowed flex border border-gray-300 w-full items-center text-xs rounded gap-3 px-[60px] m-auto"
             : "flex border border-gray-300 hover:shadow items-center rounded  gap-3 w-full justify-center m-auto"
         }
       >
         <Image
-          height={40}
-          width={40}
+          height={30}
+          width={30}
           alt="google logo"
-          src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png"
+          src="https://cdn-icons-png.flaticon.com/512/25/25231.png"
         />
-        <p className="text-[15px]">{isLoading ? "Loading..." : "Google"}</p>
+        <p className="text-[15px]">{isLoading ? "Loading..." : "Github"}</p>
       </button>
 
     </div>
 
   )
 }
-export default GoogleBtn
+export default GithubBtn

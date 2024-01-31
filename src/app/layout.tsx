@@ -9,7 +9,7 @@ import { AppContextProvider } from './context/appContext';
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Code-4-all',
+  title: 'Code-4all',
   description: 'An code e-commenrce website',
 }
 

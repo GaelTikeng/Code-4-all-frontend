@@ -5,6 +5,7 @@ import Button from "../atoms/button";
 import { useRouter } from "next/navigation";
 import { signUp } from "@/utiles/service/queries";
 import GoogleBtn from "../atoms/googleButton";
+import GithubBtn from "../atoms/githubButton";
 
 type Props = {
   onClick: () => void,
@@ -59,6 +60,7 @@ export default function SignupFormb({onClick, handleClose }: Props) {
       <p className=" pb-4 text-center">Have an account?<span onClick={onClick} className="text-blue-600 hover:cursor-pointer">Log in now</span></p>
       
       <GoogleBtn/>
+      <GithubBtn/>
       <div style={{ columnGap: "18px" }} className="flex mt-[18px] justify-between items-center font-sm ">
         <span className="block w-full h-[2px] bg-gray-300"></span>
         <span className="italic font-mono">OR</span>
