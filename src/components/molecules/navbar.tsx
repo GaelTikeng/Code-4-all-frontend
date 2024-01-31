@@ -89,7 +89,7 @@ export default function Navbar() {
       <div className="flex gap-4 my-auto">
         <div className="my-auto">
           {snippets?.length ?
-            <div className="bg-red-500 text-center z-20 mt-[-10px] right-[100px] md:right-[124px] absolute  mb-2 h-5 text-[10px] w-5 p-1 rounded-full text-white">{snippets?.length}</div>
+            <div className="bg-red-500 text-center z-20 mt-[-10px] right-[60px] md:right-[235px] absolute  mb-2 h-5 text-[10px] w-5 p-1 rounded-full text-white">{snippets?.length}</div>
             : ""}
           <GiShoppingCart
             size="25"
