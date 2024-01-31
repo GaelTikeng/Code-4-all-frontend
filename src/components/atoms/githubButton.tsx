@@ -13,9 +13,9 @@ const GithubBtn = () => {
   const handleGithubSignin = async () => {
     setIsLoading(prev => !prev)
     const result = await signInWithPopup(auth, githubAuth)
-    console.log(result)
+    // console.log(result)
     if (result) {
-      console.log(result.user)
+      // console.log(result.user)
       setIsLoading(prev => !prev)
       await fetch(BASE_URL + "/users", {
         method: "POST",
@@ -31,7 +31,7 @@ const GithubBtn = () => {
         .then((response) => response.json())
         .then((data) => {
           localStorage.setItem("userObject", JSON.stringify(data));
-          console.log(data);
+          // console.log(data);
           router.push("/");
           setIsLoading(prev => !prev);
         }

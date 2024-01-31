@@ -28,7 +28,7 @@ export default function ReviewForm({ ID, giveStatus }: Props) {
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setIsLoading(prev => !prev)
-    console.log(ID)
+    // console.log(ID)
     const payload = {
       user_id: user?.id,
       code_id: ID,
@@ -37,7 +37,7 @@ export default function ReviewForm({ ID, giveStatus }: Props) {
     }
     await createReview(payload)
       .then((res) => {
-        console.log(res)
+        // console.log(res)
         giveStatus('true')
         setIsLoading(prev => !prev)
         toast.success("Review successfully posted", {

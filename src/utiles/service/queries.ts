@@ -103,7 +103,7 @@ export const getAllSnippets = async () => {
 
 // GET CODE SNIPPET BY ID
 export const getCodeById = async (id: string | undefined) => {
-  console.log('from fxn', id)
+  // console.log('from fxn', id)
   try {
     const response = await fetch(
       BASE_URL + `/code/${id}`,
@@ -124,7 +124,7 @@ export const getCodeById = async (id: string | undefined) => {
 
 // DUPLICATE Did this duplicate bcz of types was disturbing
 export const findCodeById = async (id: string | string[]) => {
-  console.log('from fxn', id)
+  // console.log('from fxn', id)
   try {
     const response = await fetch(
       BASE_URL + `/code/${id}`,

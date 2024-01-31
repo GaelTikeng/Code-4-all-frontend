@@ -37,11 +37,11 @@ export default function Home() {
     setAllClicked(false)
     await findCodeByCategory(cat)
       .then((res) => {
-        console.log('code by category', res)
+        // console.log('code by category', res)
         setAllCode(res)
       })
       .catch((error) => {
-        console.log(error)
+        // console.log(error)
       })
   }
 
@@ -50,12 +50,12 @@ export default function Home() {
     setAllClicked(true)
     getAllSnippets()
       .then((res) => {
-        console.log("all codes", res)
+        // console.log("all codes", res)
         setAllCode(res)
         setIsLoading(prev => !prev)
       })
       .catch((err) => {
-        console.log(err)
+        // console.log(err)
       })
   }
 

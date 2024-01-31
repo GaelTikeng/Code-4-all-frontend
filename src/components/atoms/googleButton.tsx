@@ -14,7 +14,7 @@ const GoogleBtn = () => {
     setIsLoading(prev => !prev)
     const result = await signInWithPopup(auth, googleAuth)
     if (result) {
-      console.log(result)
+      // console.log(result)
       setIsLoading(prev => !prev)
       await fetch(BASE_URL + "/users", {
         method: "POST",
@@ -30,7 +30,7 @@ const GoogleBtn = () => {
         .then((response) => response.json())
         .then((data) => {
           localStorage.setItem("userObject", JSON.stringify(data));
-          console.log(data);
+          // console.log(data);
           router.push("/");
           setIsLoading(prev => !prev);
         }

@@ -21,7 +21,7 @@ const UploadedCode = ({ className, uploaded }: Props) => {
     }
   )
 
-  console.log('from component', uploaded)
+  // console.log('from component', uploaded)
 
 
   return (

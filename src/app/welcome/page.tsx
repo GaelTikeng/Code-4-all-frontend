@@ -30,7 +30,7 @@ const Signupb = () => {
       .then((response) => response.json())
       .then((data) => {
         localStorage.setItem("userObject", JSON.stringify(data));
-        console.log(data);
+        // console.log(data);
         setSuccess(`Welcome ${data.name} 🙂`);
         router.push("/dashboard");
         setIsLoading(prev => !prev);

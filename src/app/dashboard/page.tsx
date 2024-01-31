@@ -90,7 +90,7 @@ export default function Dashboard() {
       .then((data) => {
         setTransactionData(data)
         setLoading(prev => !prev)
-        console.log('these are purchases', data)
+        // console.log('these are purchases', data)
       })
       .catch((error) => {
         console.log('Un able to fetch purchases', error)
@@ -101,7 +101,7 @@ export default function Dashboard() {
       .then((res) => {
         setUploads(res)
         setIsLoading(prev => !prev)
-        console.log('these are uploaded cources', res)
+        // console.log('these are uploaded cources', res)
       })
 
   }, [user?.id])
@@ -109,7 +109,7 @@ export default function Dashboard() {
   const handleReview = (id: string) => {
     setPopupActive(prev => !prev)
     setId(id)
-    console.log(id)
+    // console.log(id)
   }
 
   return (
