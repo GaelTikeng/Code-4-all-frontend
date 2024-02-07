@@ -4,7 +4,7 @@ import Mail from 'nodemailer/lib/mailer';
 
 export async function POST(request: NextRequest) {
   const { email, name, file } = await request.json();
-  console.log("payload from route", email, name, file)
+  // console.log("payload from route", email, name, file)
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     // providerauth: {user: process.env.MY_EMAIL},
@@ -26,10 +26,10 @@ export async function POST(request: NextRequest) {
     new Promise<string>((resolve, reject) => {
       transporter.sendMail(mailOptions, function (err) {
         if (!err) {
-          console.log('email sent')
+          // console.log('email sent')
           resolve('Email sent');
         } else {
-          console.log('an error occured', err.message)
+          // console.log('an error occured', err.message)
           reject(err.message);
         }
       });
@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
     await sendMailPromise();
     return NextResponse.json({ message: 'Email sent' });
   } catch (err) {
-    console.log('from route', err)
+    // console.log('from route', err)
     return NextResponse.json({ error: err }, { status: 500 });
   }
 }

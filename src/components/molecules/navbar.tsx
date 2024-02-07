@@ -10,7 +10,6 @@ import DropdownModal from "../atoms/dropDownModal";
 import { CiSearch } from "react-icons/ci";
 import { Code } from "../../../types";
 
-
 export default function Navbar() {
   const router = useRouter()
   const [showDropDown, setShowDropDown] = useState<Boolean>(false)
@@ -83,14 +82,14 @@ export default function Navbar() {
           type="text"
           placeholder="search..."
           className="w-full  outline-none bg-transparent"
-          
+
         />
       </div>
 
       <div className="flex gap-4 my-auto">
         <div className="my-auto">
           {snippets?.length ?
-            <div className="bg-red-500 text-center z-20 mt-[-10px] right-[100px] md:right-[124px] absolute  mb-2 h-5 text-[10px] w-5 p-1 rounded-full text-white">{snippets?.length}</div>
+            <div className="bg-red-500 text-center z-20 mt-[-10px] right-[60px] md:right-[265px] absolute  mb-2 h-5 text-[10px] w-5 p-1 rounded-full text-white">{snippets?.length}</div>
             : ""}
           <GiShoppingCart
             size="25"

@@ -93,7 +93,7 @@ export default function CheckoutPage() {
         total_amount: totalPrice(snippets),
         buyer_id: user?.id
       }).then((res) => {
-        console.log(res)
+        // console.log(res)
         localStorage.setItem('purchases', JSON.stringify(res))
         setLoading(prev => !prev)
         setPopupActive((prev) => !prev)
@@ -105,7 +105,7 @@ export default function CheckoutPage() {
           file: files
         })
           .then((res) => {
-            console.log('response from fxn', res)
+            // console.log('response from fxn', res)
           })
           .catch((err) => {
             console.log('this is error', err)

@@ -29,9 +29,9 @@ export default function SignupForm({ }: Props) {
         password: password
       }).then((data) => {
         localStorage.setItem('userObject', JSON.stringify(data))
-        console.log(data);
+        // console.log(data);
         setSuccess(`Welcome ${data.name} 🙂`);
-        router.push("/dashboard");
+        router.push("/");
         setIsLoading(false);
       }).catch((error) => {
         console.log(error)

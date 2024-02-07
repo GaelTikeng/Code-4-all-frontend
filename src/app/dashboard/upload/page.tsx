@@ -46,10 +46,10 @@ const Page = () => {
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setIsLoading(prev => !prev)
-    console.log("description", formData.description)
-    console.log('form data', formData)
+    // console.log("description", formData.description)
+    // console.log('form data', formData)
     const data = new FormData(event.currentTarget)
-    console.log(data)
+    // console.log(data)
 
     if (file) {
       const res = await edgestore.publicFiles.upload({
@@ -69,7 +69,7 @@ const Page = () => {
         category: category
       })
         .then((data) => {
-          console.log(data)
+          // console.log(data)
           setIsLoading(prev => !prev)
           toast.success("Code snippet uploaded successfully", {
             position: toast.POSITION.TOP_RIGHT,

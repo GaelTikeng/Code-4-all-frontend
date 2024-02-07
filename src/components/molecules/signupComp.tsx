@@ -31,7 +31,7 @@ export default function SignupFormb({onClick, handleClose }: Props) {
         password: password
       }).then((data) => {
         localStorage.setItem('userObject', JSON.stringify(data))
-        console.log(data);
+        // console.log(data);
         router.push("/cart");
         handleClose()
         setIsLoading(false);

@@ -31,7 +31,7 @@ export default function LoginForm({ }: Props) {
       setMessage('')
       await loginFunction(credential)
         .then((res) => {
-          console.log(res)
+          // console.log(res)
           if (res.error) {
             setMessage("Invalid email or password")
             setIsLoading(false)
@@ -40,7 +40,7 @@ export default function LoginForm({ }: Props) {
             setMessage('')
             setSuccess('Welcome back')
             setIsLoading((prev) => !prev)
-            router.push('/dashboard')
+            router.push('/')
           }
         })
         .catch((error) => {

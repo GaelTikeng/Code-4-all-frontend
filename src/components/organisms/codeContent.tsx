@@ -7,7 +7,6 @@ import { IoMdClose } from "react-icons/io";
 import CartPopup from "./cartPopup";
 import { useRouter, useParams } from "next/navigation";
 import CodeCard from "../molecules/codeSnippetCard";
-import { SearchParamsContext } from "next/dist/shared/lib/hooks-client-context.shared-runtime";
 import PaginationControler from "../molecules/pagination";
 import { useAppContext } from "@/app/context/appContext";
 
