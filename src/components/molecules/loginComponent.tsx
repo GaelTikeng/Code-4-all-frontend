@@ -18,9 +18,7 @@ export default function LoginForm({ }: Props) {
   const [password, setPassword] = useState<String>('')
   const [message, setMessage] = useState<String>('')
 
-  const handleClick = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-
+  const handleClick = async () => {
     const credential: any = {
       email: email,
       password: password
@@ -92,7 +90,7 @@ export default function LoginForm({ }: Props) {
           color="bg-[#f94d1c]"
           text="text-white"
           borderColor="border-gray-300"
-          onClick={() => handleClick(e)}
+          onClick={() => handleClick()}
         />
       </form>
     </div>
