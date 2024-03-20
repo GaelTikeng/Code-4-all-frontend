@@ -21,7 +21,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-white" suppressHydrationWarning={true}>
-
         <ToastContainer />
         <EdgeStoreProvider>
           <AppContextProvider>{children}</AppContextProvider>
