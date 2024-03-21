@@ -32,7 +32,6 @@ const links = [
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
-  const paramName = pathname.split("/").slice(-1)[0];
   const router = useRouter()
   const [active, setActive] = useState<Boolean>(false)
   const [disconnect, setDisconnect] = useState<Boolean>(false)
@@ -46,7 +45,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       return null;
     }
   )
-
   const list = [
     {
       label: "Dashboard",
@@ -56,7 +54,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       }
     },
     {
-      label: "Disconnect",
+      label: "Logout",
       function: () => {
         setDisconnect(!disconnect)
         localStorage.removeItem('userObject')
@@ -94,7 +92,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               <Link
                 key={index}
                 href={link.path}
-                className={`px-9 py-4 flex items-center gap-2 hover:bg-white ${link.path === paramName ? " bg-white border-l-2 border-[#F94D1D]" : ""} hover:border-l-2 duration-5 border-[#F94D1D]`}
+                className={`px-9 py-4 flex items-center gap-2 hover:bg-white ${link.path === pathname ? " bg-white border-l-2 border-[#F94D1D]" : ""} hover:border-l-2 duration-5 border-[#F94D1D]`}
               >
                 <p className="flex-1 flex gap-2">
                   {link.icon}
@@ -120,9 +118,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               className="md:hidden"
               onClick={() => {
                 setActive((prev) => !prev);
-                // setTimeout(() => {
-                //   setActive((prev) => !prev);
-                // }, 10000);
               }}
             />
             <div
