@@ -3,7 +3,6 @@ import Navbar2 from "@/components/molecules/navbar2";
 import Footer from "@/components/organisms/footer";
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import CodeDetails from "@/components/organisms/reviewCart";
 import { Code, Review } from "../../../../types";
 import { findCodeById, getReviewByCodeId } from "@/utiles/service/queries";
 import Image from "next/image";
@@ -31,21 +30,11 @@ function DetailPage() {
       .then((res) => {
         console.log("all review", res)
         setReviews(res)
-        setIsLoading(prev => !prev)
+        setIsLoading((prev: Boolean) => !prev)
       })
-      .then((error) => [
+      .catch((error) => {
         console.log(error)
-      ])
-
-    // await findCodeById(id)
-    //   .then((res) => {
-    //     console.log('this is code detail', res)
-    //     setCodeDetail(res)
-    //     setLoading(prev => !prev)
-    //   })
-    //   .catch((error) => {
-    //     console.log("error while fetching code object", error)
-    //   })
+      })
   }
 
   const codeDetails = allCode.find((item) => item.id === param.id)
