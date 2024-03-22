@@ -13,6 +13,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { FaFileUpload } from "react-icons/fa";
 import DropdownModal from "@/components/atoms/dropDownModal";
 import { AiOutlineMenu } from "react-icons/ai";
+import { FaChevronRight } from "react-icons/fa6";
 import MenuItem from "@/components/molecules/menuItem";
 
 
@@ -93,11 +94,13 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               <Link
                 key={index}
                 href={link.path}
-                className={`px-9 py-2 flex items-center gap-2 hover:bg-white ${link.path === paramName ? " bg-white border-l-2 border-[#F94D1D]" : ""} hover:border-l-2 duration-5 border-[#F94D1D]`}
+                className={`px-9 py-4 flex items-center gap-2 hover:bg-white ${link.path === paramName ? " bg-white border-l-2 border-[#F94D1D]" : ""} hover:border-l-2 duration-5 border-[#F94D1D]`}
               >
-                {" "}
-                {link.icon}
-                {link.name}
+                <p className="flex-1 flex gap-2">
+                  {link.icon}
+                  {link.name}
+                </p>
+                <FaChevronRight className="text-[#F94D1D]" />
               </Link>
             ))}
           </div>

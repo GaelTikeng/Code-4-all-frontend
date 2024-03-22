@@ -74,7 +74,7 @@ export const createCode = async (code: {
   code_file: string,
   programming_language: string,
   category: string,
-
+  thumbnail: string
 }) => {
   return await apiCall.POST(BASE_URL + "/code", code)
 }
@@ -124,7 +124,6 @@ export const getCodeById = async (id: string | undefined) => {
 
 // DUPLICATE Did this duplicate bcz of types was disturbing
 export const findCodeById = async (id: string | string[]) => {
-  // console.log('from fxn', id)
   try {
     const response = await fetch(
       BASE_URL + `/code/${id}`,
