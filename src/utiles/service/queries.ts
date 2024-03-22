@@ -74,7 +74,7 @@ export const createCode = async (code: {
   code_file: string,
   programming_language: string,
   category: string,
-  thumbnail: string
+  thumbnail: string | null
 }) => {
   return await apiCall.POST(BASE_URL + "/code", code)
 }
