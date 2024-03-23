@@ -4,6 +4,7 @@ import { auth } from "@/utiles/firebase/firebase";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { BASE_URL } from "@/utiles/service/constant";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 const GoogleBtn = () => {
   const router = useRouter()
@@ -32,6 +33,12 @@ const GoogleBtn = () => {
           localStorage.setItem("userObject", JSON.stringify(data));
           // console.log(data);
           router.push("/");
+          toast.success("Enjoy Code-4-all 😀", {
+            position: "top-right",
+            theme: "dark",
+            hideProgressBar: true,
+            autoClose: 3000
+          })
           setIsLoading(prev => !prev);
         }
         );

@@ -69,7 +69,7 @@ export default function Navbar2({ setSearch }: Props) {
       }
     },
     {
-      label: "Disconnect",
+      label: "Logout",
       function: () => {
         setDisconnect(!disconnect)
         localStorage.clear()

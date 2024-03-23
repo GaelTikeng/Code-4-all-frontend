@@ -1,7 +1,7 @@
 "use client"
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import Button from "../atoms/button";
 import { useRouter } from "next/navigation";
 import { loginFunction } from "@/utiles/service/queries";
@@ -19,8 +19,6 @@ export default function LoginForm({ }: Props) {
   const [message, setMessage] = useState<String>('')
 
   const handleClick = async () => {
-
-
     const credential: any = {
       email: email,
       password: password
@@ -71,7 +69,7 @@ export default function LoginForm({ }: Props) {
         <span className="italic">OR</span>
         <span className="block w-full h-[2px] bg-gray-300"></span>
       </div>
-      <div className="flex flex-col gap-4">
+      <form onSubmit={handleClick} className="flex flex-col gap-4">
         {message ? <p className="bg-red-300 text-center w-full py-3 text-xs">{message}</p> : ""}
         {success ? <p className="bg-green-300 text-center py-3text-xs w-full">{success}</p> : ""}
         <input
@@ -94,7 +92,7 @@ export default function LoginForm({ }: Props) {
           borderColor="border-gray-300"
           onClick={() => handleClick()}
         />
-      </div>
+      </form>
     </div>
   )
 }
