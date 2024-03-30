@@ -1,10 +1,9 @@
-"use client"
+"use client";
 import React from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { IoMdClose, IoMdLock } from "react-icons/io";
 import { totalPrice } from "@/utiles/calculateTotalPriceFunction";
-// import { allCode } from '@/components/organisms/codeContent';
 import Overlay from "@/components/atoms/overlay";
 import { Code, User } from "../../../types";
 import PaidCourse from "@/components/molecules/paidCode";
@@ -22,38 +21,36 @@ export default function CheckoutPage() {
   const [snippets, setSnippets] = React.useState<Code[] | undefined>(
     (): Code[] | undefined => {
       if (typeof localStorage !== "undefined") {
-        const fromLocalStorage = JSON.parse(localStorage.getItem("codeArray") as string) || [];
+        const fromLocalStorage =
+          JSON.parse(localStorage.getItem("codeArray") as string) || [];
         if (fromLocalStorage) return fromLocalStorage;
       }
       return undefined;
     }
-  )
+  );
   // const snippets = JSON.parse(localStorage.getItem("codeArray") || "[]")
-  const [user, setUser] = React.useState<User | null>(
-    (): User | null => {
-      if (typeof localStorage !== "undefined") {
-        const fromLocalStorage =
-          JSON.parse(localStorage.getItem("userObject") as string) || {};
-        if (fromLocalStorage) return fromLocalStorage;
-      }
-      return null;
+  const [user, setUser] = React.useState<User | null>((): User | null => {
+    if (typeof localStorage !== "undefined") {
+      const fromLocalStorage =
+        JSON.parse(localStorage.getItem("userObject") as string) || {};
+      if (fromLocalStorage) return fromLocalStorage;
     }
-  )
+    return null;
+  });
   const [popupActive, setPopupActive] = React.useState(false);
 
-  const codeIds: string[] | undefined = []
-  const files: string[] = []
+  const codeIds: string[] | undefined = [];
+  const files: string[] = [];
 
-  const potentialBoughtourses = snippets?.map(
-    (course: Code) => (
-      <PaidCourse
-        title={course.title}
-        price={course.price}
-        author={course.user.name}
-        key={course.id}
-      />
-    )
-  );
+  const potentialBoughtourses = snippets?.map((course: Code) => (
+    <PaidCourse
+      title={course.title}
+      price={course.price}
+      author={course.user.name}
+      imageSrc={course.thumbnail}
+      key={course.id}
+    />
+  ));
 
   const handleCart = () => {
     setCartActive((prev) => !prev);
@@ -61,7 +58,7 @@ export default function CheckoutPage() {
   };
 
   function handleClick(): void {
-    router.push('/')
+    router.push("/");
   }
 
   const handleCheckout = () => {
@@ -76,59 +73,55 @@ export default function CheckoutPage() {
   };
 
   const handlePayment = async () => {
-    snippets?.map((i: { id: string; }) => (
-      codeIds.push(i.id)
-    ))
+    snippets?.map((i: { id: string }) => codeIds.push(i.id));
 
-    snippets?.map((i: any) => (
-      files.push(i.code_file)
-    ))
+    snippets?.map((i: any) => files.push(i.code_file));
 
     if (email && name) {
-      setLoading(true)
+      setLoading(true);
       await createPurchase({
         code_id: codeIds,
         // code_id: snippets[0]?.id,
         quantity: snippets?.length,
         total_amount: totalPrice(snippets),
-        buyer_id: user?.id
-      }).then((res) => {
-        // console.log(res)
-        localStorage.setItem('purchases', JSON.stringify(res))
-        setLoading(prev => !prev)
-        setPopupActive((prev) => !prev)
-        
-        // send mail
-        sendEmail({
-          name: name,
-          email: email,
-          file: files
-        })
-          .then((res) => {
-            // console.log('response from fxn', res)
-          })
-          .catch((err) => {
-            console.log('this is error', err)
-          });
+        buyer_id: user?.id,
       })
-        .catch((error) => {
-          console.log('error while purchasing', error)
+        .then((res) => {
+          // console.log(res)
+          localStorage.setItem("purchases", JSON.stringify(res));
+          setLoading((prev) => !prev);
+          setPopupActive((prev) => !prev);
+
+          // send mail
+          sendEmail({
+            name: name,
+            email: email,
+            file: files,
+          })
+            .then((res) => {
+              // console.log('response from fxn', res)
+            })
+            .catch((err) => {
+              console.log("this is error", err);
+            });
         })
-  
-      
+        .catch((error) => {
+          console.log("error while purchasing", error);
+        });
     } else {
-      setCartActive(prev => !prev)
+      setCartActive((prev) => !prev);
     }
-  }
+  };
 
   return (
     <div>
       <div className="flex justify-between shadow-md py-4 md:px-[80px] px-[20px]">
         <div
           onClick={() => {
-            router.push("/")
+            router.push("/");
           }}
-          className="text-2xl hover:cursor-pointer my-auto">
+          className="text-2xl hover:cursor-pointer my-auto"
+        >
           <Image
             src="/code4all.png"
             alt="logo"
@@ -270,8 +263,7 @@ export default function CheckoutPage() {
                     className="border px-4 py-3 w-full"
                     onChange={(e) => setEmail(e.target.value)}
                   />
-                  <div className="flex gap-2 pb-5">
-                  </div>
+                  <div className="flex gap-2 pb-5"></div>
                   <div className="flex gap-2">
                     <input type="checkbox" className="w-4 border" />
                     <span>Securely save this cart for my later purchase</span>
@@ -300,14 +292,16 @@ export default function CheckoutPage() {
               <span>{totalPrice(snippets)} FCFA</span>
             </div>
 
-            {loading ?
-              <RequestLoader /> :
+            {loading ? (
+              <RequestLoader />
+            ) : (
               <button
                 onClick={() => handlePayment()}
                 className="py-4 bg-[#f94d1c] hover:shadow-xl font-semibold text-white w-full"
               >
                 Complete checkout
-              </button>}
+              </button>
+            )}
             {popupActive && (
               <>
                 <Overlay
@@ -317,12 +311,17 @@ export default function CheckoutPage() {
                 <div className="fixed h-[50vh] z-[80] bg-white  flex gap-5 flex-col top-[15%] w-[100%] md:left-[33%] shadow-md p-4 md:w-[550px] m-auto mobile:max-sm:w-[90vw] mobile:max-sm:left-2 mobile:max-sm:right-2">
                   <span
                     className=" mr-0 cursor-pointer hover:bg-gray-300 rounded-full w-fit "
-                    onClick={() => setPopupActive((prev) => !prev)}><IoMdClose /></span>
+                    onClick={() => setPopupActive((prev) => !prev)}
+                  >
+                    <IoMdClose />
+                  </span>
 
                   <h1 className="py-4 md:py-6 font-semibold text-2xl md:text-4xl leading-normal">
                     🎉 Thanks for purchasing🎉
                   </h1>
-                  <p className="text-center">Checkout your email address to download code snippet</p>
+                  <p className="text-center">
+                    Checkout your email address to download code snippet
+                  </p>
                   <button
                     onClick={() => handleCheckout()}
                     className="p-4 bg-[#f94d1c] hover:shadow-lg  text-white m-auto w-fit flex justify-center"
@@ -335,7 +334,6 @@ export default function CheckoutPage() {
           </div>
         </div>
       </div>
-
     </div>
-  )
+  );
 }

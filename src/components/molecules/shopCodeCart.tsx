@@ -6,11 +6,12 @@ type Props = {
   price: number,
   title: string,
   author: string,
+  imageSrc?: string,
   rating: number,
   onClick?: () => void
 }
 
-export default function ShopCodeCart({ onClick, title, price, author, rating }: Props) {
+export default function ShopCodeCart({ onClick, imageSrc, title, price, author, rating }: Props) {
 
 
   return (
@@ -20,7 +21,7 @@ export default function ShopCodeCart({ onClick, title, price, author, rating }: 
       
       <div className='flex gap-4'>
         <Image
-          src="https://www.mymcpl.org/sites/default/files/2022-07/What%20Is%20a%20Zip%20File.jpg"
+          src={imageSrc || "https://www.mymcpl.org/sites/default/files/2022-07/What%20Is%20a%20Zip%20File.jpg"}
           alt='zip file'
           className="border shadow hover:cursor-pointer"
           width={100}
@@ -29,7 +30,7 @@ export default function ShopCodeCart({ onClick, title, price, author, rating }: 
         />
         <div className=' leadding-loose'>
           <h2 className="text-lg  font-medium">{title}</h2>
-          <p className="text-xs ">By {author}</p>
+          <p className="text-xs text-gray-400">By {author}</p>
           <p className="text-sm font-medium">{rating} stars</p>
         </div>
       </div>

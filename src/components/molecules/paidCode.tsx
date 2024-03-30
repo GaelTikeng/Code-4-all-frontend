@@ -5,19 +5,21 @@ type Props = {
   title?: string;
   author?: string;
   price: number | undefined,
-  rating?: number | undefined
+  rating?: number | undefined,
+  imageSrc?: string
 };
 
 const PaidCourse = ({
   title,
   author,
   price,
-  rating
+  rating,
+  imageSrc
 }: Props): React.JSX.Element => {
   return (
     <div className=" gap-4 my-2 flex w-full justify-start">
       <Image
-        src="https://www.mymcpl.org/sites/default/files/2022-07/What%20Is%20a%20Zip%20File.jpg"
+        src={imageSrc || "https://www.mymcpl.org/sites/default/files/2022-07/What%20Is%20a%20Zip%20File.jpg"}
         alt='zip file'
         className="border shadow hover:cursor-pointer"
         width={60}

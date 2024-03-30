@@ -3,6 +3,7 @@ import React from "react";
 import Button from "../atoms/button";
 
 type Props = {
+  imageSrc?: string
   title: string | undefined,
   author?: string | undefined,
   rating: number | undefined
@@ -11,14 +12,14 @@ type Props = {
   handleDetail?: () => void
 }
 
-export default function CodeCard({ handleDetail, onClick, title, author, rating, price }: Props) {
+export default function CodeCard({ handleDetail, onClick, imageSrc, title, author, rating, price }: Props) {
 
 
   return (
     <div className=" max-w-[170px] shadow-lg">
       <div onClick={handleDetail}>
         <Image
-          src="https://www.mymcpl.org/sites/default/files/2022-07/What%20Is%20a%20Zip%20File.jpg"
+          src={imageSrc || "https://www.mymcpl.org/sites/default/files/2022-07/What%20Is%20a%20Zip%20File.jpg"}
           alt="zip file image"
           className="border shadow hover:cursor-pointer"
           width={170}

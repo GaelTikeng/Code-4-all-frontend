@@ -10,7 +10,7 @@ type Props = {
 
 export default function CommentCart({ onClick, createdAt, comment, name }: Props) {
   return (
-    <div className="bg-white py-5 max-w-[300px] leading-loose m-4 shadow">
+    <div className="bg-white h-fit py-5 max-w-[300px] leading-loose m-4 shadow">
       <div className="flex justify-center py-4">
         <Image
           src="https://cdn-icons-png.flaticon.com/512/6596/6596121.png"

@@ -24,6 +24,7 @@ type Code = {
   programming_language: string,
   category: string,
   rating: number,
+  thumbnail: string
   author: string,
   createdAt: string,
   user: {

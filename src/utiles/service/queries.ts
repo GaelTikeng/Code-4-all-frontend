@@ -74,7 +74,7 @@ export const createCode = async (code: {
   code_file: string,
   programming_language: string,
   category: string,
-  thumbnail: string | null
+  thumbnail?: string | null
 }) => {
   return await apiCall.POST(BASE_URL + "/code", code)
 }
@@ -143,8 +143,8 @@ export const findCodeById = async (id: string | string[]) => {
 }
 
 // DELETE CODE SNIPPET
-export const deleteCode = async (id: string, author_id: string) => {
-  return await apiCall.DELETE(BASE_URL + `/code/${id}/${author_id}`)
+export const deleteCode = async (code_id: string, author_id: string) => {
+  return await apiCall.DELETE(BASE_URL + `/code/${code_id}/${author_id}`)
 }
 
 // GET CODE SNIPPET PER USER/AUTHOR
