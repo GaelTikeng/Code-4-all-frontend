@@ -68,22 +68,26 @@ export default function SignupFormb({onClick, handleClose }: Props) {
       </div>
       <div className="flex flex-col gap-4">
         <input
+          name="name"
           type="text"
           placeholder="Name"
           className="border rounded border-gray-300 px-3 w-full"
           onChange={(e) => setName(e.target.value)}
         />
         <input
-          type="text"
+          type="email"
+          name="email"
           placeholder="Email"
           className="border rounded border-gray-300 px-3 w-full"
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
           type="password"
+          name="password"
           placeholder="Password"
           className="border rounded border-gray-300 px-3 w-full"
           onChange={(e) => setPassword(e.target.value)}
+          required
         />
         {error ? <p className="text-red-500">{error}</p> : ""}
         <Button

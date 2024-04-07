@@ -73,13 +73,15 @@ export default function LoginForm({ }: Props) {
         {message ? <p className="bg-red-300 text-center w-full py-3 text-xs">{message}</p> : ""}
         {success ? <p className="bg-green-300 text-center py-3text-xs w-full">{success}</p> : ""}
         <input
-          type="text"
+          type="email"
           placeholder="Email"
+          name="email"
           className="border rounded border-gray-300 px-3 w-full"
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
           type="password"
+          name="password"
           placeholder="Password"
           className="border rounded border-gray-300 px-3 w-full"
           onChange={(e) => setPassword(e.target.value)}

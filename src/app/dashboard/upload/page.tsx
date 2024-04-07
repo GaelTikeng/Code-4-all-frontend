@@ -92,30 +92,13 @@ const Page = () => {
     event.preventDefault();
     setIsLoading((prev) => !prev);
     console.log("form data", formData);
-    // const data = new FormData(event.currentTarget)
-    // console.log(data)
 
+    // UPLOAD CODEFILE AND THUMBNAIL RO CLOUDINARY
     const uploadedfile = await codeFileUpload(localCodeFile);
     console.log("uploaded file from cloudianry", uploadedfile);
     const uploadedThumbnail = await imageUpload(imageSrc)
     console.log('uploaded Image from cloudinanry', uploadedThumbnail)
     if (uploadedfile && uploadedThumbnail) {
-      // const res = await edgestore.publicFiles.upload({
-      //   file,
-      //   onProgressChange: (progress) => {
-      //     setProgress(progress)
-      //   }
-      // })
-      // const uploadedImage = await edgestore.myPublicImages.upload({
-      //   localCodeFile,
-      //   onProgressChange: (progress) => {
-      //     setFileProgress(progress) 
-      //   }
-      // })
-      // setUrls({
-      //   imageUrl: uploadedImage.url,
-      //   thumbnailUrl: uploadedImage?.thumbnailUrl
-      // })
 
       // POST REQUEST TO THE DATABASE
       await createCode({
@@ -199,7 +182,7 @@ const Page = () => {
             <option value="Backend">Backend</option>
           </select>
         </div>
-
+        
         <div className="flex text-gray-700 flex-col pb-4">
           <label htmlFor="frm-phone" className="py-2">
             Price in FCFA<span className="text-red-500">*</span>
@@ -222,19 +205,6 @@ const Page = () => {
             setData(data);
           }}
         />
-        {/* <div className="flex flex-col pb-4">
-          <label htmlFor="frm-first">Upload file<span className="text-red-500">*</span></label>
-          <input
-            className="border-1 p-1 px-3"
-            type="file"
-            name="file"
-            // accept="image/jpg, image/png"
-            // required
-            onChange={(event) => {
-              setFile(event.target.files?.[0])
-            }}
-          />
-        </div> */}
 
         {/* FILE UPLOAD DRAG & DROP */}
         <div className="md:flex my-4 justify-between mx-auto ">

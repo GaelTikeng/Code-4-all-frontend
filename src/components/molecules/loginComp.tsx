@@ -75,13 +75,15 @@ export default function LoginFormb({ handleClose, onClick }: Props) {
         {message ? <p className="bg-red-300 w-full text-center py-3 text-xs">{message}</p> : ""}
         {success ? <p className="bg-green-300 text-center py-3text-xs w-full">{success}</p> : ""}
         <input
-          type="text"
+          type="email"
+          name="email"
           placeholder="Email"
           className="border rounded border-gray-300 px-3 w-full"
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
           type="password"
+          name="password"
           placeholder="Password"
           className="border rounded border-gray-300 px-3 w-full"
           onChange={(e) => setPassword(e.target.value)}

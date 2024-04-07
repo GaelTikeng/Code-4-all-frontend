@@ -109,7 +109,7 @@ export default function CheckoutPage() {
           console.log("error while purchasing", error);
         });
     } else {
-      setCartActive((prev) => !prev);
+      setCartActive(true);
     }
   };
 
@@ -243,23 +243,25 @@ export default function CheckoutPage() {
                 <hr className={cartActive ? "flex" : "hidden"} />
                 <div className={cartActive ? "w-full px-5 py-5" : "hidden"}>
                   <div className="flex justify-between py-2">
-                    <label className="font-bold">Name on cart</label>
+                    <label htmlFor=" cart name" className="font-bold">Name on cart</label>
                   </div>
 
                   <input
                     className="border border-gray2 px-4 py-2 w-full"
                     placeholder="name on cart"
                     type="text"
+                    name="cart name"
                     onChange={(e) => setName(e.target.value)}
                   />
 
                   <div className="flex justify-between py-2">
-                    <label className="font-bold">Email address</label>
+                    <label htmlFor="email" className="font-bold">Email address</label>
                     <span className="text-sm text-gray2">Required</span>
                   </div>
                   <input
                     required
-                    type="text"
+                    name="email"
+                    type="email"
                     className="border px-4 py-3 w-full"
                     onChange={(e) => setEmail(e.target.value)}
                   />

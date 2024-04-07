@@ -83,7 +83,7 @@ const UploadedCode = ({ className, uploaded, handleDelete }: Props) => {
                   <AiFillDelete 
                     size={25}
                     onClick={() => handleDelete(item.id)}
-                    className="hover:cursor-pointer text-red-500"
+                    className="hover:cursor-pointer text-[#f94d1c]"
                   />
                 </td>
               </tr>
