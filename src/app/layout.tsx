@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Code-4all',
-  description: 'An code e-commenrce website',
+  description: 'A code e-commenrce website',
 }
 
 export default function RootLayout({
@@ -21,7 +21,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-white" suppressHydrationWarning={true}>
-
         <ToastContainer />
         <EdgeStoreProvider>
           <AppContextProvider>{children}</AppContextProvider>

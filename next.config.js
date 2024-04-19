@@ -10,6 +10,9 @@ module.exports = {
         hostname: "www.ekreative.com",
       },
       {
+        hostname: "res.cloudinary.com",
+      },
+      {
         hostname: "www.mymcpl.org",
       },
       {

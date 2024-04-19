@@ -2,14 +2,18 @@ import { getPurchasesPerBuyer } from "@/utiles/service/queries";
 import React, { useEffect } from "react";
 import { Code, Purchase, User } from "../../../types";
 import Loader from "../atoms/loader";
+import { RiFileEditLine } from "react-icons/ri";
+import { AiFillDelete } from "react-icons/ai";
 
 
 type Props = {
   className?: string,
-  uploaded: Code[]
+  uploaded: Code[],
+  handleDelete: (id: string) => void,
+  // handleEdit: (id: string) => void
 }
 
-const UploadedCode = ({ className, uploaded }: Props) => {
+const UploadedCode = ({ className, uploaded, handleDelete }: Props) => {
   const [user, setUser] = React.useState<User | null>(
     (): User | null => {
       if (typeof localStorage !== "undefined") {
@@ -21,7 +25,9 @@ const UploadedCode = ({ className, uploaded }: Props) => {
     }
   )
 
-  // console.log('from component', uploaded)
+  const handleEdit = (id: string) => {
+    console.log(id)
+  }
 
 
   return (
@@ -48,6 +54,9 @@ const UploadedCode = ({ className, uploaded }: Props) => {
               <th scope="col" className="px-6 py-3">
                 Price
               </th>
+              <th scope="col" className="px-6 py-3">
+                Action
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -65,6 +74,18 @@ const UploadedCode = ({ className, uploaded }: Props) => {
                 <td className="px-6 py-4">{item.createdAt.slice(0, 10)}</td>
                 <td className="px-6 py-4">{item.rating}</td>
                 <td className="px-6 py-4">{item.price} FCFA</td>
+                <td className="px-6 py-4 flex gap-3">
+                  <RiFileEditLine
+                    size={25}
+                    className="hover:cursor-pointer"
+                    onClick={() => handleEdit(item.id)}
+                  />
+                  <AiFillDelete 
+                    size={25}
+                    onClick={() => handleDelete(item.id)}
+                    className="hover:cursor-pointer text-[#f94d1c]"
+                  />
+                </td>
               </tr>
             ))
               :

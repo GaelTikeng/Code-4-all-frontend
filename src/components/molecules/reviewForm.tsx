@@ -41,7 +41,7 @@ export default function ReviewForm({ ID, giveStatus }: Props) {
         giveStatus('true')
         setIsLoading(prev => !prev)
         toast.success("Review successfully posted", {
-          position: toast.POSITION.TOP_RIGHT,
+          position: "top-right",
           theme: "dark",
           hideProgressBar: true,
           autoClose: 2000

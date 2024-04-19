@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import CodeCard from "@/components/molecules/codeSnippetCard";
 import React from "react";
 import Image from "next/image";
@@ -50,67 +50,64 @@ const codeData = [
 ];
 
 export default function Dashboard() {
-  const [id, setId] = React.useState<string>('')
-  const [status, setStatus] = React.useState<string>('')
-  const [popupActive, setPopupActive] = React.useState<Boolean>(false)
-  const [loading, setLoading] = React.useState<Boolean>(false)
-  const [isLoading, setIsLoading] = React.useState<Boolean>(false)
-  const [transactionData, setTransactionData] = React.useState<Purchase[]>([])
-  const [uploads, setUploads] = React.useState<Code[]>([])
-  const [user, setUser] = React.useState<User | null>(
-    (): User | null => {
-      if (typeof localStorage !== "undefined") {
-        const fromLocalStorage =
-          JSON.parse(localStorage.getItem("userObject") as string) || {};
-        if (fromLocalStorage) return fromLocalStorage;
-      }
-      return null;
+  const [id, setId] = React.useState<string>("");
+  const [status, setStatus] = React.useState<string>("");
+  const [popupActive, setPopupActive] = React.useState<Boolean>(false);
+  const [loading, setLoading] = React.useState<Boolean>(false);
+  const [isLoading, setIsLoading] = React.useState<Boolean>(false);
+  const [transactionData, setTransactionData] = React.useState<Purchase[]>([]);
+  const [uploads, setUploads] = React.useState<Code[]>([]);
+  const [user, setUser] = React.useState<User | null>((): User | null => {
+    if (typeof localStorage !== "undefined") {
+      const fromLocalStorage =
+        JSON.parse(localStorage.getItem("userObject") as string) || {};
+      if (fromLocalStorage) return fromLocalStorage;
     }
-  )
+    return null;
+  });
   const [snippets, setSnippets] = React.useState<Code[] | undefined>(
     (): Code[] | undefined => {
       if (typeof localStorage !== "undefined") {
-        const fromLocalStorage = JSON.parse(localStorage.getItem("codeArray") as string) || [];
+        const fromLocalStorage =
+          JSON.parse(localStorage.getItem("codeArray") as string) || [];
         if (fromLocalStorage) return fromLocalStorage;
       }
       return undefined;
     }
-  )
+  );
 
-    const getStatusFromChild = (msg: string) => {
-      setStatus(msg)
-    }
+  const getStatusFromChild = (msg: string) => {
+    setStatus(msg);
+  };
 
   React.useEffect(() => {
-    setLoading(true)
-    setIsLoading(true)
+    setLoading(true);
+    setIsLoading(true);
 
-    // get purchases per buyer
+    // GET PURCHASE COURSES
     getPurchasesPerBuyer(user?.id)
       .then((data) => {
-        setTransactionData(data)
-        setLoading(prev => !prev)
+        setTransactionData(data);
+        setLoading((prev) => !prev);
         // console.log('these are purchases', data)
       })
       .catch((error) => {
-        console.log('Un able to fetch purchases', error)
-      })
+        console.log("Un able to fetch purchases", error);
+      });
 
-    // get code per user
-    getCodePerUser(user?.id)
-      .then((res) => {
-        setUploads(res)
-        setIsLoading(prev => !prev)
-        // console.log('these are uploaded cources', res)
-      })
-
-  }, [user?.id])
+    // GET ALL SNIPPETS A USER UPLOADED
+    getCodePerUser(user?.id).then((res) => {
+      setUploads(res);
+      setIsLoading((prev) => !prev);
+      // console.log('these are uploaded cources', res)
+    });
+  }, [user?.id]);
 
   const handleReview = (id: string) => {
-    setPopupActive(prev => !prev)
-    setId(id)
+    setPopupActive((prev) => !prev);
+    setId(id);
     // console.log(id)
-  }
+  };
 
   return (
     <div className="flex flex-col w-full gap-4 ">
@@ -119,11 +116,16 @@ export default function Dashboard() {
       </div>
       <div className="md:flex gap-4 w-full">
         {snippets?.map((code, index) => (
-          <div key={index} className="bg-[#f1f1f1] border shadow w-[200px]">
-            <div
-            >
+          <div
+            key={index}
+            className="bg-[#f1f1f1] h-fit border shadow w-[200px]"
+          >
+            <div>
               <Image
-                src="https://www.mymcpl.org/sites/default/files/2022-07/What%20Is%20a%20Zip%20File.jpg"
+                src={
+                  code.thumbnail ||
+                  "https://www.mymcpl.org/sites/default/files/2022-07/What%20Is%20a%20Zip%20File.jpg"
+                }
                 alt="zip file image"
                 className="border shadow hover:cursor-pointer"
                 width={200}
@@ -138,7 +140,11 @@ export default function Dashboard() {
                 <span>{code.rating} stars</span>
               </div>
             </div>
-            {status === "true" ? <p className="bg-yellow-200 text-[10px] w-fit">Reviewed</p> : ""}
+            {status === "true" ? (
+              <p className="bg-yellow-200 text-[10px] w-fit">Reviewed</p>
+            ) : (
+              ""
+            )}
             <Button
               label="Add a review"
               color="bg-[#f94d1c]"
@@ -161,28 +167,39 @@ export default function Dashboard() {
             >
               <IoMdClose />
             </span>
-            <ReviewForm giveStatus={getStatusFromChild} ID={id}/>
-
+            <ReviewForm giveStatus={getStatusFromChild} ID={id} />
           </div>
         </>
       )}
       <div className="flex flex-col gap-4">
         <h3 className="font-semibold text-lg">Transaction History</h3>
         <div className="w-full">
-          {(transactionData?.length)
-            ?
+          {transactionData?.length ? (
             <Transactions transaction={transactionData} />
-            :
-            <p className="italic font-mono">No transaction done yet</p>}
+          ) : (
+            <p className="italic font-mono">No transaction done yet</p>
+          )}
         </div>
       </div>
       <div className=" w-full">
         <h3 className="font-semibold pb-4 text-lg">Upload History</h3>
-        {(uploads?.length)
-          ?
-          <UploadedCode uploaded={uploads} />
-          :
-          <p className="italic font-mono">No upload has been done yet. <Link className="text-blue-500 hover:underline" href="/dashboard/upload">Upload Snippet</Link> </p>}
+        {uploads?.length ? (
+          <UploadedCode
+            uploaded={uploads}
+            handleDelete={() => console.log("delete")}
+            // handleEdit={() => console.log("edit code")}
+          />
+        ) : (
+          <p className="italic font-mono">
+            No upload has been done yet.{" "}
+            <Link
+              className="text-blue-500 hover:underline"
+              href="/dashboard/upload"
+            >
+              Upload Snippet
+            </Link>{" "}
+          </p>
+        )}
       </div>
     </div>
   );

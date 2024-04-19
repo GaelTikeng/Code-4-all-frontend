@@ -61,6 +61,7 @@ export default function Codes({ snippets }: Props) {
         {entries?.map((item, index) => (
           <CodeCard
             key={index}
+            imageSrc={item.thumbnail}
             title={item.title}
             author={item.user.name}
             rating={item.rating}

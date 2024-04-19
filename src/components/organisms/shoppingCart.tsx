@@ -10,6 +10,7 @@ import { IoMdClose } from "react-icons/io";
 import SignupFormb from "../molecules/signupComp";
 import LoginFormb from "../molecules/loginComp";
 import { useRouter } from "next/navigation";
+import { IoArrowBack } from "react-icons/io5";
 
 
 
@@ -61,8 +62,8 @@ export default function ShoppingCart({ codeCart }: Props) {
 
   return (
     <div className="md:w-2/3 w-full px-5 mx-auto py-8">
-      <h1 className="text-3xl font-bold ">Shopping Cart</h1>
-      <Link className="text-[#f94d1c] hover:cursor-pointer hover:underline " href="/">Go back</Link>
+      <h1 className="text-3xl font-bold text-center">Shopping Cart</h1>
+      <Link className="text-[#f94d1c] w-fit py-4 flex hover:cursor-pointer hover:underline " href="/"><IoArrowBack size={20}/> Go back</Link>
       <p className="font-medium pt-4 ">{snippets?.length} Code snippet(s) in cart</p>
 
       <div className="md:flex gap-10 justify-between">
@@ -84,6 +85,7 @@ export default function ShoppingCart({ codeCart }: Props) {
               price={item.price}
               author={item.user.name}
               rating={item.rating}
+              imageSrc={item.thumbnail}
               onClick={() => handleRemove(item.id)}
             />
           )) : <p className="m-auto">No code added to cart. <Link className="text-blue-500" href="/">Browse code snippets</Link> </p>}
