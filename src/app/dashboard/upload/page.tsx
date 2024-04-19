@@ -1,13 +1,11 @@
 "use client";
 import React, { FormEvent, useState, useCallback, useRef } from "react";
 import { User } from "../../../../types";
-import { useEdgeStore } from "@/lib/edgestore";
 import { createCode } from "@/utiles/service/queries";
 import { toast } from "react-toastify";
 import dynamic from "next/dynamic";
 import { useDropzone } from "react-dropzone";
 import { FaCloudUploadAlt } from "react-icons/fa";
-import Image from "next/image";
 import { codeFileUpload, imageUpload } from "@/utiles/fileUploadHandler";
 
 // IMPORT CK5EDITOR AS CLIENT COMPONENT
@@ -16,19 +14,16 @@ const CK5Editor = dynamic(() => import("@/utiles/editor/CK5Editor"), {
 });
 
 const Page = () => {
-  const [file, setFile] = useState<File | undefined>();
   const [imageSrc, setImageSrc] = useState<any>();
   const [thumbnail, setThumbnail] = useState<string>("");
   const [data, setData] = useState<string>("");
   const [isLoading, setIsLoading] = useState<Boolean>(false);
-  const [progress, setProgress] = useState<number | undefined>();
   const [fileProgress, setFileProgress] = useState<number | undefined>();
   const [localCodeFile, setLocalCodeFile] = useState<
     string | ArrayBuffer | null
   >("");
   const [category, setCategory] = useState<string>("");
   const [price, setPrice] = useState<number>(0);
-  const { edgestore } = useEdgeStore();
   const inputRef: any = useRef();
   const [user, setUser] = useState<User | null>((): User | null => {
     if (typeof localStorage !== "undefined") {
@@ -60,7 +55,7 @@ const Page = () => {
 
     file.readAsDataURL(acceptedFiles[0]);
   }, []);
-  const { acceptedFiles, getRootProps, getInputProps, isDragActive } =
+  const { getRootProps, getInputProps, isDragActive } =
     useDropzone({
       accept: {
         "text/html": [".html", ".htm", ".pdf", ".docx", ".zip"],
@@ -91,7 +86,6 @@ const Page = () => {
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setIsLoading((prev) => !prev);
-    console.log("form data", formData);
 
     // UPLOAD CODEFILE AND THUMBNAIL RO CLOUDINARY
     const uploadedfile = await codeFileUpload(localCodeFile);
@@ -110,8 +104,7 @@ const Page = () => {
         programming_language: formData.language,
         category: formData.category,
         thumbnail: uploadedThumbnail
-      }).then((data) => {
-        console.log(data);
+      }).then(() => {
         setIsLoading((prev) => !prev);
         toast.success("Code snippet uploaded successfully", {
           position: "top-right",
@@ -127,7 +120,6 @@ const Page = () => {
 
   return (
     <div className="w-full md:w-[75%] p-5 mx-auto bg-[#f1f1f1]">
-      {/* <h1>upload code</h1> */}
       <form className="container" onSubmit={handleSubmit}>
         <h1 className="font-semibold text-gray-700 text-center py-5 text-xl">
           Upload code snippet
