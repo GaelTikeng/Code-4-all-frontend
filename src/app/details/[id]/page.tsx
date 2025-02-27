@@ -1,5 +1,5 @@
 "use client";
-import Navbar2 from "@/components/molecules/navbar2";
+import LoginUserNavbar from "@/components/molecules/loginUserNavbar";
 import Footer from "@/components/organisms/footer";
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
@@ -45,7 +45,7 @@ function DetailPage() {
 
   return (
     <div className="">
-      <Navbar2 />
+      <LoginUserNavbar />
       <div className="w-[90%] md:max-w-[80%] gap-5 py-6 mx-auto h-fit">
         <div>
           <Link className="text-[#f94d1c] flex hover:underline" href="/">

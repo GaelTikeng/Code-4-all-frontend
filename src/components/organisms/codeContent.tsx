@@ -47,7 +47,6 @@ export default function Codes({ snippets }: Props) {
 
   const handleDetail = (id: string) => {
     router.push(`/details/${id}`)
-    console.log(id)
   }
 
   useEffect(() => {

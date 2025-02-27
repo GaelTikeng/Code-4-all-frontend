@@ -1,6 +1,6 @@
 "use client";
 import Navbar from "@/components/molecules/navbar";
-import Navbar2 from "@/components/molecules/navbar2";
+import Navbar2 from "@/components/molecules/loginUserNavbar";
 import Footer from "@/components/organisms/footer";
 import ShoppingCart from "@/components/organisms/shoppingCart";
 import { LOCAL_STORAGE } from "@/utiles/service/storage";

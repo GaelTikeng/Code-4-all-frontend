@@ -55,13 +55,12 @@ const Page = () => {
 
     file.readAsDataURL(acceptedFiles[0]);
   }, []);
-  const { getRootProps, getInputProps, isDragActive } =
-    useDropzone({
-      accept: {
-        "text/html": [".html", ".htm", ".pdf", ".docx", ".zip"],
-      },
-      onDrop,
-    });
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    accept: {
+      "text/html": [".html", ".htm", ".pdf", ".docx", ".zip"],
+    },
+    onDrop,
+  });
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -87,13 +86,14 @@ const Page = () => {
     event.preventDefault();
     setIsLoading((prev) => !prev);
 
-    // UPLOAD CODEFILE AND THUMBNAIL RO CLOUDINARY
+    console.log("data => ", data)
+
+    // UPLOAD CODEFILE AND THUMBNAIL TO CLOUDINARY
     const uploadedfile = await codeFileUpload(localCodeFile);
     console.log("uploaded file from cloudianry", uploadedfile);
-    const uploadedThumbnail = await imageUpload(imageSrc)
-    console.log('uploaded Image from cloudinanry', uploadedThumbnail)
+    const uploadedThumbnail = await imageUpload(imageSrc);
+    console.log("uploaded Image from cloudinanry", uploadedThumbnail);
     if (uploadedfile && uploadedThumbnail) {
-
       // POST REQUEST TO THE DATABASE
       await createCode({
         user_id: user?.id,
@@ -103,8 +103,9 @@ const Page = () => {
         code_file: uploadedfile,
         programming_language: formData.language,
         category: formData.category,
-        thumbnail: uploadedThumbnail
-      }).then(() => {
+        thumbnail: uploadedThumbnail,
+      }).then((response) => {
+        console.log(response)
         setIsLoading((prev) => !prev);
         toast.success("Code snippet uploaded successfully", {
           position: "top-right",
@@ -112,9 +113,10 @@ const Page = () => {
           hideProgressBar: true,
           autoClose: 2000,
         });
-      });
-    } else {
-
+      }).catch((error) => {
+        console.log(error)
+        toast.error('Something went wrong')
+      })
     }
   }
 
@@ -174,7 +176,7 @@ const Page = () => {
             <option value="Backend">Backend</option>
           </select>
         </div>
-        
+
         <div className="flex text-gray-700 flex-col pb-4">
           <label htmlFor="frm-phone" className="py-2">
             Price in FCFA<span className="text-red-500">*</span>

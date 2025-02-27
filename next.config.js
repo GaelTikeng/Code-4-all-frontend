@@ -18,7 +18,6 @@ module.exports = {
       {
         hostname: "cdn1.iconfinder.com",
       },
-
       {
         hostname: "i.pinimg.com",
       },

@@ -1,5 +1,5 @@
-"use client"
-import React, { useState, forwardRef, ChangeEvent } from "react"
+"use client";
+import React, { useState, forwardRef, ChangeEvent } from "react";
 import { GiShoppingCart } from "react-icons/gi";
 import { IoMdContact } from "react-icons/io";
 import Button from "../atoms/button";
@@ -11,82 +11,80 @@ import { Code, User } from "../../../types";
 import { CiSearch } from "react-icons/ci";
 import { useAppContext } from "@/app/context/appContext";
 
-
 interface Props {
-  setSearch?: () => void
+  setSearch?: () => void;
 }
 
-export default function Navbar2({ setSearch }: Props) {
-  const {allCode, setSearchRes} = useAppContext()
-  const router = useRouter()
-  const [showDropDown, setShowDropDown] = useState<Boolean>(false)
-  const [disconnect, setDisconnect] = useState<Boolean>(false)
+export default function LoginUserNavbar({ setSearch }: Props) {
+  const { allCode, setSearchRes } = useAppContext();
+  const router = useRouter();
+  const [showDropDown, setShowDropDown] = useState<Boolean>(false);
+  const [disconnect, setDisconnect] = useState<Boolean>(false);
   // const [search, setSearch] = useState<string>('')
 
-  const [user, setUser] = useState<User | null>(
-    (): User | null => {
-      if (typeof localStorage !== "undefined") {
-        const fromLocalStorage =
-          JSON.parse(localStorage.getItem("userObject") as string) || {};
-        if (fromLocalStorage) return fromLocalStorage;
-      }
-      return null;
+  const [user, setUser] = useState<User | null>((): User | null => {
+    if (typeof localStorage !== "undefined") {
+      const fromLocalStorage =
+        JSON.parse(localStorage.getItem("userObject") as string) || {};
+      if (fromLocalStorage) return fromLocalStorage;
     }
-  )
+    return null;
+  });
   const [snippets, setSnippets] = React.useState<Code[] | undefined>(
     (): Code[] | undefined => {
       if (typeof localStorage !== "undefined") {
-        const fromLocalStorage = JSON.parse(localStorage.getItem("codeArray") as string) || [];
+        const fromLocalStorage =
+          JSON.parse(localStorage.getItem("codeArray") as string) || [];
         if (fromLocalStorage) return fromLocalStorage;
       }
       return undefined;
     }
-  )
+  );
 
   const dropDownList = [
     {
       label: "Login",
       function: () => {
-        router.push('/login')
-        setShowDropDown(prev => !prev)
-      }
+        router.push("/login");
+        setShowDropDown((prev) => !prev);
+      },
     },
     {
       label: "Signup",
       function: () => {
-        router.push('/signup')
-        setShowDropDown(prev => !prev)
-      }
-    }
-  ]
+        router.push("/signup");
+        setShowDropDown((prev) => !prev);
+      },
+    },
+  ];
 
   const list = [
     {
       label: "Dashboard",
       function: () => {
-        router.push('/dashboard')
-        setDisconnect(!disconnect)
-      }
+        router.push("/dashboard");
+        setDisconnect(!disconnect);
+      },
     },
     {
       label: "Logout",
       function: () => {
-        setDisconnect(!disconnect)
-        localStorage.clear()
-        router.push('/')
-      }
-    }
-  ]
+        setDisconnect(!disconnect);
+        localStorage.clear();
+        router.push("/");
+      },
+    },
+  ];
 
   const handleLogin = () => {
-    router.push("/login")
-  }
+    router.push("/login");
+  };
 
   const handleSignup = () => {
-    router.push('/signup')
-  }
+    router.push("/signup");
+  };
   function handleGoToCart() {
-    router.push('/cart')
+    router.push("/cart");
   }
 
   function handleCloseModal(): void {
@@ -94,26 +92,31 @@ export default function Navbar2({ setSearch }: Props) {
   }
 
   function handleOpenDP() {
-    setShowDropDown((prev) => !prev)
+    setShowDropDown((prev) => !prev);
   }
 
   function handleDiscoonnect() {
-    setDisconnect(prev => !prev)
+    setDisconnect((prev) => !prev);
   }
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    const filter = allCode.filter((item) => item.title.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase()))
+    const filter = allCode.filter((item) =>
+      item.title
+        .toLocaleLowerCase()
+        .includes(e.target.value.toLocaleLowerCase())
+    );
     setSearchRes(filter);
-  }
+  };
 
   return (
     <div className=" flex gap-4 justify-between py-3 shadow-lg w-full md:px-[80px] px-[20px] ">
       <div className="flex">
         <div
           onClick={() => {
-            router.push("/")
+            router.push("/");
           }}
-          className="text-2xl hover:cursor-pointer my-auto">
+          className="text-2xl hover:cursor-pointer my-auto"
+        >
           <Image
             src="/code4all.png"
             alt="logo"
@@ -134,9 +137,13 @@ export default function Navbar2({ setSearch }: Props) {
       </div>
       <div className="flex gap-4 my-auto">
         <div className="my-auto">
-          {snippets?.length ?
-            <div className="bg-red-500 text-center z-20 mt-[-10px] right-[65px] md:right-[124px] absolute  mb-2 h-5 text-[10px] w-5 p-1 rounded-full text-white">{snippets?.length}</div>
-            : ""}
+          {snippets?.length ? (
+            <div className="bg-red-500 text-center z-20 mt-[-10px] right-[65px] md:right-[124px] absolute  mb-2 h-5 text-[10px] w-5 p-1 rounded-full text-white">
+              {snippets?.length}
+            </div>
+          ) : (
+            ""
+          )}
           <GiShoppingCart
             size="25"
             className="my-auto relative hover:cursor-pointer"
@@ -145,11 +152,11 @@ export default function Navbar2({ setSearch }: Props) {
         </div>
         <div
           onClick={handleOpenDP}
-          className={user?.name ? " hidden md:hidden my-auto " : "md:hidden my-auto "}
+          className={
+            user?.name ? " hidden md:hidden my-auto " : "md:hidden my-auto "
+          }
         >
-          <IoMdContact
-            size="25"
-          />
+          <IoMdContact size="25" />
         </div>
         {showDropDown && (
           <div className="absolute z-40 top-10 right-0">
@@ -168,8 +175,8 @@ export default function Navbar2({ setSearch }: Props) {
             </DropdownModal>
           </div>
         )}
-        {user?.name ?
-          <div onClick={() => handleDiscoonnect()} >
+        {user?.name ? (
+          <div onClick={() => handleDiscoonnect()}>
             <Avatar
               className="peer hover:cursor-pointer"
               name={user.name}
@@ -178,7 +185,8 @@ export default function Navbar2({ setSearch }: Props) {
               size="35"
             />
           </div>
-          : <div className="md:flex hidden my-auto gap-2">
+        ) : (
+          <div className="md:flex hidden my-auto gap-2">
             <Button
               label="Login"
               color="bg-white"
@@ -193,7 +201,7 @@ export default function Navbar2({ setSearch }: Props) {
               onClick={() => handleSignup()}
             />
           </div>
-        }
+        )}
       </div>
       {disconnect && (
         <div className="absolute z-40 top-12 shadow right-0">
@@ -213,6 +221,5 @@ export default function Navbar2({ setSearch }: Props) {
         </div>
       )}
     </div>
-  )
+  );
 }
-

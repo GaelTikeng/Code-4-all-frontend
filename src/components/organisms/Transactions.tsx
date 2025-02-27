@@ -9,7 +9,7 @@ type Props = {
   transaction: Purchase[]
 }
 
-const Transactions = ({ className, transaction }: Props) => {
+function Transactions ({ className, transaction }: Props) {
   const [user, setUser] = React.useState<User | null>(
     (): User | null => {
       if (typeof localStorage !== "undefined") {
