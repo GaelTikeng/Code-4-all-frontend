@@ -1,19 +1,17 @@
 "use client"
-import CommentCart from "@/components/molecules/commentCart";
 import HeroSection from "@/components/molecules/heroSection";
 import Navbar from "@/components/molecules/navbar";
 import Codes from "@/components/organisms/codeContent";
 import CommentCarousel from "@/components/organisms/commentCarousel";
 import Footer from "@/components/organisms/footer";
 import Discount from "@/components/organisms/newzletter";
-import React, { Suspense, useEffect, useState } from "react";
-import { findAllReviews, findCodeByCategory, getAllSnippets } from "@/utiles/service/queries";
+import React, { useState } from "react";
+import { findCodeByCategory, getAllSnippets } from "@/utiles/service/queries";
 import { Code, Review, User } from "../../types";
-import Navbar2 from "@/components/molecules/navbar2";
-import CarousselComment from "@/components/organisms/carouselComments";
 import SkeletonCart from "@/components/molecules/codeSnippetSkeleton";
 import SkeletonComment from "@/components/molecules/skeletonComments";
 import { useAppContext } from "./context/appContext";
+import LoginUserNavbar from "@/components/molecules/loginUserNavbar";
 
 export default function Home() {
   const { allCode, allReviews, setAllCode, allClicked, clicked, setAllClicked, setClicked } = useAppContext()
@@ -48,20 +46,20 @@ export default function Home() {
   const getAllCode = async () => {
     setClicked(prev => !prev)
     setAllClicked(true)
-    getAllSnippets()
+    await getAllSnippets()
       .then((res) => {
-        // console.log("all codes", res)
+        console.log("all codes", res)
         setAllCode(res)
         setIsLoading(prev => !prev)
       })
       .catch((err) => {
-        // console.log(err)
+        console.log(err)
       })
   }
 
   return (
     <div>
-      {user ? <Navbar2 /> : <Navbar />}
+      {user ? <LoginUserNavbar /> : <Navbar />}
       <HeroSection />
       <div className="flex mt-3 w-[90%] mx-auto pb-2 gap-6">
         <div onClick={() => getAllCode()}>

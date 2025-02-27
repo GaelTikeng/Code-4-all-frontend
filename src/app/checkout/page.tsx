@@ -158,7 +158,7 @@ export default function CheckoutPage() {
               </div>
               <div className="bg-gray2 border">
                 <div
-                  className="hover:cursor-pointer  p-3 flex gap-3 "
+                  className="hover:cursor-pointer p-3 flex gap-3 "
                   onClick={() => handlePaypal()}
                 >
                   <input

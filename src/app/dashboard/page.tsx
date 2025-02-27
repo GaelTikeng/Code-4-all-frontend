@@ -5,6 +5,7 @@ import Image from "next/image";
 
 // React icons imports
 import { IoMdClose } from "react-icons/io";
+
 import Transactions from "@/components/organisms/Transactions";
 import { Code, Purchase, User } from "../../../types";
 import { getCodePerUser, getPurchasesPerBuyer } from "@/utiles/service/queries";

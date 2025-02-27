@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -16,57 +16,54 @@ import { AiOutlineMenu } from "react-icons/ai";
 import { FaChevronRight } from "react-icons/fa6";
 import MenuItem from "@/components/molecules/menuItem";
 
-
 const links = [
   {
     name: "Dashboard",
     path: "/dashboard",
-    icon: <MdDashboard className='text-[#f94d1c]' size='20' />,
+    icon: <MdDashboard className="text-[#f94d1c]" size="20" />,
   },
   {
     name: "Upload Snippet",
     path: "/dashboard/upload",
-    icon: <FaFileUpload className='text-[#f94d1c]' size='20' />,
+    icon: <FaFileUpload className="text-[#f94d1c]" size="20" />,
   },
 ];
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
-  const router = useRouter()
-  const [active, setActive] = useState<Boolean>(false)
-  const [disconnect, setDisconnect] = useState<Boolean>(false)
-  const [user, setUser] = useState<User | null>(
-    (): User | null => {
-      if (typeof localStorage !== "undefined") {
-        const fromLocalStorage =
-          JSON.parse(localStorage.getItem("userObject") as string) || {};
-        if (fromLocalStorage) return fromLocalStorage;
-      }
-      return null;
+  const router = useRouter();
+  const [active, setActive] = useState<Boolean>(false);
+  const [disconnect, setDisconnect] = useState<Boolean>(false);
+  const [user, setUser] = useState<User | null>((): User | null => {
+    if (typeof localStorage !== "undefined") {
+      const fromLocalStorage =
+        JSON.parse(localStorage.getItem("userObject") as string) || {};
+      if (fromLocalStorage) return fromLocalStorage;
     }
-  )
+    return null;
+  });
   const list = [
     {
       label: "Dashboard",
       function: () => {
-        setDisconnect(!disconnect)
-        router.push('/dashboard')
-      }
+        setDisconnect(!disconnect);
+        router.push("/dashboard");
+      },
     },
     {
       label: "Logout",
       function: () => {
-        setDisconnect(!disconnect)
-        localStorage.removeItem('userObject')
-        router.push('/')
-      }
-    }
-  ]
+        setDisconnect(!disconnect);
+        localStorage.removeItem("userObject");
+        router.push("/");
+      },
+    },
+  ];
 
   const handleLockOut = () => {
-    localStorage.removeItem('userObject')
-    router.push('/')
-  }
+    localStorage.removeItem("userObject");
+    router.push("/");
+  };
 
   function handleCloseModal(): void {
     throw new Error("Function not implemented.");
@@ -76,8 +73,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     <div className="w-full h-sccreen flex">
       <div className="sideNav md:bg-[#f1f1f1] h-screen w-[20vw] hidden md:flex flex-col justify-between">
         <div
-          onClick={() => router.push('/')}
-          className="hidden md:flex w-full justify-center hover:cursor-pointer mt-5 items-center p-2">
+          onClick={() => router.push("/")}
+          className="hidden md:flex w-full justify-center hover:cursor-pointer mt-5 items-center p-2"
+        >
           <Image
             src={"/code4all.png"}
             alt={"code4all logo"}
@@ -92,7 +90,11 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               <Link
                 key={index}
                 href={link.path}
-                className={`px-9 py-4 flex items-center gap-2 hover:bg-white ${link.path === pathname ? " bg-white border-l-2 border-[#F94D1D]" : ""} hover:border-l-2 duration-5 border-[#F94D1D]`}
+                className={`px-9 py-4 flex items-center gap-2 hover:bg-white ${
+                  link.path === pathname
+                    ? " bg-white border-l-2 border-[#F94D1D]"
+                    : ""
+                } hover:border-l-2 duration-5 border-[#F94D1D]`}
               >
                 <p className="flex-1 flex gap-2">
                   {link.icon}
@@ -105,7 +107,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
           <button
             onClick={() => handleLockOut()}
-            className="flex items-center justify-center hover:bg-white text-[#F94D1D]  gap-2 px-6">
+            className="flex items-center justify-center hover:bg-white text-[#F94D1D]  gap-2 px-6"
+          >
             <CiLogout /> Logout
           </button>
         </div>
@@ -121,8 +124,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               }}
             />
             <div
-              onClick={() => router.push('/')}
-              className="md:hidden flex w-[100px] justify-center hover:cursor-pointer mt-5 items-center p-2">
+              onClick={() => router.push("/")}
+              className="md:hidden flex w-[100px] justify-center hover:cursor-pointer mt-5 items-center p-2"
+            >
               <Image
                 src={"/code4all.png"}
                 alt={"code4all logo"}
@@ -133,12 +137,12 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             <div className="input hidden md:flex bg-[#f1f1f1] w-[80%] items-center py-1 px-2 gap-2 rounded-full">
               <CiSearch size={20} />
               <input
-                type="text"
+                type="search"
                 placeholder="search..."
                 className="w-full  outline-none bg-transparent"
               />
             </div>
-            <div className="" onClick={() => setDisconnect(prev => !prev)}>
+            <div className="" onClick={() => setDisconnect((prev) => !prev)}>
               <Avatar
                 className="peer hover:cursor-pointer"
                 name={user?.name}
@@ -165,11 +169,16 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               </div>
             )}
           </div>
-          <MenuItem className={`${active
-            ? "z-20 top-0 md:hidden ml-[-4] mt-20 absolute w-full transition-transform 1s ease-in-out"
-            : "hidden"
-            }`} />
-          <div className="py-4 md:w-[100%] h-[calc(100vh-56px)] overflow-y-auto">{children}</div>
+          <MenuItem
+            className={`${
+              active
+                ? "z-20 top-0 md:hidden ml-[-4] mt-20 absolute w-full transition-transform 1s ease-in-out"
+                : "hidden"
+            }`}
+          />
+          <div className="py-4 md:w-[100%] h-[calc(100vh-56px)] overflow-y-auto">
+            {children}
+          </div>
         </div>
       </div>
     </div>
