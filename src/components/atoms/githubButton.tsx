@@ -13,7 +13,6 @@ const GithubBtn = () => {
   const handleGithubSignin = async () => {
     setIsLoading(prev => !prev)
     const result = await signInWithPopup(auth, githubAuth)
-    // console.log(result)
     if (result) {
       // console.log(result.user)
       setIsLoading(prev => !prev)
